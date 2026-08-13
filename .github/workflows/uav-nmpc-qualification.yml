@@ -1,6 +1,8 @@
 name: UAV NMPC qualification
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
 jobs:
   qualify:
     runs-on: ubuntu-24.04
