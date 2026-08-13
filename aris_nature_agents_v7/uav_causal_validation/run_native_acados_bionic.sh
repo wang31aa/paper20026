@@ -36,7 +36,7 @@ unzip -q dataset.zip 'dataset/data/mpc/comparison/01/workspace.mat'
 
 export ENV_RUN=true
 export ACADOS_INSTALL_DIR=/work/acados
-export LD_LIBRARY_PATH=/work/acados/lib
+export LD_LIBRARY_PATH=/work/acados/lib:/work/build
 export OCTAVE_PATH=/work/acados/interfaces/acados_matlab_octave:/work/acados/external/casadi-octave:/work/aris_nature_agents_v7/uav_causal_validation
 mkdir -p aris_nature_agents_v7/uav_causal_validation/results
 octave --no-gui --quiet --eval "addpath(genpath('/work/official_code/matlab_code')); native_octave_replay('dataset/data/mpc/comparison/01/workspace.mat','aris_nature_agents_v7/uav_causal_validation/results/native_acados_replay.mat')"
