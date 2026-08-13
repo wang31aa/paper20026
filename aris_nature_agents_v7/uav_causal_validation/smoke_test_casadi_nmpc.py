@@ -11,6 +11,12 @@ w=load_official_workspace(a.workspace); build=time.perf_counter(); c=CasadiNMPC(
 r=c.solve(w.initial_state)
 report={"backend":f"CasADi 3.7.2 {a.backend} sparse symbolic translation","build_seconds":build,
         "solve_seconds":r.solve_seconds,"success":r.success,"iterations":r.iterations,
+        "return_status":r.return_status,
+        "official_tolerance_pass":r.official_tolerance_pass,
+        "minimum_constraint_margin":r.minimum_constraint_margin,
+        "primal_infeasibility":r.primal_infeasibility,
+        "dual_infeasibility":r.dual_infeasibility,
+        "complementarity":r.complementarity,
         "objective":r.objective,"horizon_seconds":w.parameters.horizon_seconds,
         "horizon_steps":w.parameters.horizon_steps,"official_acados_replay":False,
         "scope":"full-horizon optimizer smoke test; not complete trajectory qualification"}
