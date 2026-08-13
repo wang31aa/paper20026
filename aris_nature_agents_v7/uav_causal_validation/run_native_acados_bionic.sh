@@ -44,4 +44,4 @@ if ! octave --no-gui --quiet --eval "$replay"; then
   test -f /work/build/libcl_swarming.so
   octave --no-gui --quiet --eval "$replay"
 fi
-chmod -R a+rX aris_nature_agents_v7/uav_causal_validation/results
+chmod -R a+rwX aris_nature_agents_v7/uav_causal_validation/results
