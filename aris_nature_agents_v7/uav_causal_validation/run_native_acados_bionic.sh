@@ -15,12 +15,12 @@ tar -xf casadi-linux-octave-v3.4.5.tar.gz -C acados/external/casadi-octave
 mkdir -p acados/build
 cd acados/build
 cmake .. \
-  -D CMAKE_BUILD_TYPE=Release \
-  -D BUILD_SHARED_LIBS=ON \
-  -D BLASFEO_TARGET=GENERIC \
-  -D HPIPM_TARGET=GENERIC \
-  -D ACADOS_OCTAVE=ON \
-  -D ACADOS_INSTALL_DIR=/work/acados
+  -DCMAKE_BUILD_TYPE=Release \
+  -DBUILD_SHARED_LIBS=ON \
+  -DBLASFEO_TARGET=GENERIC \
+  -DHPIPM_TARGET=GENERIC \
+  -DACADOS_OCTAVE=ON \
+  -DACADOS_INSTALL_DIR=/work/acados
 cmake --build . -- -j2
 cmake --build . --target install
 cd /work
