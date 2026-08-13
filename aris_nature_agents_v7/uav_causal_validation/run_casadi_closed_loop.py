@@ -48,4 +48,6 @@ summary={"backend":a.backend,"completed":completed,"steps":len(rows),
          "all_steps_passed_official_solver_tolerances":bool(rows) and all(x["solver_official_tolerance_pass"] for x in rows)}
 (a.log.parent/"casadi_free_run_summary.json").write_text(json.dumps(summary,indent=2)+"\n")
 print(json.dumps(summary,indent=2))
-if not summary["completed"] or not summary["all_solver_steps_passed"]: raise SystemExit(2)
+# This program is a trajectory producer.  It must preserve an incomplete or
+# failed run for the downstream fail-closed replay scorer instead of aborting
+# before the frozen metrics can be computed.
