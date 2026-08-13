@@ -27,9 +27,9 @@ def main():
               "component input, pair collision and cylinder constraints"],
               "scope": "translation unit tests; not source-controller replay"}
     path = HERE / "results" / "python_translation_unit_tests.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))
 
 
 if __name__ == "__main__": main()
-
