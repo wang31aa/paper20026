@@ -15,7 +15,7 @@ jobs:
       - name: Install Octave build environment
         run: |
           sudo apt-get update
-          sudo apt-get install -y octave liboctave-dev cmake build-essential gfortran wget unzip
+          sudo apt-get install -y octave octave-dev cmake build-essential gfortran wget unzip
       - name: Fetch pinned acados and CasADi 3.4.5
         run: |
           git clone --recursive https://github.com/acados/acados.git acados
