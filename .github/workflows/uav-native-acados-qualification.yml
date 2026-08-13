@@ -45,7 +45,7 @@ jobs:
           OCTAVE_PATH: ${{ github.workspace }}/acados/interfaces/acados_matlab_octave:${{ github.workspace }}/acados/external/casadi-octave:${{ github.workspace }}/official_code/matlab_code:${{ github.workspace }}/aris_nature_agents_v7/uav_causal_validation
         run: |
           mkdir -p aris_nature_agents_v7/uav_causal_validation/results
-          octave --no-gui --quiet --eval "native_octave_replay('dataset/data/mpc/comparison/01/workspace.mat','aris_nature_agents_v7/uav_causal_validation/results/native_acados_replay.mat')"
+          octave --no-gui --quiet --eval "addpath(genpath('${{ github.workspace }}/official_code/matlab_code')); addpath(genpath('${{ github.workspace }}/acados/external/casadi-octave')); native_octave_replay('dataset/data/mpc/comparison/01/workspace.mat','aris_nature_agents_v7/uav_causal_validation/results/native_acados_replay.mat')"
       - name: Apply frozen source-replay acceptance criteria
         run: |
           python -m pip install --disable-pip-version-check numpy scipy
