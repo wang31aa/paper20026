@@ -14,4 +14,5 @@ report={"backend":f"CasADi 3.7.2 {a.backend} sparse symbolic translation","build
         "objective":r.objective,"horizon_seconds":w.parameters.horizon_seconds,
         "horizon_steps":w.parameters.horizon_steps,"official_acados_replay":False,
         "scope":"full-horizon optimizer smoke test; not complete trajectory qualification"}
-(HERE/'results/casadi_nmpc_smoke_test.json').write_text(json.dumps(report,indent=2)+'\n'); print(json.dumps(report,indent=2))
+out=HERE/'results/casadi_nmpc_smoke_test.json'; out.parent.mkdir(parents=True,exist_ok=True)
+out.write_text(json.dumps(report,indent=2)+'\n'); print(json.dumps(report,indent=2))
