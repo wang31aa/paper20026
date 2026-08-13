@@ -129,7 +129,29 @@ class CasadiNMPC:
         self.state_fun=ca.Function("rollout",[x0,decision],[ca.hcat(states)])
 
     def solve(self,x0):
-        initial=np.zeros_like(self.lbx) if self._warm is None else self._warm.reshape(-1,order="F")
+        if self._warm is None:
+            # The archived multiple-shooting controller initializes every
+            # predicted velocity on +v_ref*u_ref.  Its direction residual is
+            # sign-symmetric, so a zero single-shooting seed may converge to
+            # the equally cheap -u_ref branch.  Project the official positive
+            # velocity initialization onto dynamically feasible controls:
+            # accelerate along +u_ref until v_ref is reached, then hold it.
+            n=self.p.n; h=self.p.horizon_steps; dt=self.p.dt
+            direction=np.asarray(self.p.reference_direction,dtype=float)
+            direction=direction/np.linalg.norm(direction)
+            velocity=np.asarray(x0,dtype=float)[3*n:].reshape(n,3).copy()
+            seeded=np.zeros((h,3*n),dtype=float)
+            limit=self.p.component_acceleration_limit
+            for k in range(h):
+                projected=velocity@direction
+                required=np.clip((self.p.reference_speed-projected)/dt,-limit,limit)
+                acceleration=required[:,None]*direction[None,:]
+                acceleration=np.clip(acceleration,-limit,limit)
+                seeded[k]=acceleration.reshape(-1)
+                velocity += dt*acceleration
+            initial=seeded.T.reshape(-1,order="F")
+        else:
+            initial=self._warm.T.reshape(-1,order="F")
         start=time.perf_counter()
         solution=self.solver(x0=initial,p=np.asarray(x0),lbx=self.lbx,ubx=self.ubx,lbg=self.lbg,ubg=self.ubg)
         elapsed=time.perf_counter()-start
