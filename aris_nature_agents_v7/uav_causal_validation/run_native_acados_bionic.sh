@@ -12,15 +12,18 @@ wget -q https://github.com/casadi/casadi/releases/download/3.4.5/casadi-linux-oc
 mkdir -p acados/external/casadi-octave
 tar -xf casadi-linux-octave-v3.4.5.tar.gz -C acados/external/casadi-octave
 
-cmake -S acados -B acados/build \
+mkdir -p acados/build
+cd acados/build
+cmake .. \
   -D CMAKE_BUILD_TYPE=Release \
   -D BUILD_SHARED_LIBS=ON \
   -D BLASFEO_TARGET=GENERIC \
   -D HPIPM_TARGET=GENERIC \
   -D ACADOS_OCTAVE=ON \
   -D ACADOS_INSTALL_DIR=/work/acados
-cmake --build acados/build -- -j2
-cmake --build acados/build --target install
+cmake --build . -- -j2
+cmake --build . --target install
+cd /work
 
 curl -L --retry 15 -o matlab_code.zip \
   'https://zenodo.org/records/4379503/files/matlab_code.zip?download=1'
