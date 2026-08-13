@@ -1,0 +1,57 @@
+name: UAV native pinned-acados qualification
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+jobs:
+  native-replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Octave build environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y octave liboctave-dev cmake build-essential gfortran wget unzip
+      - name: Fetch pinned acados and CasADi 3.4.5
+        run: |
+          git clone --recursive https://github.com/acados/acados.git acados
+          git -C acados checkout 91067daebe12c07d76d32a6aed0b8db00b3a54e1
+          git -C acados submodule update --init --recursive
+          wget -q https://github.com/casadi/casadi/releases/download/3.4.5/casadi-linux-octave-v3.4.5.tar.gz
+          mkdir -p acados/external/casadi-octave
+          tar -xf casadi-linux-octave-v3.4.5.tar.gz -C acados/external/casadi-octave
+      - name: Build pinned shared libraries and Octave interface
+        run: |
+          cmake -S acados -B acados/build -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=$PWD/acados -D BUILD_SHARED_LIBS=ON -D BLASFEO_TARGET=GENERIC -D HPIPM_TARGET=GENERIC -D ACADOS_OCTAVE=ON -D ACADOS_INSTALL_DIR=$PWD/acados
+          cmake --build acados/build -j2
+          cmake --install acados/build
+      - name: Download and verify official code and data
+        run: |
+          curl -L --retry 15 -o matlab_code.zip 'https://zenodo.org/records/4379503/files/matlab_code.zip?download=1'
+          echo '02cb805c7ed6d00cac410f84a9a1a3c5da6dd228c1cb580e5038f85804b06e45  matlab_code.zip' | sha256sum -c -
+          unzip -q matlab_code.zip -d official_code
+          curl -L --retry 15 -o dataset.zip 'https://zenodo.org/records/4379168/files/dataset.zip?download=1'
+          echo 'ff012bec9c5206a312eb18d664f760fe821e8cb9b4c2c65ea8f6bf9462960934  dataset.zip' | sha256sum -c -
+          unzip -q dataset.zip 'dataset/data/mpc/comparison/01/workspace.mat'
+      - name: Run official native closed loop
+        env:
+          ENV_RUN: 'true'
+          ACADOS_INSTALL_DIR: ${{ github.workspace }}/acados
+          LD_LIBRARY_PATH: ${{ github.workspace }}/acados/lib
+          OCTAVE_PATH: ${{ github.workspace }}/acados/interfaces/acados_matlab_octave:${{ github.workspace }}/acados/external/casadi-octave:${{ github.workspace }}/official_code/matlab_code:${{ github.workspace }}/aris_nature_agents_v7/uav_causal_validation
+        run: |
+          mkdir -p aris_nature_agents_v7/uav_causal_validation/results
+          octave --no-gui --quiet --eval "native_octave_replay('dataset/data/mpc/comparison/01/workspace.mat','aris_nature_agents_v7/uav_causal_validation/results/native_acados_replay.mat')"
+      - name: Apply frozen source-replay acceptance criteria
+        run: |
+          python -m pip install --disable-pip-version-check numpy scipy
+          python aris_nature_agents_v7/uav_causal_validation/qualify_native_acados_replay.py dataset/data/mpc/comparison/01/workspace.mat aris_nature_agents_v7/uav_causal_validation/results/native_acados_replay.mat --output aris_nature_agents_v7/uav_causal_validation/results/native_acados_source_replay_metrics.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: uav-native-acados-qualification
+          path: aris_nature_agents_v7/uav_causal_validation/results/
