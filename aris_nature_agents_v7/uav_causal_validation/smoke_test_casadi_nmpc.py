@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse,json,time
+import argparse,json,sys,time
 from pathlib import Path
 HERE=Path(__file__).resolve().parent; sys.path.insert(0,str(HERE))
 from python_translation.workspace import load_official_workspace
