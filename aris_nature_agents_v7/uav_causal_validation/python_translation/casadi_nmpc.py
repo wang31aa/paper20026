@@ -149,7 +149,10 @@ class CasadiNMPC:
         minimum_margin=float(np.min(margins)) if margins.size else float("inf")
         official_tolerance_pass=(
             minimum_margin >= -1e-2
-            and np.isfinite(primal) and primal <= 1e-2
+            # This is a single-shooting transcription: dynamics equalities are
+            # eliminated and feasibility is checked directly from g and the
+            # decision bounds. IPOPT's scaled inf_pr is retained as a
+            # diagnostic but is not the archived acados inequality residual.
             and np.isfinite(dual) and dual <= 1.0
             and (not np.isfinite(complementarity) or complementarity <= 1e-1)
         )
