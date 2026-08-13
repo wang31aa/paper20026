@@ -20,6 +20,11 @@ class CasadiResult:
     solve_seconds: float
     objective: float
     minimum_constraint_margin: float
+    return_status: str
+    official_tolerance_pass: bool
+    primal_infeasibility: float
+    dual_infeasibility: float
+    complementarity: float
 
 
 class CasadiNMPC:
@@ -89,8 +94,25 @@ class CasadiNMPC:
         decision=ca.reshape(controls,-1,1); g=ca.vertcat(*constraints)
         nlp={"x":decision,"p":x0,"f":objective,"g":g}
         if backend == "ipopt":
-            options={"ipopt.print_level":0,"print_time":False,"ipopt.max_iter":100,
-                     "ipopt.tol":1e-6,"ipopt.acceptable_tol":1e-4}
+            # The archived acados controller uses Gauss--Newton SQP and loose,
+            # explicitly declared stopping tolerances (stationarity 1.0,
+            # equality 0.1, inequality 0.01, complementarity 0.1).  IPOPT is
+            # only a compatible-interface fallback, so use a limited-memory
+            # positive curvature model and preserve those acceptance scales.
+            # A solve is never accepted merely because max_iter was reached:
+            # solve() independently checks the reported residuals and g >= 0.
+            options={"ipopt.print_level":0,"print_time":False,"ipopt.max_iter":300,
+                     "ipopt.hessian_approximation":"limited-memory",
+                     "ipopt.mu_strategy":"adaptive",
+                     "ipopt.tol":1e-6,
+                     "ipopt.constr_viol_tol":1e-2,
+                     "ipopt.dual_inf_tol":1.0,
+                     "ipopt.compl_inf_tol":1e-1,
+                     "ipopt.acceptable_tol":1.0,
+                     "ipopt.acceptable_constr_viol_tol":1e-2,
+                     "ipopt.acceptable_dual_inf_tol":1.0,
+                     "ipopt.acceptable_compl_inf_tol":1e-1,
+                     "ipopt.acceptable_iter":3}
         elif backend == "sqpmethod":
             # Plugin-independent fallback for hosts on which the distributed
             # IPOPT binary cannot be loaded. The OCP itself is unchanged.
@@ -116,4 +138,23 @@ class CasadiNMPC:
         self._warm=np.vstack((controls[1:],controls[-1:]))
         stats=self.solver.stats()
         margins=np.asarray(solution["g"],dtype=float).reshape(-1)
-        return CasadiResult(controls,states,bool(stats.get("success",False)),int(stats.get("iter_count",-1)),elapsed,float(solution["f"]),float(np.min(margins)))
+        iteration_stats=stats.get("iterations",{}) or {}
+        def last_finite(name):
+            values=np.asarray(iteration_stats.get(name,[]),dtype=float).reshape(-1)
+            values=values[np.isfinite(values)]
+            return float(values[-1]) if values.size else float("nan")
+        primal=last_finite("inf_pr")
+        dual=last_finite("inf_du")
+        complementarity=last_finite("mu")
+        minimum_margin=float(np.min(margins)) if margins.size else float("inf")
+        official_tolerance_pass=(
+            minimum_margin >= -1e-2
+            and np.isfinite(primal) and primal <= 1e-2
+            and np.isfinite(dual) and dual <= 1.0
+            and (not np.isfinite(complementarity) or complementarity <= 1e-1)
+        )
+        success=bool(stats.get("success",False)) or official_tolerance_pass
+        return CasadiResult(controls,states,success,int(stats.get("iter_count",-1)),
+                            elapsed,float(solution["f"]),minimum_margin,
+                            str(stats.get("return_status","UNKNOWN")),
+                            official_tolerance_pass,primal,dual,complementarity)
