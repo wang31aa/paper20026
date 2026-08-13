@@ -20,10 +20,10 @@ jobs:
       - name: Full-scale smoke and free closed loop
         working-directory: aris_nature_agents_v7
         run: |
-          mkdir -p uav_causal_validation/results
           python uav_causal_validation/test_python_translation.py
           python uav_causal_validation/smoke_test_casadi_nmpc.py ../dataset/data/mpc/comparison/01/workspace.mat --backend ipopt
           python uav_causal_validation/run_casadi_closed_loop.py ../dataset/data/mpc/comparison/01/workspace.mat --backend ipopt
+          python uav_causal_validation/qualify_nmpc_replay.py ../dataset/data/mpc/comparison/01/workspace.mat uav_causal_validation/results/casadi_free_run.jsonl
       - uses: actions/upload-artifact@v4
         if: always()
         with:
