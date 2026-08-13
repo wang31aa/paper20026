@@ -17,7 +17,14 @@ jobs:
           python-version: '3.11'
       - name: Prepare pinned acados and official archives
         run: bash aris_nature_agents_v7/uav_causal_validation/prepare_native_acados_matlab.sh
-      - name: Run official controller through MATLAB
+      - name: Generate model library and MATLAB MEX interfaces
+        continue-on-error: true
+        uses: matlab-actions/run-command@v2
+        with:
+          command: addpath(genpath(fullfile(pwd,'acados','interfaces','acados_matlab_octave'))); addpath(genpath(fullfile(pwd,'acados','external','casadi-matlab'))); addpath(genpath(fullfile(pwd,'official_code','matlab_code'))); addpath(fullfile(pwd,'aris_nature_agents_v7','uav_causal_validation')); native_matlab_replay(fullfile(pwd,'dataset','data','mpc','comparison','01','workspace.mat'),fullfile(pwd,'aris_nature_agents_v7','uav_causal_validation','results','native_matlab_replay.mat'));
+      - name: Verify generated model library
+        run: test -f "$GITHUB_WORKSPACE/build/libcl_swarming.so"
+      - name: Run official controller in a fresh MATLAB process
         uses: matlab-actions/run-command@v2
         with:
           command: addpath(genpath(fullfile(pwd,'acados','interfaces','acados_matlab_octave'))); addpath(genpath(fullfile(pwd,'acados','external','casadi-matlab'))); addpath(genpath(fullfile(pwd,'official_code','matlab_code'))); addpath(fullfile(pwd,'aris_nature_agents_v7','uav_causal_validation')); native_matlab_replay(fullfile(pwd,'dataset','data','mpc','comparison','01','workspace.mat'),fullfile(pwd,'aris_nature_agents_v7','uav_causal_validation','results','native_matlab_replay.mat'));
