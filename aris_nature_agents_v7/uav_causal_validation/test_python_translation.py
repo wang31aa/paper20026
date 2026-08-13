@@ -23,8 +23,12 @@ def main():
     assert np.allclose(xn[9:].reshape(3, 3), velocity + .1 * u.reshape(3, 3))
     margins = constraint_margins(x, u, p)
     assert np.min(margins["input"]) > 0
+    warm = np.arange(12, dtype=float).reshape(4, 3)
+    packed = warm.T.reshape(-1, order="F")
+    assert np.array_equal(packed, np.arange(12, dtype=float))
+    assert np.array_equal(packed.reshape(3, 4, order="F").T, warm)
     report = {"validator": "PASS", "tested": ["exact double integrator", "deterministic closest neighbours",
-              "component input, pair collision and cylinder constraints"],
+              "component input, pair collision and cylinder constraints", "CasADi warm-start ordering"],
               "scope": "translation unit tests; not source-controller replay"}
     path = HERE / "results" / "python_translation_unit_tests.json"
     path.parent.mkdir(parents=True, exist_ok=True)
