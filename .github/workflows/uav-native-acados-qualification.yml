@@ -15,17 +15,19 @@ jobs:
       - name: Install Octave build environment
         run: |
           sudo apt-get update
-          sudo apt-get install -y octave octave-dev cmake build-essential gfortran wget unzip
-      - name: Fetch pinned acados and CasADi 3.4.5
+          sudo apt-get install -y octave octave-dev cmake build-essential gfortran swig wget unzip
+      - name: Fetch pinned acados and CasADi 3.4.5 sources
         run: |
           git clone --recursive https://github.com/acados/acados.git acados
           git -C acados checkout 91067daebe12c07d76d32a6aed0b8db00b3a54e1
           git -C acados submodule update --init --recursive
-          wget -q https://github.com/casadi/casadi/releases/download/3.4.5/casadi-linux-octave-v3.4.5.tar.gz
-          mkdir -p acados/external/casadi-octave
-          tar -xf casadi-linux-octave-v3.4.5.tar.gz -C acados/external/casadi-octave
+          git clone --recursive --branch 3.4.5 --depth 1 https://github.com/casadi/casadi.git casadi-3.4.5
       - name: Build pinned shared libraries and Octave interface
         run: |
+          mkdir -p acados/external/casadi-octave
+          cmake -S casadi-3.4.5 -B casadi-3.4.5/build -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=$PWD/casadi-3.4.5/install -D MATLAB_PREFIX=$PWD/acados/external/casadi-octave -D WITH_OCTAVE=ON -D WITH_MATLAB=OFF -D WITH_PYTHON=OFF -D WITH_COMMON=OFF
+          cmake --build casadi-3.4.5/build -j2 --target octave
+          cmake --install casadi-3.4.5/build
           cmake -S acados -B acados/build -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=$PWD/acados -D BUILD_SHARED_LIBS=ON -D BLASFEO_TARGET=GENERIC -D HPIPM_TARGET=GENERIC -D ACADOS_OCTAVE=ON -D ACADOS_INSTALL_DIR=$PWD/acados
           cmake --build acados/build -j2
           cmake --install acados/build
