@@ -1,0 +1,28 @@
+name: UAV NMPC qualification
+on:
+  workflow_dispatch:
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install casadi==3.7.2 scipy==1.16.1 numpy==2.5.2
+      - name: Download and verify official workspace
+        run: |
+          curl -L --retry 15 -o dataset.zip 'https://zenodo.org/records/4379168/files/dataset.zip?download=1'
+          echo 'ff012bec9c5206a312eb18d664f760fe821e8cb9b4c2c65ea8f6bf9462960934  dataset.zip' | sha256sum -c -
+          unzip -q dataset.zip 'dataset/data/mpc/comparison/01/workspace.mat'
+      - name: Full-scale smoke and free closed loop
+        working-directory: aris_nature_agents_v7
+        run: |
+          python uav_causal_validation/test_python_translation.py
+          python uav_causal_validation/smoke_test_casadi_nmpc.py ../dataset/data/mpc/comparison/01/workspace.mat
+          python uav_causal_validation/run_casadi_closed_loop.py ../dataset/data/mpc/comparison/01/workspace.mat --backend sqpmethod
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: uav-nmpc-qualification
+          path: aris_nature_agents_v7/uav_causal_validation/results/
