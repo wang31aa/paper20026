@@ -1,8 +1,6 @@
 name: UAV NMPC qualification
 on:
   workflow_dispatch:
-  pull_request:
-    branches: [main]
 jobs:
   qualify:
     runs-on: ubuntu-24.04
@@ -20,10 +18,9 @@ jobs:
       - name: Full-scale smoke and free closed loop
         working-directory: aris_nature_agents_v7
         run: |
-          mkdir -p uav_causal_validation/results
           python uav_causal_validation/test_python_translation.py
-          python uav_causal_validation/smoke_test_casadi_nmpc.py ../dataset/data/mpc/comparison/01/workspace.mat
-          python uav_causal_validation/run_casadi_closed_loop.py ../dataset/data/mpc/comparison/01/workspace.mat --backend sqpmethod
+          python uav_causal_validation/smoke_test_casadi_nmpc.py ../dataset/data/mpc/comparison/01/workspace.mat --backend ipopt
+          python uav_causal_validation/run_casadi_closed_loop.py ../dataset/data/mpc/comparison/01/workspace.mat --backend ipopt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
