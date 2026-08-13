@@ -19,6 +19,7 @@ class CasadiResult:
     iterations: int
     solve_seconds: float
     objective: float
+    minimum_constraint_margin: float
 
 
 class CasadiNMPC:
@@ -114,4 +115,5 @@ class CasadiNMPC:
         states=np.asarray(self.state_fun(np.asarray(x0),solution["x"])).T
         self._warm=np.vstack((controls[1:],controls[-1:]))
         stats=self.solver.stats()
-        return CasadiResult(controls,states,bool(stats.get("success",False)),int(stats.get("iter_count",-1)),elapsed,float(solution["f"]))
+        margins=np.asarray(solution["g"],dtype=float).reshape(-1)
+        return CasadiResult(controls,states,bool(stats.get("success",False)),int(stats.get("iter_count",-1)),elapsed,float(solution["f"]),float(np.min(margins)))
