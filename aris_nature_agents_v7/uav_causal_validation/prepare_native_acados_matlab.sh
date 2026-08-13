@@ -18,5 +18,6 @@ curl -L --retry 15 -o dataset.zip 'https://zenodo.org/records/4379168/files/data
 echo 'ff012bec9c5206a312eb18d664f760fe821e8cb9b4c2c65ea8f6bf9462960934  dataset.zip' | sha256sum -c -
 unzip -q dataset.zip 'dataset/data/mpc/comparison/01/workspace.mat'
 mkdir -p aris_nature_agents_v7/uav_causal_validation/results
+echo "ENV_RUN=true" >> "$GITHUB_ENV"
 echo "ACADOS_INSTALL_DIR=$GITHUB_WORKSPACE/acados" >> "$GITHUB_ENV"
 echo "LD_LIBRARY_PATH=$GITHUB_WORKSPACE/acados/lib:$GITHUB_WORKSPACE/build" >> "$GITHUB_ENV"
