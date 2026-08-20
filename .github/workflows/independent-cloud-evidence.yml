@@ -26,7 +26,17 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Run frozen eight-domain evidence gate
         run: python validation/cloud_evidence_gate.py
+      - name: Run pipe virtual platform
+        run: python validation/virtual_platform_program.py pipe
+      - name: Run TCP virtual platform
+        run: python validation/virtual_platform_program.py tcp
+      - name: Compare independent software backends
+        run: python validation/compare_virtual_backends.py
       - uses: actions/upload-artifact@v4
         with:
           name: cloud-evidence-${{ matrix.os }}-py${{ matrix.python }}
-          path: cloud_evidence.json
+          path: |
+            cloud_evidence.json
+            virtual_pipe.json
+            virtual_tcp.json
+            backend_comparison.json

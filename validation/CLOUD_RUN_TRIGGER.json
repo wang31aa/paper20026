@@ -1,0 +1,5 @@
+{
+  "schema": "CLOUD-EVIDENCE-TRIGGER-1",
+  "purpose": "Trigger independent GitHub-hosted runner validation",
+  "claim_boundary": "software replication only; hardware_hil=false; entity_hil=false"
+}
