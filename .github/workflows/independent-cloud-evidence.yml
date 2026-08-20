@@ -1,0 +1,28 @@
+name: independent-cloud-evidence
+on:
+  push:
+    paths:
+      - "validation/**"
+      - ".github/workflows/independent-cloud-evidence.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reproduce:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ["3.11", "3.13"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Run frozen eight-domain evidence gate
+        run: python validation/cloud_evidence_gate.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cloud-evidence-${{ matrix.os }}-py${{ matrix.python }}
+          path: cloud_evidence.json
