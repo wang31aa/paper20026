@@ -1,0 +1,39 @@
+name: UAV native MATLAB pinned-acados qualification
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+jobs:
+  matlab-replay:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: matlab-actions/setup-matlab@v2
+        with:
+          release: R2024b
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Prepare pinned acados and official archives
+        run: bash aris_nature_agents_v7/uav_causal_validation/prepare_native_acados_matlab.sh
+      - name: Generate model library and MATLAB MEX interfaces
+        continue-on-error: true
+        uses: matlab-actions/run-command@v2
+        with:
+          command: addpath(genpath(fullfile(pwd,'acados','interfaces','acados_matlab_octave'))); addpath(genpath(fullfile(pwd,'acados','external','casadi-matlab'))); addpath(genpath(fullfile(pwd,'official_code','matlab_code'))); addpath(fullfile(pwd,'aris_nature_agents_v7','uav_causal_validation')); native_matlab_replay(fullfile(pwd,'dataset','data','mpc','comparison','01','workspace.mat'),fullfile(pwd,'aris_nature_agents_v7','uav_causal_validation','results','native_matlab_replay.mat'));
+      - name: Verify generated model library
+        run: test -f "$GITHUB_WORKSPACE/build/libcl_swarming.so"
+      - name: Run official controller in a fresh MATLAB process
+        uses: matlab-actions/run-command@v2
+        with:
+          command: addpath(genpath(fullfile(pwd,'acados','interfaces','acados_matlab_octave'))); addpath(genpath(fullfile(pwd,'acados','external','casadi-matlab'))); addpath(genpath(fullfile(pwd,'official_code','matlab_code'))); addpath(fullfile(pwd,'aris_nature_agents_v7','uav_causal_validation')); native_matlab_replay(fullfile(pwd,'dataset','data','mpc','comparison','01','workspace.mat'),fullfile(pwd,'aris_nature_agents_v7','uav_causal_validation','results','native_matlab_replay.mat'));
+      - name: Apply unchanged frozen acceptance criteria
+        run: |
+          python -m pip install --disable-pip-version-check numpy scipy
+          python aris_nature_agents_v7/uav_causal_validation/qualify_native_acados_replay.py dataset/data/mpc/comparison/01/workspace.mat aris_nature_agents_v7/uav_causal_validation/results/native_matlab_replay.mat --output aris_nature_agents_v7/uav_causal_validation/results/native_matlab_source_replay_metrics.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: uav-native-matlab-acados-qualification
+          path: aris_nature_agents_v7/uav_causal_validation/results/
