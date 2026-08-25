@@ -1,0 +1,31 @@
+name: decisive-theory-validation
+on:
+  push:
+    paths:
+      - "validation/decisive_theory_validation.py"
+      - ".github/workflows/decisive-theory-validation.yml"
+  pull_request:
+    paths:
+      - "validation/decisive_theory_validation.py"
+      - ".github/workflows/decisive-theory-validation.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ["3.11", "3.13"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python validation/decisive_theory_validation.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: decisive-theory-${{ matrix.os }}-py${{ matrix.python }}
+          path: decisive_theory_validation.json
