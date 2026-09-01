@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this evidence archive, please cite it after the authors have completed the release metadata."
+title: "When synchronization residuals become traceable certificates: evidence archive"
+version: 0.7.0-rc1
+type: software
+authors:
+  - family-names: "Authors withheld for review"
+abstract: >-
+  Code, generated data, mathematical audits, and reproducibility material for
+  an evidence-bounded reconstruction of residual certification in directed
+  heterogeneous nonlinear networks.
+keywords:
+  - quasi-synchronization
+  - directed networks
+  - residual certification
+  - reproducibility
+notes: >-
+  Provisional metadata: replace the anonymous author record, add the verified
+  public repository URL, confirm use of wang31aa@126.com as a public contact,
+  confirm the proposed MIT/CC-BY-4.0 split, then add the effective licence field
+  and validate this file before public release. No licence grant, DOI or external
+  reproduction is claimed by this provisional citation record.

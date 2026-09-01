@@ -1,0 +1,53 @@
+{
+  "protocol_id": "OPENMCT-MODELSET-R46-PREFLIGHT-1",
+  "status": "post-R42 exploratory mathematical preflight",
+  "frozen_before_preflight_execution": true,
+  "prior_result_known": true,
+  "prior_result": {
+    "protocol_id": "OPENMCT-GB-R42-1",
+    "protocol_sha256": "4ed5e4c1c6a71c64598a316743e9eebb06a7d5e6c527a30345f3bbcd71e34848",
+    "qualification_passed": false,
+    "network_simulation_authorized": false,
+    "failed_gates": ["loo_stability", "zero_domain_exits"]
+  },
+  "source": {
+    "doi": "10.17632/5xvg43r9r8.1",
+    "archive_sha256": "0f1781b7443dc5f6cfaab8e8cb473ca84832f8d8e4ad8e0b368da09d1a1a06df",
+    "licence": "CC-BY-4.0",
+    "evidence_role": "single-platform empirical sensitivity envelope, not a motor population"
+  },
+  "frozen_parameter_vertices": [
+    {"id": "pooled", "a": 302.1765090064751, "b": 335.7068606323302, "c": 400.6689774797264},
+    {"id": "leave_2ms_out", "a": 45.88893987152496, "b": 51.732430245177575, "c": 9.833214324766253},
+    {"id": "leave_10ms_out", "a": 320.494384150811, "b": 355.5864081930548, "c": 556.301459473605},
+    {"id": "leave_20ms_out", "a": 302.85775648544507, "b": 336.22859393695376, "c": 421.87231588385464}
+  ],
+  "nominal_pwm_gain": 335.7068606323302,
+  "rho_interval_rule": "min/max b over the four frozen correlated vertices divided by nominal_pwm_gain",
+  "followers": 5,
+  "rho_corner_count": 32,
+  "graphs": ["chain", "branch", "cyclic"],
+  "edge_convention": "W[i,j]>0 means follower i receives follower j; target is column N",
+  "metric_problem": {
+    "per_graph_common_metric": true,
+    "normalization": "sum(g)=N",
+    "minimum_g": 0.0001,
+    "matrix": "S_rho=G*diag(rho)*L1+L1^T*diag(rho)*G",
+    "objective": "maximize common Euclidean eigenvalue margin over all rho corners",
+    "generalized_margin": "min_corner lambda_min(G^-1/2*S_rho*G^-1/2)",
+    "pass_tolerance": 1e-08
+  },
+  "authorization": {
+    "exploratory_metric_preflight_supported": "true only if source bindings, all 32 corners for all 3 graphs, solver status, minimum g, Euclidean margin and generalized margin pass",
+    "exploratory_sensitivity_simulation_authorized": false,
+    "qualified_openmct_network_model": false,
+    "physical_evidence": false
+  },
+  "stop_rules": [
+    "do not narrow the rho interval after observing the result",
+    "do not replace a common per-graph G with corner-specific metrics",
+    "do not drop a graph or rho corner",
+    "do not reinterpret the four vertices as independent motors or a confidence region",
+    "do not run network trajectories under this preflight protocol"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "10.0",
+  "theory_change": "participation is eta=rho*gamma where gamma is certified from H^T P + P H = I for each frozen target-pinned graph",
+  "observer_discretization": "exact sample-held flow exp(-rho H dt), not explicit Euler",
+  "parent_results": ["V9 adverse raw-rho study", "V9.1 endpoint repair study"],
+  "domains": ["robot", "motor"],
+  "sizes": [5, 10, 20, 50],
+  "topologies": ["chain", "ring", "clustered", "random_directed"],
+  "topology_seed": 10077,
+  "eta": [0.15, 0.25, 0.4, 0.65, 1.0, 1.5, 2.2, 3.2],
+  "policies": ["all_coupled", "two_layer_gate", "independent_tracking"],
+  "heldout_seeds": [10001, 10002, 10003, 10004, 10005],
+  "target_visible_fraction": 0.2,
+  "heterogeneous_fraction": 0.25,
+  "dt_s": 0.05,
+  "duration_s": 20.0,
+  "robot_task_tube": 0.55,
+  "robot_minimum_spacing": 0.25,
+  "motor_speed_tube": 0.45,
+  "claim_boundary": "topology-normalized author-defined computational validation; no physical, HIL or public-platform intervention"
+}

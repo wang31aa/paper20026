@@ -1,0 +1,14 @@
+{
+  "schema": "THREE-DOMAIN-OBSERVER-PROCESS-VHIL-3",
+  "frozen_before_execution": true,
+  "domains": ["uav6dof", "vehicle", "motor"],
+  "policies": ["all_coupled", "two_layer_gate", "physical_filter"],
+  "nodes": 5,
+  "cycles": 180,
+  "sample_period_s": 0.02,
+  "switch_period_cycles": 30,
+  "observer_gain": 2.0,
+  "seed": 25100,
+  "requirements": ["target_only_visible_at_node_0", "observer_state_sent_separately_from_plant_state", "at_least_three_adjacency_modes", "heterogeneous_parameters_enter_plant", "requested_and_applied_controls_logged"],
+  "claim_boundary": "process-isolated virtual-HIL/SIL observer-interface test; not entity HIL, hardware, source-controller replay or physical experimentation"
+}

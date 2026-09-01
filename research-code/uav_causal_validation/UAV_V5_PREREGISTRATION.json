@@ -1,0 +1,22 @@
+{
+  "schema_version": "5.0",
+  "status": "FROZEN_BEFORE_V5_DEVELOPMENT",
+  "parent_v41_contract_sha256": "e7063dd5696e017647b3354601f7b8beb49c64966a521cd9720f782496d58058",
+  "development_seeds": [15101, 15102, 15103, 15104, 15105, 15106, 15107, 15108, 15109, 15110, 15111, 15112],
+  "heldout_seeds": [16101, 16102, 16103, 16104, 16105, 16106, 16107, 16108, 16109, 16110, 16111, 16112, 16113, 16114, 16115, 16116, 16117, 16118, 16119, 16120],
+  "rho_grid": [0.18, 0.26, 0.36, 0.50, 0.68, 0.90, 1.18, 1.52],
+  "observer_mode": "model_based_bounded_age",
+  "max_missed_updates": 1,
+  "command_reserve_mps2": 0.35,
+  "certified_acceleration_reserve_mps2": 0.308,
+  "epsilon_peak_m": 0.14,
+  "epsilon_ultimate_m": 0.14,
+  "development_quantile": 0.95,
+  "qualification_rule": "held-out execution is permitted only if the frozen critical function contains at least one feasible rho and both an infeasible low-rho and infeasible high-rho witness",
+  "information_contract": "Each delivered edge carries timestamped position, velocity, actuator state, previously applied command, heterogeneous beta/drag/tau and declared trim; a deterministic refresh is forced after one missed scheduled update.",
+  "prohibited": [
+    "No held-out seed may be read before this contract and the V5 parameter contract are frozen.",
+    "No parameter or threshold may be changed after held-out execution.",
+    "An empty predicted window is a failed promotion, not evidence of a critical window."
+  ]
+}

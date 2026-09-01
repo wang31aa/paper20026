@@ -1,0 +1,32 @@
+{
+  "status": "BLOCKED_UNTIL_L1",
+  "source_replay_registry_sha256": null,
+  "development_records": [],
+  "validation_records": [],
+  "heldout_records": [],
+  "rho_definition": "neighbour participation weight applied before source-controller optimization",
+  "parameter_identification": {
+    "a_i_rho": "fit modal contraction only from development closed-loop perturbation responses; validate free-run on validation records",
+    "D0_i": "development-only envelope of persistent platform/model mismatch at zero added participation",
+    "Db_i": "development-only slope/support function of mismatch transmitted by participating neighbours",
+    "U_i": "source acceleration authority after preserving official acceleration constraints",
+    "h": "actual message update interval measured from the controller interface",
+    "V_i": "development-only bound on unobserved neighbour-state continuation between updates"
+  },
+  "task_thresholds": {
+    "inter_agent_clearance": "official 2*r_coll constraint",
+    "obstacle_clearance": "official cylinder radius plus source safety margin",
+    "completion": "all agents cross source end line",
+    "control": "official max_a constraint"
+  },
+  "prediction": {
+    "direction_by_active_mode": null,
+    "rho_interval": null,
+    "feasible_window": null,
+    "weak_failure_witness": null,
+    "interior_success_witness": null,
+    "strong_failure_witness": null,
+    "counterexample_scenarios": ["monotone_improvement", "no_window"]
+  },
+  "frozen_at_utc": null
+}

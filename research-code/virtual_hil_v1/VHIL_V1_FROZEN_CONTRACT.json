@@ -1,0 +1,22 @@
+{
+  "schema": "EIGHT-DOMAIN-PROCESS-ISOLATED-VHIL-1",
+  "frozen_before_execution": true,
+  "domains": ["uav6dof", "vehicle", "motor", "robot", "microgrid", "circuit", "water", "structure"],
+  "policies": ["all_coupled", "two_layer_gate", "physical_filter"],
+  "nodes": 5,
+  "cycles": 100,
+  "sample_period_s": 0.02,
+  "seeds": {"uav6dof": 3101, "vehicle": 3201, "motor": 3301, "robot": 3401, "microgrid": 3501, "circuit": 3601, "water": 3701, "structure": 3801},
+  "pairing": "Within a domain, policies reuse the same initial state, parameter vector and exogenous innovation stream. No physical units, state vector or random stream is shared across domains.",
+  "acceptance": {
+    "separate_plant_and_controller_processes": true,
+    "positive_parameter_spread_in_every_domain": true,
+    "complete_cycle_log": true,
+    "all_requested_applied_and_saturation_fields_present": true,
+    "dynamic_adjacency_and_task_margin_present": true,
+    "intervention_changes_future_state": true,
+    "deadline_miss_fraction_max": 0.02
+  },
+  "qualification_label": "process_isolated_virtual_hil",
+  "claim_boundary": "Independent process-isolated real-time computational plants. This is virtual HIL/SIL with message I/O, not hardware-in-the-loop, an entity platform, source-controller reproduction or physical experimentation."
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "53.0",
+  "frozen_before_execution": true,
+  "coarse_resolutions": [3, 4, 5],
+  "refinement_factor": 2,
+  "brake_actions": [0, 1, 2],
+  "leader_disturbances": [0, 1, 2],
+  "safe_gap_index": 1,
+  "claim_boundary": "Exact exhaustive kernels for the declared finite three-vehicle robust game, with certified coarse-cell inner and outer lifts. This is not an exact continuous-road kernel, HIL or a physical experiment."
+}

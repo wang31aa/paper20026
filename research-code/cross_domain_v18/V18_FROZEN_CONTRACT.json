@@ -1,0 +1,22 @@
+{
+  "schema": "V18-PROSPECTIVE-OUT-OF-GRID-1",
+  "development_source": "cross_domain_v17/results/v17_runs.csv",
+  "domains": ["uav6dof", "vehicle", "motor", "robot", "microgrid", "circuit", "water", "structure"],
+  "heldout_sizes": [10, 30],
+  "heldout_topologies": ["ring", "clustered"],
+  "heldout_rho": [0.5, 0.9, 1.4, 2.1],
+  "heldout_seeds": [10301, 10302, 10303],
+  "policies": ["all_coupled", "independent_tracking", "two_layer_gate"],
+  "fault_rotation": ["sensor_bias", "actuator_loss", "mixed"],
+  "prediction": {
+    "model": "domain-specific ridge logistic model",
+    "features": ["intercept", "log_n", "rho", "rho_squared", "gamma", "visible_fraction", "heterogeneous_fraction", "policy_independent", "policy_two_layer", "topology_random", "topology_switching"],
+    "ridge": 0.01,
+    "iterations": 4000,
+    "learning_rate": 0.03,
+    "decision_threshold": 0.5,
+    "no_heldout_retuning": true
+  },
+  "pairing": "Policies share the same initial state, heterogeneous parameter draw and innovation stream only within a domain-size-topology-rho-seed block.",
+  "claim_boundary": "Prospective out-of-grid validation inside eight author-defined heterogeneous computational domains; not leave-physical-domain validation, source reproduction, HIL or hardware evidence."
+}

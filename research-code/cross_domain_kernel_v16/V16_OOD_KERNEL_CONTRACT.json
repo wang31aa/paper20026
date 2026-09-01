@@ -1,0 +1,33 @@
+{
+  "schema": "CROSS-DOMAIN-KERNEL-V16-CONTRACT-1",
+  "created_utc": "2026-08-20T09:10:00Z",
+  "purpose": "Qualification contract for a future eight-domain leave-one-domain-out capability-kernel test",
+  "outcome_blindness": "This contract does not reclassify existing V12.1/V13 outcomes and may not be tuned against a held-out domain.",
+  "domains": ["uav", "vehicle", "motor", "robot", "microgrid", "circuit", "water", "structure"],
+  "required_descriptor_blocks": [
+    "bounded heterogeneous dynamics identified without held-out task labels",
+    "information graph and physical influence graph",
+    "information pattern including observer and controller memory",
+    "actuation, delay, noise and disturbance sets",
+    "physical task set in domain units",
+    "certified inner and outer predecessor operators"
+  ],
+  "required_intervention_log": [
+    "initial state and innovation stream identifier",
+    "requested, limited and applied control",
+    "dynamic adjacency and edge weights",
+    "message age and target reachability",
+    "physical task margin and failure event",
+    "recovery dwell, energy, communication and computation time"
+  ],
+  "prediction_classes": ["INNER_KERNEL_FEASIBLE", "UNRESOLVED", "OUTER_KERNEL_EXCLUDED"],
+  "leave_domain_out_rule": "All abstraction maps, parameter estimators, enclosures, policies and thresholds are frozen on seven domains before the eighth descriptor or outcome is opened.",
+  "minimum_confirmation": {
+    "sensitivity": 0.8,
+    "specificity": 0.8,
+    "false_negative_rate": 0.2,
+    "clustered_confidence_interval_required": true,
+    "all_failures_and_abstentions_retained": true
+  },
+  "promotion_rule": "A domain is OOD_KERNEL_QUALIFIED only when every descriptor block, paired intervention and held-out prediction field is evidenced. Computation alone cannot promote HIL or physical status."
+}

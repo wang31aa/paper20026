@@ -1,0 +1,10 @@
+name: residual-certificate-reproduction
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13
+  - pip
+  - make
+  - tectonic
+  - pip:
+      - -r requirements-linux-py313.lock

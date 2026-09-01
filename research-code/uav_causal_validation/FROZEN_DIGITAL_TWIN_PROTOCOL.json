@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "frozen_before_outcomes": true,
+  "evidence_class": "public-data-constrained paired computational intervention",
+  "source_replay_required": false,
+  "source_replay_role": "external controller-compatibility evidence only",
+  "agents": 5,
+  "dt_s": 0.1,
+  "duration_s": 24.0,
+  "development_seeds": [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008],
+  "heldout_seeds": [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008],
+  "participation_grid": [0.15, 0.3, 0.5, 0.75, 1.0, 1.35, 1.7],
+  "environments": {
+    "development": [{"name":"sparse","obstacles":2,"wind":0.06,"loss":0.02},{"name":"dense","obstacles":5,"wind":0.10,"loss":0.08}],
+    "heldout": [{"name":"crosswind","obstacles":3,"wind":0.16,"loss":0.05},{"name":"lossy_dense","obstacles":6,"wind":0.10,"loss":0.18}]
+  },
+  "heterogeneous_plant": {
+    "acceleration_effectiveness": [0.86, 0.93, 1.0, 1.08, 1.15],
+    "linear_drag_per_s": [0.03, 0.05, 0.08, 0.10, 0.12],
+    "actuator_time_constant_s": [0.20, 0.28, 0.40, 0.58, 0.76],
+    "qualification": "tau range constrained by UAV-FD; beta and drag are declared sensitivity factors, not fitted physical estimates"
+  },
+  "policies": ["pf", "finite_horizon_mpc", "mpc_cbf", "participation_gated_mpc_cbf"],
+  "task": {"goal_x_m":18.0,"minimum_pair_clearance_m":0.40,"minimum_obstacle_clearance_m":0.35,"maximum_speed_mps":1.8,"maximum_acceleration_mps2":2.0,"completion_fraction":0.8},
+  "primary_prediction": "task feasibility is non-monotone in participation for the heterogeneous plant",
+  "counterexamples_retained": ["monotone improvement", "monotone degradation", "empty feasible window", "gate-induced harm"],
+  "promotion": {"minimum_heldout_pairs":200,"paired_random_streams_required":true,"gate_preoptimization_required":true,"all_rows_finite_required":true}
+}

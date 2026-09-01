@@ -1,0 +1,16 @@
+{
+  "schema_version": "27.0",
+  "frozen_before_execution": true,
+  "domains": ["robot", "microgrid", "circuit", "water", "structure"],
+  "sizes": [5, 20],
+  "topologies": ["switching"],
+  "rho_grid": [0.25, 0.5, 0.8, 1.1, 1.5, 2.0, 2.8],
+  "seeds": [8101, 8102, 8103, 8104, 8105],
+  "policies": ["all_coupled", "global_gain_reduction", "independent_tracking", "connectivity_gate", "physical_filter", "two_layer_gate"],
+  "steps": 160,
+  "dt_s": 0.06,
+  "observer": "weighted row Laplacian L=diag(A1)-A plus pinned visibility V; exact ZOH propagation exp(-rho*H*dt)",
+  "pairing": "node parameters, initial states and innovation arrays are identical across policies within each condition",
+  "parameter_evidence_class": "AUTHOR_DECLARED_NORMALIZED",
+  "claim_boundary": "Traceable heterogeneous computational re-execution; not independent physical identification, source-model replay, entity HIL or physical experimentation"
+}

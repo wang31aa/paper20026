@@ -1,0 +1,12 @@
+{
+  "schema_version": "55.0",
+  "frozen_before_execution": true,
+  "platform_policy": {
+    "vehicle": "two_layer_lag_kernel",
+    "uav6dof": "all_coupled",
+    "motor": "independent_tracking"
+  },
+  "loss": "1-task_success + 0.05 normalized control energy + 0.05 normalized terminal error",
+  "oracle": "minimum realized loss among declared policies under the same scenario",
+  "claim_boundary": "Cross-platform retrospective policy-regret audit with a frozen domain-aware rule. It is not a leave-physical-domain prospective test, HIL, hardware or proof of universal optimality."
+}

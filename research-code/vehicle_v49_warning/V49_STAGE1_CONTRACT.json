@@ -1,0 +1,14 @@
+{
+  "version": "V49.0",
+  "created_before_execution": true,
+  "parent_supervisor": "vehicle_v48_supervisor/run_v48.py",
+  "warning_variable": "conservative dynamic-headway margin in metres",
+  "candidate_thresholds_m": [0.1, 0.25, 0.5, 1.0, 2.0, 3.0],
+  "selection_rule": "maximize development Youden index subject to sensitivity >=0.8; break ties by smaller threshold",
+  "development_seeds": [5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008],
+  "heldout_seeds": [5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116],
+  "stress": [0.5, 1.5, 2.5],
+  "delay_s": [0.0, 0.4, 0.8],
+  "participation": [0.35, 0.65, 0.95],
+  "claim_boundary": "This is an empirically calibrated warning for the declared computational vehicle model. It is not a certified distance to the exact viability kernel or a road-safety alarm."
+}

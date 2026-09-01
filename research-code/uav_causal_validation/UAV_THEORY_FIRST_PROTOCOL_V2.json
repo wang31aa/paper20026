@@ -1,0 +1,71 @@
+{
+  "schema_version": "2.0",
+  "status": "FROZEN_BEFORE_V2_OUTCOMES",
+  "evidence_label": "theory-first paired heterogeneous-UAV computational intervention",
+  "claim_boundary": "not a physical experiment and not an EPFL source-controller replay",
+  "agents": 5,
+  "dt_s": 0.05,
+  "duration_s": 28.0,
+  "participation_grid": [0.2, 0.35, 0.5, 0.7, 0.9, 1.15, 1.45],
+  "development_seeds": [3101, 3102, 3103, 3104, 3105, 3106],
+  "heldout_seeds": [4101, 4102, 4103, 4104, 4105, 4106, 4107, 4108],
+  "theory_contract": {
+    "modal_a_bar": [0.80, 0.86, 0.92, 0.98],
+    "modal_kappa": [0.20, 0.18, 0.16, 0.14],
+    "D0": [0.18, 0.16, 0.15, 0.14],
+    "Db": [0.70, 0.66, 0.62, 0.58],
+    "U": [0.25, 0.24, 0.23, 0.22],
+    "Vh": [0.14, 0.13, 0.12, 0.11],
+    "epsilon_peak": 0.65,
+    "epsilon_ultimate": 0.55,
+    "prediction_rule": "Psi(rho)<=1",
+    "parameters_are_synthetic_contract_values": true
+  },
+  "observer": {
+    "base_update_interval_s": 0.30,
+    "update_interval_rule": "h/rho",
+    "position_innovation_gain": 0.72,
+    "velocity_innovation_gain": 0.48,
+    "packet_loss_action": "predict_without_reset",
+    "target_visible_nodes": [0, 2]
+  },
+  "plant": {
+    "acceleration_effectiveness": [0.86, 0.93, 1.00, 1.08, 1.15],
+    "linear_drag_per_s": [0.03, 0.05, 0.08, 0.10, 0.12],
+    "actuator_time_constant_s": [0.20, 0.28, 0.40, 0.58, 0.76],
+    "parameter_status": "declared sensitivity envelope; only tau is externally range-constrained"
+  },
+  "environments": {
+    "development": [
+      {"name": "dev_open", "wind_sd": 0.025, "loss": 0.02, "delay_steps": 0},
+      {"name": "dev_loss", "wind_sd": 0.045, "loss": 0.08, "delay_steps": 1}
+    ],
+    "heldout": [
+      {"name": "test_crosswind", "wind_sd": 0.065, "loss": 0.05, "delay_steps": 2},
+      {"name": "test_bursty", "wind_sd": 0.045, "loss": 0.16, "delay_steps": 1}
+    ]
+  },
+  "task": {
+    "goal_x_m": 16.0,
+    "minimum_pair_clearance_m": 0.35,
+    "corridor_half_width_m": 2.2,
+    "completion_fraction": 0.8,
+    "maximum_speed_mps": 1.8,
+    "maximum_acceleration_mps2": 2.0
+  },
+  "policies": ["independent_tracking", "all_coupled", "observer_residual_gate", "connectivity_observer_gate"],
+  "primary_hypotheses": [
+    "the exact modal challenge obeys the frozen Psi participation set",
+    "in the heterogeneous UAV surrogate, observer residual gating changes subsequent controls and states",
+    "the frozen theoretical window predicts the direction of the peak-residual trade-off on heldout environments"
+  ],
+  "fail_closed_promotion": {
+    "modal_certificate_required": true,
+    "observer_logged_required": true,
+    "paired_streams_required": true,
+    "heldout_window_sensitivity_min": 0.80,
+    "heldout_window_specificity_min": 0.80,
+    "physical_task_success_required": true,
+    "no_post_outcome_parameter_changes": true
+  }
+}

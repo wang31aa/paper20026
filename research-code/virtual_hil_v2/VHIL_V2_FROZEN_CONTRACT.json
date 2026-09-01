@@ -1,0 +1,13 @@
+{
+  "schema": "EIGHT-DOMAIN-TCP-VIRTUAL-PLATFORM-1",
+  "frozen_before_execution": true,
+  "domains": ["uav6dof", "vehicle", "motor", "robot", "microgrid", "circuit", "water", "structure"],
+  "policies": ["all_coupled", "two_layer_gate", "physical_filter"],
+  "nodes": 5,
+  "cycles": 100,
+  "sample_period_s": 0.02,
+  "transport": "length-prefixed JSON over TCP loopback between independent plant-server and controller-client processes",
+  "acceptance": {"complete_rows": 2400, "positive_parameter_spread": true, "cross_backend_final_margin_tolerance": 1e-12},
+  "qualification_label": "independent_tcp_virtual_platform",
+  "claim_boundary": "Second software implementation and transport backend; not an external machine, hardware HIL, entity platform or physical experiment."
+}

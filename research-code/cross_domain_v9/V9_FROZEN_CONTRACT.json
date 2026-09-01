@@ -1,0 +1,41 @@
+{
+  "schema_version": "9.0",
+  "frozen_before_execution": true,
+  "domains": {
+    "robot": "heterogeneous double-integrator formation",
+    "vehicle": "heterogeneous longitudinal platoon with actuation lag",
+    "motor": "heterogeneous first-order speed network"
+  },
+  "sizes": [5, 10, 20, 50],
+  "topologies": ["chain", "ring", "clustered", "random_directed"],
+  "rho": [0.3, 0.45, 0.6, 0.8, 1.0, 1.2, 1.45, 1.7, 2.0, 2.3, 2.6],
+  "policies": ["all_coupled", "two_layer_gate", "independent_tracking"],
+  "development_seeds": [9001, 9002, 9003, 9004, 9005],
+  "heldout_seeds": [9101, 9102, 9103, 9104, 9105, 9106, 9107, 9108, 9109, 9110],
+  "duration_s": 20.0,
+  "dt_s": 0.05,
+  "target_visible_fraction": 0.2,
+  "heterogeneous_fraction": 0.25,
+  "message_delay_steps": 1,
+  "innovation_pairing": "same domain-size-topology-rho-seed innovations across policies",
+  "parameters": {
+    "robot": {"kp": 1.4, "kd": 1.1, "physical_gain": 0.65, "u_max": 2.5, "spacing": 1.0, "task_tube": 0.55, "minimum_spacing": 0.25},
+    "vehicle": {"kp": 0.22, "kv": 0.75, "physical_gain": 0.45, "time_headway": 1.4, "standstill_m": 4.0, "acc_min": -3.5, "acc_max": 2.0, "minimum_margin_m": 0.0},
+    "motor": {"tracking_gain": 1.8, "physical_gain": 0.7, "input_max": 3.0, "speed_tube": 0.45}
+  },
+  "heterogeneity": {
+    "robot_actuator_effectiveness": [0.72, 1.18],
+    "vehicle_actuation_time_constant_s": [0.25, 0.75],
+    "motor_time_constant_s": [0.35, 0.95],
+    "persistent_transmitted_bias": 0.32
+  },
+  "pre_registered_hypotheses": [
+    "low participation may fail because the target observer is too slow",
+    "intermediate participation may satisfy the task",
+    "high participation may fail when persistent mismatch is physically transmitted",
+    "the two-layer gate keeps the information graph and removes only inadmissible physical influence",
+    "homogeneous or independent-tracking arms may be monotone and are retained as counterexamples",
+    "critical locations vary with size, topology, visibility and domain parameters"
+  ],
+  "claim_boundary": "author-defined frozen computational models; not public-platform, HIL or hardware execution"
+}

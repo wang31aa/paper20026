@@ -1,0 +1,30 @@
+{
+  "schema": "PHYSICAL-PLATFORM-CLOSURE-R1",
+  "frozen_before_any_new_physical_execution": true,
+  "shared_design": {
+    "stages": ["calibration", "parameter_freeze", "failure_class_prediction", "paired_intervention", "heldout_recovery"],
+    "required_policies": ["all_coupled", "global_gain_reduction", "observer_only", "domain_safety_filter", "two_layer_gate"],
+    "pairing": "same initial state, task, topology and exogenous innovation stream within every policy block",
+    "minimum_independent_heldout_runs_per_class": 20,
+    "required_logs": ["device_identity", "monotonic_clock", "node_state", "observer_state", "requested_control", "applied_control", "saturation", "dynamic_adjacency", "message_age", "residual", "task_margin", "energy", "communication_cost", "failure_time", "recovery_dwell"],
+    "promotion_rule": "Physical qualification requires an external device or real-time plant to execute the controller and produce subsequent measured states. Passive logs, SIL and offline replay are ineligible."
+  },
+  "platforms": {
+    "robot": {"minimum_nodes": 5, "physical_endpoints": ["minimum_separation_m", "formation_completion", "actuator_saturation"], "adapter": "multi_robot_realtime"},
+    "uav": {"minimum_nodes": 5, "physical_endpoints": ["minimum_aircraft_separation_m", "obstacle_clearance_m", "mission_completion", "energy_J"], "adapter": "six_dof_uav_realtime"},
+    "vehicle": {"minimum_nodes": 3, "physical_endpoints": ["time_headway_s", "minimum_gap_m", "string_amplification", "jerk_mps3"], "adapter": "vehicle_platoon_realtime"},
+    "motor": {"minimum_nodes": 3, "physical_endpoints": ["speed_error_rpm", "current_A", "torque_margin_Nm", "thermal_limit"], "adapter": "multi_motor_realtime"},
+    "microgrid": {"minimum_nodes": 5, "physical_endpoints": ["frequency_nadir_Hz", "voltage_margin_V", "rocof_Hz_per_s", "load_shed_fraction"], "adapter": "microgrid_realtime"},
+    "circuit": {"minimum_nodes": 5, "physical_endpoints": ["synchronization_residual_V", "supply_limit_V", "current_limit_A"], "adapter": "network_circuit_realtime"},
+    "water": {"minimum_nodes": 3, "physical_endpoints": ["level_margin_m", "overflow_event", "pump_saturation", "settling_time_s"], "adapter": "water_process_realtime"},
+    "structure": {"minimum_nodes": 3, "physical_endpoints": ["peak_displacement_m", "peak_acceleration_mps2", "actuator_force_N", "stability_event"], "adapter": "rths_realtime"}
+  },
+  "frozen_acceptance": {
+    "classification_balanced_accuracy_min": 0.8,
+    "false_negative_rate_max": 0.2,
+    "recovery_success_rate_min": 0.8,
+    "minimum_task_margin_nonnegative": true,
+    "report_all_induced_failures": true,
+    "deadline_miss_rate_max": 0.001
+  }
+}

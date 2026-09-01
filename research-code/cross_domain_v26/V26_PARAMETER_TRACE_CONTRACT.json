@@ -1,0 +1,16 @@
+{
+  "schema_version": "26.0",
+  "frozen_before_execution": true,
+  "parent_design": "V25 fair-baseline matrix",
+  "purpose": "Re-execute the active three-domain matrix with complete node-level parameter traceability and fail-closed unit/range checks.",
+  "domains": ["uav6dof", "vehicle", "motor"],
+  "sizes": [5, 20],
+  "topologies": ["certified_switching"],
+  "rho_grid": [0.3, 0.5, 0.8, 1.1, 1.5, 2.1, 2.8],
+  "development_seeds": [97001, 97002],
+  "heldout_seeds": [98001, 98002, 98003],
+  "policies": ["all_coupled", "global_gain_reduction", "independent_tracking", "connectivity_gate", "physical_filter", "two_layer_gate"],
+  "required_trace": ["node-level values", "parameter names", "unit class", "parameter hash on every trajectory", "evidence class", "range validation", "cross-policy identity"],
+  "motor_unit_rule": "R,L,J,B,Kt are normalized computational values; they must never be labelled SI motor parameters.",
+  "claim_boundary": "traceable heterogeneous computational re-execution; not independent parameter identification, source-controller replay, entity HIL or physical experimentation"
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "56.0",
+  "frozen_before_execution": true,
+  "scientific_question": "Do domain-specific policies selected before evaluation retain task feasibility and bounded regret on new matched closed-loop streams in three independently implemented heterogeneous models?",
+  "platforms": ["uav6dof", "vehicle", "motor"],
+  "new_streams": {
+    "uav6dof": {"seeds": [56101, 56102, 56103, 56104, 56105, 56106, 56107, 56108], "rho": [0.4, 0.9, 1.4, 2.0]},
+    "vehicle": {"seeds": [56201, 56202, 56203, 56204, 56205, 56206, 56207, 56208], "delay_s": [0.1, 0.3], "observer_error_mps": [0.25, 0.45]},
+    "motor": {"seeds": [56301, 56302, 56303], "sizes": [5], "topologies": ["chain", "random_directed"], "rho": [0.4, 1.0, 2.2]}
+  },
+  "selected_policy": {
+    "uav6dof": "all_coupled",
+    "vehicle": "two_layer_lag_kernel",
+    "motor": "decentralized_pi"
+  },
+  "loss": "1-task_success + 0.05*within-condition normalized control cost + 0.05*within-condition normalized terminal error",
+  "acceptance": {
+    "all_rows_finite": true,
+    "complete_policy_pairing": true,
+    "new_seeds_disjoint_from_source_contracts": true,
+    "report_false_safe_and_failures": true
+  },
+  "claim_boundary": "Prospectively specified new-stream paired computational closed loops in three heterogeneous models. This is not leave-physical-domain validation, source-controller replay, HIL, hardware or proof of universal optimality."
+}

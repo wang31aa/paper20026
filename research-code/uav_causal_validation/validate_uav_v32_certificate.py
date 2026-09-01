@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+import csv,hashlib,json,math
+from pathlib import Path
+H=Path(__file__).resolve().parent;O=H/"results";Q=json.loads((H/"UAV_V32_PREREGISTRATION.json").read_text());C=json.loads((O/"UAV_V32_FROZEN_CONTRACT.json").read_text())
+b={k:C[k] for k in C if k!="contract_sha256"};h=hashlib.sha256(json.dumps(b,sort_keys=True,separators=(",",":")).encode()).hexdigest();rows=list(csv.DictReader((O/"uav_v32_term_breakdown.csv").open()))
+checks={"hash":h==C["contract_sha256"],"no_heldout":C["future_heldout_seed_count_read"]==0,"reset_position_m":Q["units"]["Ep_reset"]=="m","growth_position_m":Q["units"]["Vph"]=="m","reset_velocity_mps":Q["units"]["Ev_reset"]=="m s^-1","growth_velocity_mps":Q["units"]["Vvh"]=="m s^-1","acceleration_common_unit":len({Q["units"][k] for k in ("D0","Db","U")})==1,"all_terms_finite":all(math.isfinite(float(r[k])) for r in rows for k in ("forcing_m","position_information_m","velocity_information_m","peak_total_m","ultimate_m")),"term_rows":len(rows)==32}
+R={"checks":checks,"certificate_dimensionally_and_reset_closed":all(checks.values()),"contract_sha256":C["contract_sha256"],"feasible_rho":[r["rho"] for r in C["critical_function"] if r["predicted_feasible"]]};(O/"uav_v32_certificate_validation.json").write_text(json.dumps(R,indent=2)+"\n");print(json.dumps(R,indent=2));raise SystemExit(0 if R["certificate_dimensionally_and_reset_closed"] else 2)

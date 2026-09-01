@@ -1,0 +1,4 @@
+#!/usr/bin/env python3
+import csv,hashlib,json,math
+from pathlib import Path
+H=Path(__file__).resolve().parent;C=json.loads((H/'MARINE_V60_FROZEN_CONTRACT.json').read_text());R=json.loads((H/'results/V60_REPORT.json').read_text());rows=list(csv.DictReader((H/'results/V60_HELDOUT.csv').open()));checks={'hash':R['contract_sha256']==hashlib.sha256((H/'MARINE_V60_FROZEN_CONTRACT.json').read_bytes()).hexdigest(),'factorial':len(rows)==150,'fresh':min(C['heldout_seeds'])>1000,'finite':all(math.isfinite(float(x[k])) for x in rows for k in ['terminal_rmse_m','minimum_clearance_m','energy_N2s']),'promotion':R['promotion_pass'],'precursors':all((H.parent/p).exists() for p in ['marine_v58_unseen_domain/results/V58_REPORT.json','marine_v59_dynamic_observer/results/V59_REPORT.json']),'label':'not physical' in C['claim_boundary'].lower()};print(json.dumps(checks,indent=2));raise SystemExit(0 if all(checks.values()) else 1)

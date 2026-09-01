@@ -1,0 +1,29 @@
+{
+  "schema_version": "25.0",
+  "frozen_before_execution": true,
+  "resource_revision": "The three-topology launch exceeded the task execution window and terminated before writing any result. This reduced contract was frozen before the first completed outcome; V23--V24 retain the fixed-topology evidence.",
+  "question": "Does two-layer selection retain a task-resource advantage after correcting independent tracking and adding domain physical filters under the V24 common-metric switching family?",
+  "domains": ["uav6dof", "vehicle", "motor"],
+  "sizes": [5, 20],
+  "topologies": ["certified_switching"],
+  "rho_grid": [0.3, 0.5, 0.8, 1.1, 1.5, 2.1, 2.8],
+  "development_seeds": [97001, 97002],
+  "heldout_seeds": [98001, 98002, 98003],
+  "fault_rotation": ["delay", "packet_loss", "sensor_bias"],
+  "policies": ["all_coupled", "global_gain_reduction", "independent_tracking", "connectivity_gate", "physical_filter", "two_layer_gate"],
+  "domain_policy_mapping": {
+    "uav6dof": {"independent_tracking": "zero physical influence edges", "physical_filter": "separation and tilt projection"},
+    "vehicle": {"independent_tracking": "zero physical influence edges", "physical_filter": "dynamic headway correction"},
+    "motor": {"independent_tracking": "decentralized PI", "physical_filter": "current-limited PI"}
+  },
+  "pairing": "Every policy in a domain-condition block reuses the same plant parameters, initial state, switching schedule and innovation stream.",
+  "primary_endpoints": ["task_success", "minimum_physical_margin", "tail_error", "control_energy", "communication_messages", "first_failure_time"],
+  "promotion_rule": {
+    "complete_pairs": true,
+    "positive_parameter_spreads": true,
+    "common_metric_switching_pass": true,
+    "no_universal_policy_dominance_assumed": true,
+    "retain_gate_induced_failures": true
+  },
+  "evidence_class": "prospective paired heterogeneous common-metric software-in-the-loop baseline comparison; not HIL, hardware or source-controller reproduction"
+}

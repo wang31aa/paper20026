@@ -1,0 +1,27 @@
+{
+  "registry_version": "2026-08-23",
+  "sources": [
+    {
+      "domain": "biological_group_hunting",
+      "source": "Dryad doi:10.5061/dryad.5x69p8dc9",
+      "license": "CC0-1.0",
+      "metadata_verified": true,
+      "storage_size_bytes": 33399883,
+      "expected_files": 5,
+      "raw_download": "BLOCKED_BY_UPSTREAM_HTTP_401_403",
+      "current_eligibility": "OBSERVATIONAL_PROTOCOL_ONLY",
+      "causal_recovery_qualified": false,
+      "reason": "No executed participation intervention and raw files were not retrieved in this environment."
+    },
+    {
+      "domain": "social_collective_choice",
+      "source": "Duarte et al., doi:10.3386/w26241; doi:10.1093/restud/rdaf075",
+      "license": "NOT_CONFIRMED_FOR_MICRODATA_REDISTRIBUTION",
+      "metadata_verified": true,
+      "raw_download": "NOT_ATTEMPTED_WITHOUT_CONFIRMED_REPLICATION_LICENSE",
+      "current_eligibility": "EXPLANATORY_ASSOCIATION_ONLY",
+      "causal_recovery_qualified": false,
+      "reason": "Observational network/contact data do not identify an unexecuted selective policy."
+    }
+  ]
+}

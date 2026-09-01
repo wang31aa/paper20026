@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "source": {
+    "article_doi": "10.1038/s42256-021-00341-y",
+    "data_doi": "10.5281/zenodo.4379168",
+    "code_doi": "10.5281/zenodo.4379503",
+    "code_sha256": "02cb805c7ed6d00cac410f84a9a1a3c5da6dd228c1cb580e5038f85804b06e45",
+    "data_sha256": "ff012bec9c5206a312eb18d664f760fe821e8cb9b4c2c65ea8f6bf9462960934",
+    "code_license": "MIT",
+    "data_redistribution_reviewed": false,
+    "swarmlab_v1_commit": "377ffd75b4581d642881f3d349a03cbc1a26e24d",
+    "swarmlab_v1_archive_sha256": "aa21629dd4e8a78d38218e9dcbe033c4778c84fe30fd78246ce735458d84d2c6"
+  },
+  "environment": {
+    "matlab_available": false,
+    "octave_available": true,
+    "acados_pinned_available": true,
+    "acados_commit": "91067daebe12c07d76d32a6aed0b8db00b3a54e1",
+    "acados_core_build_qualified": true,
+    "acados_nmpc_solver_generated": true,
+    "octave_runtime_qualified": true,
+    "upstream_stack_reproduced": true,
+    "runtime_python": "3.12.13 compatibility runtime",
+    "translated_binary_runtime_compatible": true,
+    "fallback_solver_smoke_passed": true
+  },
+  "levels": {
+    "L0_archive_qualified": true,
+    "L1_source_replay_qualified": false,
+    "L2_paired_intervention_qualified": false,
+    "L3_heldout_prediction_qualified": false
+  },
+  "artifacts": {
+    "source_replay_metrics": "results/pf_source_replay_metrics.json",
+    "nmpc_cloud_replay_metrics": "results/nmpc_source_replay_metrics_cloud_31702556957.json",
+    "native_acados_replay_metrics": "results/native_acados_source_replay_metrics_cloud_31717161695.json",
+    "native_matlab_replay_metrics": "results/native_matlab_source_replay_metrics_cloud_31726983422.json",
+    "translation_unit_tests": "results/python_translation_unit_tests.json",
+    "frozen_prediction": null,
+    "paired_counterfactual_log": null,
+    "heldout_metrics": null
+  },
+  "causal_validation_qualified": false,
+  "status": "NOT_QUALIFIED",
+  "blocking_reason": "PF replay passed. Independent pinned-acados replays in ABI-matched Octave (run 31717161695) and native MATLAB R2024b (run 31726983422) produced identical reported metrics, excluding Octave substitution. Both passed trajectory/event tolerances but failed the unchanged control-integral criterion (2.00235 versus 1.53333; 30.6% high), with nonzero status on all 166 solves. The archived model is homogeneous, so this is not vehicle heterogeneity. L1 remains false and L2/L3 remain prohibited."
+}

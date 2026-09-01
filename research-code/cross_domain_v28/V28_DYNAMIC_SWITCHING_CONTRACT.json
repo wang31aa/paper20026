@@ -1,0 +1,12 @@
+{
+  "schema_version":"28.0","frozen_before_execution":true,
+  "parent_parameter_contract":"cross_domain_v27/V27_FROZEN_CONTRACT.json",
+  "domains":["robot","microgrid","circuit","water","structure"],
+  "sizes":[5,20],"rho_grid":[0.25,0.5,0.8,1.1,1.5,2.0,2.8],
+  "seeds":[8101,8102,8103,8104,8105],
+  "policies":["all_coupled","global_gain_reduction","independent_tracking","connectivity_gate","physical_filter","two_layer_gate"],
+  "switch_period_steps":40,"number_of_modes":4,"steps":160,"dt_s":0.06,
+  "graph_family":"connected symmetric ring backbone plus balanced directed permutation circulation",
+  "certificate":"G=I and H_k+H_k^T positive definite for every mode",
+  "claim_boundary":"Actual directed switching computational re-execution; not a closed-form necessary-sufficient law, physical identification, HIL or experiment"
+}

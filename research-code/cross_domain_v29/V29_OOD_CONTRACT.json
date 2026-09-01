@@ -1,0 +1,1 @@
+{"schema_version":"29.0","frozen_before_execution":true,"frozen_model":"cross_domain_v28/V28_FROZEN_CRITICAL_MODELS.json","sizes":[10,30],"seeds":[9101,9102,9103],"rho_grid":[0.25,0.5,0.8,1.1,1.5,2.0,2.8],"policies":["all_coupled","two_layer_gate"],"claim_boundary":"unseen-scale and unseen-seed computational test; not leave-physical-domain validation"}

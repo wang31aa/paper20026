@@ -1,0 +1,9 @@
+{
+  "schema_version": "42.0",
+  "frozen_before_correction": true,
+  "source_v41_runs_sha256": "f6fef2ac20ea9ab0edd957f59e14f286bb6c0cb645b2294ee3b81c42bd4ffcb9",
+  "source_v41_manifest_sha256": "c1f1ff9481c930c97609d1081358c3dd230d3b5eaf3f8a44cb37311b253d45cf",
+  "correction": "V41 main-domain rows inherited no parameter_sha256 field from V25. Reconstruct the exact deterministic node-parameter payload for every block, populate its hash, and leave every trajectory endpoint unchanged.",
+  "forbidden_changes": ["task_success", "minimum_physical_margin", "tail_error", "control_energy", "communication_messages", "first_failure_time", "policy selection"],
+  "claim_boundary": "Post-execution provenance correction of V41; not a new simulation or new physical evidence."
+}

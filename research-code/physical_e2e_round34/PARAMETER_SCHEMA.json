@@ -1,0 +1,1314 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/phys-e2e-oct-r34-parameters.schema.json",
+  "title": "PHYS-E2E-OCT-R34 frozen preregistration parameters",
+  "description": "Schema for parameters frozen before primary hardware acquisition. It contains no outcome or result fields.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "protocol_id",
+    "status",
+    "freeze",
+    "upstream",
+    "claim_scope",
+    "apparatus",
+    "state_map",
+    "topology",
+    "timing_network",
+    "physical_model",
+    "observer_controller",
+    "quantization_actuation",
+    "safety",
+    "certificate",
+    "data_partitions",
+    "experimental_design",
+    "endpoints",
+    "failure_rules",
+    "raw_field_contract",
+    "release_contract"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "protocol_id": {
+      "const": "PHYS-E2E-OCT-R34"
+    },
+    "status": {
+      "const": "preregistration_parameters_no_results"
+    },
+    "freeze": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frozen_at_utc",
+        "protocol_sha256",
+        "canonical_parameter_payload_sha256",
+        "registration_uri",
+        "authorised_by"
+      ],
+      "properties": {
+        "frozen_at_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "protocol_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "canonical_parameter_payload_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "registration_uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "authorised_by": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "upstream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version",
+        "zenodo_doi",
+        "zenodo_record",
+        "code_zip_md5",
+        "code_zip_sha256",
+        "github_release",
+        "github_commit",
+        "hardware_article_doi",
+        "fork_firmware_commit",
+        "fork_firmware_sha256",
+        "compiled_binary_sha256",
+        "matrix_generator_sha256",
+        "certificate_checker_sha256",
+        "software_redistribution_basis",
+        "redistribution_evidence_sha256"
+      ],
+      "properties": {
+        "name": {
+          "const": "OpenMCT"
+        },
+        "version": {
+          "const": "v1.1.0"
+        },
+        "zenodo_doi": {
+          "const": "10.5281/zenodo.19986592"
+        },
+        "zenodo_record": {
+          "const": "https://zenodo.org/records/19986592"
+        },
+        "code_zip_md5": {
+          "const": "3b308895b767e59dc48fab6c2119d1fb"
+        },
+        "code_zip_sha256": {
+          "const": "a5213827b52e43a9ef93445c2c3678ffbc0a54aa090de0d9f6ff28b3425fc45a"
+        },
+        "github_release": {
+          "const": "https://github.com/AlejoBSmith/DC_Motor/releases/tag/v1.1.0"
+        },
+        "github_commit": {
+          "const": "2bb6278"
+        },
+        "hardware_article_doi": {
+          "const": "10.1016/j.ohx.2026.e00794"
+        },
+        "fork_firmware_commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "fork_firmware_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "compiled_binary_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "matrix_generator_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "certificate_checker_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "software_redistribution_basis": {
+          "type": "string",
+          "enum": [
+            "written_permission",
+            "verified_software_license",
+            "documented_clean_room_implementation"
+          ]
+        },
+        "redistribution_evidence_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "claim_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registered_claim",
+        "state_dimension",
+        "physical_target_required",
+        "exact_r3_replication",
+        "continuous_time_theorem_claim"
+      ],
+      "properties": {
+        "registered_claim": {
+          "const": "discrete_time_scalar_openmct_minimal_chain_not_r3"
+        },
+        "state_dimension": {
+          "const": 1
+        },
+        "physical_target_required": {
+          "const": true
+        },
+        "exact_r3_replication": {
+          "const": false
+        },
+        "continuous_time_theorem_claim": {
+          "const": false
+        }
+      }
+    },
+    "apparatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apparatus_id",
+        "physical_motor_count",
+        "nodes",
+        "communication_layer",
+        "synchronisation_layer",
+        "power_configuration",
+        "emergency_stop_id"
+      ],
+      "properties": {
+        "apparatus_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "physical_motor_count": {
+          "const": 3
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/node"
+          }
+        },
+        "communication_layer": {
+          "$ref": "#/$defs/versionedComponent"
+        },
+        "synchronisation_layer": {
+          "$ref": "#/$defs/versionedComponent"
+        },
+        "power_configuration": {
+          "type": "string",
+          "enum": [
+            "common_supply_logged",
+            "independent_supplies_each_logged"
+          ]
+        },
+        "emergency_stop_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "state_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state_name",
+        "raw_unit",
+        "normalised_unit",
+        "omega_center_rpm",
+        "omega_scale_rpm",
+        "leader_abs_max_normalised",
+        "follower_abs_max_normalised",
+        "speed_filter_definition",
+        "filter_group_delay_samples"
+      ],
+      "properties": {
+        "state_name": {
+          "const": "normalised_shaft_speed"
+        },
+        "raw_unit": {
+          "const": "rpm"
+        },
+        "normalised_unit": {
+          "const": "dimensionless"
+        },
+        "omega_center_rpm": {
+          "type": "number"
+        },
+        "omega_scale_rpm": {
+          "$ref": "#/$defs/positive"
+        },
+        "leader_abs_max_normalised": {
+          "$ref": "#/$defs/positive"
+        },
+        "follower_abs_max_normalised": {
+          "$ref": "#/$defs/positive"
+        },
+        "speed_filter_definition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "filter_group_delay_samples": {
+          "$ref": "#/$defs/nonnegativeInteger"
+        }
+      }
+    },
+    "topology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topology_id",
+        "receiver_row_convention",
+        "follower_adjacency",
+        "pinning",
+        "pinned_laplacian",
+        "hidden_target_channel_prohibited"
+      ],
+      "properties": {
+        "topology_id": {
+          "const": "physical_chain_target_to_1_to_2"
+        },
+        "receiver_row_convention": {
+          "const": true
+        },
+        "follower_adjacency": {
+          "const": [
+            [0, 0],
+            [1, 0]
+          ]
+        },
+        "pinning": {
+          "const": [1, 0]
+        },
+        "pinned_laplacian": {
+          "const": [
+            [1, 0],
+            [-1, 1]
+          ]
+        },
+        "hidden_target_channel_prohibited": {
+          "const": true
+        }
+      }
+    },
+    "timing_network": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sample_period_us",
+        "jitter_abs_max_us",
+        "clock_offset_abs_max_us",
+        "clock_skew_abs_max_ppm",
+        "computation_deadline_us",
+        "admissible_packet_ages_samples",
+        "admissible_input_delays_samples",
+        "max_consecutive_packet_holds",
+        "packet_reorder_allowed",
+        "tick_counter_bits",
+        "common_start_trigger"
+      ],
+      "properties": {
+        "sample_period_us": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "jitter_abs_max_us": {
+          "$ref": "#/$defs/nonnegative"
+        },
+        "clock_offset_abs_max_us": {
+          "$ref": "#/$defs/nonnegative"
+        },
+        "clock_skew_abs_max_ppm": {
+          "$ref": "#/$defs/nonnegative"
+        },
+        "computation_deadline_us": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "admissible_packet_ages_samples": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "admissible_input_delays_samples": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "max_consecutive_packet_holds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "packet_reorder_allowed": {
+          "const": false
+        },
+        "tick_counter_bits": {
+          "type": "integer",
+          "minimum": 32
+        },
+        "common_start_trigger": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "physical_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_class",
+        "nodes",
+        "hard_disturbance_bound_basis",
+        "probabilistic_coverage_level",
+        "certified_temperature_C",
+        "certified_supply_voltage_V",
+        "certified_load_codes",
+        "first_order_adequacy_rule",
+        "higher_order_post_confirmation_prohibited"
+      ],
+      "properties": {
+        "model_class": {
+          "const": "affine_discrete_first_order_with_bounded_residual"
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/nodeModel"
+          }
+        },
+        "hard_disturbance_bound_basis": {
+          "type": "string",
+          "enum": [
+            "engineering_specification_plus_set_membership",
+            "finite_sample_probabilistic_only"
+          ]
+        },
+        "probabilistic_coverage_level": {
+          "anyOf": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "exclusiveMaximum": 1
+            },
+            {
+              "type": "string",
+              "const": "not_applicable_deterministic"
+            }
+          ]
+        },
+        "certified_temperature_C": {
+          "$ref": "#/$defs/interval"
+        },
+        "certified_supply_voltage_V": {
+          "$ref": "#/$defs/interval"
+        },
+        "certified_load_codes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "first_order_adequacy_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "higher_order_post_confirmation_prohibited": {
+          "const": true
+        }
+      }
+    },
+    "observer_controller": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observer_gain_gamma",
+        "controller_gain_kappa",
+        "nominal_parameters",
+        "leader_input_broadcast",
+        "node2_direct_leader_state_access",
+        "controller_equation_id",
+        "observer_equation_id",
+        "gain_selection_data",
+        "post_confirmation_retuning_allowed"
+      ],
+      "properties": {
+        "observer_gain_gamma": {
+          "$ref": "#/$defs/positive"
+        },
+        "controller_gain_kappa": {
+          "$ref": "#/$defs/positive"
+        },
+        "nominal_parameters": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/nominalModel"
+          }
+        },
+        "leader_input_broadcast": {
+          "const": true
+        },
+        "node2_direct_leader_state_access": {
+          "const": false
+        },
+        "controller_equation_id": {
+          "const": "MODEL_CANCEL_PINNED_V1"
+        },
+        "observer_equation_id": {
+          "const": "DISTRIBUTED_TARGET_STATE_V1"
+        },
+        "gain_selection_data": {
+          "const": "identification_only"
+        },
+        "post_confirmation_retuning_allowed": {
+          "const": false
+        }
+      }
+    },
+    "quantization_actuation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "encoder_pulses_per_revolution",
+        "encoder_counting_multiplier",
+        "state_quantisation_step",
+        "observer_quantisation_step",
+        "signed_pwm_min",
+        "signed_pwm_max",
+        "pwm_register_bits",
+        "pwm_frequency_Hz",
+        "pwm_quantisation_step",
+        "dead_zone_mode",
+        "dead_zone_value_signed_pwm",
+        "anti_windup_mode",
+        "command_safety_margin",
+        "zero_order_hold"
+      ],
+      "properties": {
+        "encoder_pulses_per_revolution": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "encoder_counting_multiplier": {
+          "type": "integer",
+          "enum": [1, 2, 4]
+        },
+        "state_quantisation_step": {
+          "$ref": "#/$defs/positive"
+        },
+        "observer_quantisation_step": {
+          "$ref": "#/$defs/positive"
+        },
+        "signed_pwm_min": {
+          "type": "integer",
+          "maximum": -1
+        },
+        "signed_pwm_max": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pwm_register_bits": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        },
+        "pwm_frequency_Hz": {
+          "$ref": "#/$defs/positive"
+        },
+        "pwm_quantisation_step": {
+          "$ref": "#/$defs/positive"
+        },
+        "dead_zone_mode": {
+          "type": "string",
+          "enum": [
+            "disabled",
+            "explicitly_modelled"
+          ]
+        },
+        "dead_zone_value_signed_pwm": {
+          "$ref": "#/$defs/nonnegative"
+        },
+        "anti_windup_mode": {
+          "type": "string",
+          "enum": [
+            "not_applicable",
+            "explicitly_modelled"
+          ]
+        },
+        "command_safety_margin": {
+          "$ref": "#/$defs/positive"
+        },
+        "zero_order_hold": {
+          "const": true
+        }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supply_voltage_max_V",
+        "supply_current_limit_A",
+        "motor_current_abort_A",
+        "board_temperature_abort_C",
+        "speed_abs_abort_rpm",
+        "watchdog_timeout_us",
+        "lost_heartbeat_action",
+        "driver_fault_action",
+        "emergency_stop_action",
+        "shaft_guard_required"
+      ],
+      "properties": {
+        "supply_voltage_max_V": {
+          "$ref": "#/$defs/positive"
+        },
+        "supply_current_limit_A": {
+          "$ref": "#/$defs/positive"
+        },
+        "motor_current_abort_A": {
+          "$ref": "#/$defs/positive"
+        },
+        "board_temperature_abort_C": {
+          "$ref": "#/$defs/positive"
+        },
+        "speed_abs_abort_rpm": {
+          "$ref": "#/$defs/positive"
+        },
+        "watchdog_timeout_us": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "lost_heartbeat_action": {
+          "const": "all_pwm_zero_and_log"
+        },
+        "driver_fault_action": {
+          "const": "all_pwm_zero_and_log"
+        },
+        "emergency_stop_action": {
+          "const": "all_pwm_zero_and_log"
+        },
+        "shaft_guard_required": {
+          "const": true
+        }
+      }
+    },
+    "certificate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "certificate_type",
+        "augmented_state_order",
+        "lambda",
+        "disturbance_P_norm_bound",
+        "invariant_radius_P_norm",
+        "P",
+        "trace_P",
+        "P_min_eigenvalue_lower_bound",
+        "contraction_margin_lower_bound",
+        "vertex_count",
+        "mode_count",
+        "mode_ids",
+        "system_matrices",
+        "verification_tolerance",
+        "verification_arithmetic",
+        "verification_tool",
+        "solver_tool",
+        "all_vertices_verified",
+        "invariant_inequality_verified",
+        "no_saturation_inequality_verified",
+        "firmware_matrix_equivalence_verified",
+        "verification_report_sha256"
+      ],
+      "properties": {
+        "certificate_type": {
+          "const": "common_quadratic_interval_switched_discrete_time"
+        },
+        "augmented_state_order": {
+          "type": "integer",
+          "minimum": 4
+        },
+        "lambda": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
+        },
+        "disturbance_P_norm_bound": {
+          "$ref": "#/$defs/nonnegative"
+        },
+        "invariant_radius_P_norm": {
+          "$ref": "#/$defs/positive"
+        },
+        "P": {
+          "$ref": "#/$defs/matrix"
+        },
+        "trace_P": {
+          "const": 1
+        },
+        "P_min_eigenvalue_lower_bound": {
+          "$ref": "#/$defs/positive"
+        },
+        "contraction_margin_lower_bound": {
+          "$ref": "#/$defs/positive"
+        },
+        "vertex_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "mode_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "mode_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "system_matrices": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/systemMatrix"
+          }
+        },
+        "verification_tolerance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1e-6
+        },
+        "verification_arithmetic": {
+          "type": "string",
+          "enum": [
+            "rational",
+            "outward_rounded_interval"
+          ]
+        },
+        "verification_tool": {
+          "$ref": "#/$defs/versionedComponent"
+        },
+        "solver_tool": {
+          "$ref": "#/$defs/versionedComponent"
+        },
+        "all_vertices_verified": {
+          "const": true
+        },
+        "invariant_inequality_verified": {
+          "const": true
+        },
+        "no_saturation_inequality_verified": {
+          "const": true
+        },
+        "firmware_matrix_equivalence_verified": {
+          "const": true
+        },
+        "verification_report_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "data_partitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "calibration_run_ids",
+        "identification_run_ids",
+        "confirmation_run_ids",
+        "primary_run_ids",
+        "partition_manifest_sha256",
+        "disjointness_verified",
+        "primary_used_for_tuning"
+      ],
+      "properties": {
+        "calibration_run_ids": {
+          "$ref": "#/$defs/runIds"
+        },
+        "identification_run_ids": {
+          "$ref": "#/$defs/runIds"
+        },
+        "confirmation_run_ids": {
+          "$ref": "#/$defs/runIds"
+        },
+        "primary_run_ids": {
+          "$ref": "#/$defs/runIds"
+        },
+        "partition_manifest_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "disjointness_verified": {
+          "const": true
+        },
+        "primary_used_for_tuning": {
+          "const": false
+        }
+      }
+    },
+    "experimental_design": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "arms",
+        "leader_profiles",
+        "load_conditions",
+        "matched_blocks_per_profile_load",
+        "arm_order_randomisation_seed",
+        "arm_order_schedule_sha256",
+        "independent_trajectories",
+        "initial_speed_window_rpm",
+        "warmup_seconds",
+        "run_seconds",
+        "tail_window_fraction"
+      ],
+      "properties": {
+        "arms": {
+          "const": [
+            "observer_loop",
+            "oracle_target",
+            "no_target"
+          ]
+        },
+        "leader_profiles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/profile"
+          }
+        },
+        "load_conditions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "matched_blocks_per_profile_load": {
+          "type": "integer",
+          "minimum": 10
+        },
+        "arm_order_randomisation_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "arm_order_schedule_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "independent_trajectories": {
+          "const": true
+        },
+        "initial_speed_window_rpm": {
+          "$ref": "#/$defs/interval"
+        },
+        "warmup_seconds": {
+          "$ref": "#/$defs/nonnegative"
+        },
+        "run_seconds": {
+          "$ref": "#/$defs/positive"
+        },
+        "tail_window_fraction": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
+        }
+      }
+    },
+    "endpoints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_certificate_endpoint",
+        "comparative_metric",
+        "oracle_noninferiority_margin",
+        "no_target_minimum_improvement",
+        "uncertainty_unit",
+        "multiple_testing_rule",
+        "secondary_endpoints"
+      ],
+      "properties": {
+        "primary_certificate_endpoint": {
+          "const": "all_registered_samples_covered_and_all_hard_gates_pass"
+        },
+        "comparative_metric": {
+          "const": "follower_aggregated_tail_tracking_rmse"
+        },
+        "oracle_noninferiority_margin": {
+          "$ref": "#/$defs/nonnegative"
+        },
+        "no_target_minimum_improvement": {
+          "$ref": "#/$defs/nonnegative"
+        },
+        "uncertainty_unit": {
+          "const": "matched_hardware_block"
+        },
+        "multiple_testing_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "secondary_endpoints": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "failure_rules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pre_primary_blockers",
+        "run_level_failures",
+        "interpretation_prohibitions",
+        "delete_failed_runs",
+        "retune_after_primary",
+        "hardware_replacement_policy"
+      ],
+      "properties": {
+        "pre_primary_blockers": {
+          "$ref": "#/$defs/nonemptyStrings"
+        },
+        "run_level_failures": {
+          "$ref": "#/$defs/nonemptyStrings"
+        },
+        "interpretation_prohibitions": {
+          "$ref": "#/$defs/nonemptyStrings"
+        },
+        "delete_failed_runs": {
+          "const": false
+        },
+        "retune_after_primary": {
+          "const": false
+        },
+        "hardware_replacement_policy": {
+          "const": "new_node_id_and_repeat_calibration_identification_confirmation"
+        }
+      }
+    },
+    "raw_field_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "append_only",
+        "device_and_host_dual_log",
+        "required_fields",
+        "field_dictionary_sha256",
+        "missing_required_field_action"
+      ],
+      "properties": {
+        "format": {
+          "type": "string",
+          "enum": [
+            "csv_long_plus_binary_device_log",
+            "parquet_long_plus_binary_device_log"
+          ]
+        },
+        "append_only": {
+          "const": true
+        },
+        "device_and_host_dual_log": {
+          "const": true
+        },
+        "required_fields": {
+          "type": "array",
+          "minItems": 70,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "field_dictionary_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "missing_required_field_action": {
+          "const": "retain_run_and_fail_gate"
+        }
+      }
+    },
+    "release_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository_uri",
+        "license_code",
+        "license_data",
+        "raw_logs_release",
+        "firmware_source_release",
+        "compiled_binary_release",
+        "certificate_checker_release",
+        "clean_clone_command",
+        "manifest_sha256"
+      ],
+      "properties": {
+        "repository_uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "license_code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license_data": {
+          "type": "string",
+          "minLength": 1
+        },
+        "raw_logs_release": {
+          "const": true
+        },
+        "firmware_source_release": {
+          "const": true
+        },
+        "compiled_binary_release": {
+          "const": true
+        },
+        "certificate_checker_release": {
+          "const": true
+        },
+        "clean_clone_command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "manifest_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "positive": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "nonnegative": {
+      "type": "number",
+      "minimum": 0
+    },
+    "nonnegativeInteger": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "interval": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "number"
+      }
+    },
+    "matrix": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "number"
+        }
+      }
+    },
+    "systemMatrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode_id",
+        "vertex_id",
+        "F"
+      ],
+      "properties": {
+        "mode_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vertex_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "F": {
+          "$ref": "#/$defs/matrix"
+        }
+      }
+    },
+    "versionedComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version",
+        "commit",
+        "sha256"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commit": {
+          "type": "string",
+          "minLength": 7
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_id",
+        "role",
+        "hardware_serial",
+        "motor_serial",
+        "encoder_serial",
+        "teensy_model",
+        "driver_model",
+        "calibration_manifest_sha256"
+      ],
+      "properties": {
+        "node_id": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "physical_leader",
+            "physical_follower"
+          ]
+        },
+        "hardware_serial": {
+          "type": "string",
+          "minLength": 1
+        },
+        "motor_serial": {
+          "type": "string",
+          "minLength": 1
+        },
+        "encoder_serial": {
+          "type": "string",
+          "minLength": 1
+        },
+        "teensy_model": {
+          "type": "string",
+          "pattern": "^Teensy 4"
+        },
+        "driver_model": {
+          "const": "DRV8874"
+        },
+        "calibration_manifest_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "nodeModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_id",
+        "a_interval",
+        "b_interval",
+        "c_interval",
+        "w_abs_max",
+        "input_delay_modes",
+        "identification_method",
+        "identification_code_sha256",
+        "identification_output_sha256"
+      ],
+      "properties": {
+        "node_id": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "a_interval": {
+          "$ref": "#/$defs/interval"
+        },
+        "b_interval": {
+          "$ref": "#/$defs/interval"
+        },
+        "c_interval": {
+          "$ref": "#/$defs/interval"
+        },
+        "w_abs_max": {
+          "$ref": "#/$defs/nonnegative"
+        },
+        "input_delay_modes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "identification_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "identification_code_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "identification_output_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "nominalModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_id",
+        "a_nominal",
+        "b_nominal",
+        "c_nominal"
+      ],
+      "properties": {
+        "node_id": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "a_nominal": {
+          "type": "number"
+        },
+        "b_nominal": {
+          "$ref": "#/$defs/positive"
+        },
+        "c_nominal": {
+          "type": "number"
+        }
+      }
+    },
+    "runIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_id",
+        "type",
+        "definition_sha256",
+        "amplitude_abs_max",
+        "frequency_Hz_max"
+      ],
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "step_sequence",
+            "multisine",
+            "chirp",
+            "aprbs"
+          ]
+        },
+        "definition_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "amplitude_abs_max": {
+          "$ref": "#/$defs/positive"
+        },
+        "frequency_Hz_max": {
+          "$ref": "#/$defs/positive"
+        }
+      }
+    },
+    "nonemptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "x-semanticChecks": [
+    "Exactly one apparatus node has role physical_leader and node_id 0; exactly two have role physical_follower and node_id 1 or 2; all node and hardware identities are unique.",
+    "All interval arrays are ordered lower <= upper; every nominal parameter lies inside its interval; every b interval has lower endpoint > 0.",
+    "Model and nominal node_id sets are exactly {0,1,2}.",
+    "The dimensions of P are augmented_state_order by augmented_state_order, every row has equal length, P is symmetric, trace(P)=1, and an independent rigorous checker verifies positive definiteness.",
+    "system_matrices contains exactly vertex_count * mode_count unique (mode_id, vertex_id) pairs; every F has the same dimensions as P and every declared mode_id occurs.",
+    "Every admissible interval matrix belongs to the convex hull of the enumerated vertices and every admissible timing/packet pattern maps to one frozen mode_id.",
+    "The checker verifies F^T P F <= lambda^2 P for every vertex and mode with the declared positive margin.",
+    "The checker verifies lambda * invariant_radius_P_norm + disturbance_P_norm_bound <= invariant_radius_P_norm.",
+    "The checker verifies command magnitude remains inside signed PWM limits after reserving quantisation and command safety margins over the full invariant set.",
+    "Calibration, identification, confirmation and primary run ID sets are pairwise disjoint and their manifest is frozen before fitting.",
+    "No confirmation or primary sample is used for model-order, parameter, gain, bound, margin, tail-window or endpoint selection.",
+    "The primary run list equals the Cartesian product of frozen profiles, loads, blocks and three arms, with no outcome-based deletions.",
+    "required_fields contains every field listed in PROTOCOL_MATH.md Section 14, with units and data types fixed in the hashed field dictionary.",
+    "No result, observed metric, p-value, confidence interval, success flag or post-run estimate is permitted in the preregistration parameter file.",
+    "If hard_disturbance_bound_basis is finite_sample_probabilistic_only, probabilistic_coverage_level is numeric and deterministic physical theorem wording is prohibited; if the basis is engineering_specification_plus_set_membership, the field equals not_applicable_deterministic.",
+    "canonical_parameter_payload_sha256 is computed from canonical JSON after removing only freeze.canonical_parameter_payload_sha256; the external manifest also hashes the complete file.",
+    "The github_commit is the v1.1.0 release commit; the fork diff against that commit must be archived.",
+    "software_redistribution_basis must be supported by the hashed evidence; the hardware CERN-OHL-P-2.0 label alone is not accepted as a software redistribution licence.",
+    "Any schema-valid file still fails preregistration if a semantic check above is false."
+  ]
+}

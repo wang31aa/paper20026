@@ -1,0 +1,21 @@
+{
+  "schema_version":"7.0",
+  "status":"FROZEN_BEFORE_FORMAL_DEVELOPMENT",
+  "pilot_seed_excluded":21101,
+  "development_seeds":[22101,22102,22103,22104,22105,22106],
+  "heldout_seeds":[23101,23102,23103,23104,23105,23106,23107,23108,23109,23110,23111,23112,23113,23114,23115,23116,23117,23118,23119,23120],
+  "development_environments":["open_nominal","moderate_loss","moderate_crosswind"],
+  "heldout_environments":["bursty_loss","delayed_crosswind","payload_shift","topology_dropout"],
+  "witness_rho":{"low":0.5,"middle":1.18,"high":2.5},
+  "policies":["all_coupled_with_trim_sharing","heterogeneity_constrained_participation_gate","independent_constrained_tracking"],
+  "target_visibility":"target_rooted","target_visible_nodes":[0],"target_manoeuvre_amplitude_m":0.6,"target_observer_gain":0.8,
+  "observer_mode":"model_based_bounded_age","base_update_interval_s":0.04,"max_missed_updates":1,"command_reserve_mps2":1.0,
+  "physical_task_threshold_m":0.14,
+  "frozen_predictions":[
+    "low participation: all policies fail because non-root target estimates are too stale",
+    "middle participation: all-coupled and gated policies satisfy the task threshold",
+    "high participation: all-coupled fails from heterogeneous mismatch propagation while the heterogeneity-constrained gate recovers"
+  ],
+  "promotion_checks":{"middle_gated_success_rate_min":0.9,"high_all_coupled_failure_rate_min":0.5,"high_gate_success_rate_min":0.8,"low_all_coupled_failure_rate_min":0.5,"all_environments_required":true},
+  "baseline_scope":{"official_pf":"reported separately from qualified official replay only","official_nmpc":"reported separately; source replay must independently pass L1","independent_constrained_tracking":"computational physical-filter comparator, not official PF or NMPC"}
+}

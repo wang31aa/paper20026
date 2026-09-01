@@ -1,0 +1,24 @@
+{
+  "schema_version": "20.0",
+  "frozen_before_execution": true,
+  "resource_revision": "The initial 13,608-trajectory launch was terminated before any output file was produced. This reduced matrix was frozen before the first completed outcome and preserves every domain, topology and rho level.",
+  "central_test": "Do correlated, physically coherent parameter families preserve the information-limited and mismatch-limited participation mechanisms without post-result retuning?",
+  "claim_boundary": "prospective heterogeneous computational stress test; not source-controller replay, entity HIL, hardware, or independent physical identification",
+  "domains": ["uav6dof", "vehicle", "motor"],
+  "sizes": [5, 20],
+  "topologies": ["chain", "random_directed", "switching"],
+  "rho_grid": [0.3, 0.5, 0.8, 1.1, 1.5, 2.1, 2.8],
+  "development_seeds": [32001, 32002],
+  "heldout_seeds": [42001, 42002, 42003],
+  "fault_rotation": ["delay", "packet_loss", "sensor_bias"],
+  "policies": ["all_coupled", "global_gain_reduction", "broadcast_boost", "connectivity_gate", "physical_filter", "two_layer_gate"],
+  "pairing": "Within each domain-size-topology-rho-seed block, policies share initial conditions, correlated plant parameters and exogenous innovations.",
+  "parameter_registry": "../parameter_qualification/PHYSICAL_PARAMETER_REGISTRY.json",
+  "primary_endpoints": ["task_success", "minimum_physical_margin", "first_failure_time", "tail_error", "control_energy", "communication_messages"],
+  "promotion_rule": {
+    "minimum_heldout_conditions_per_domain": 126,
+    "report_all_parameter_and_policy failures": true,
+    "universal_policy_dominance_required": false,
+    "window_claim_requires": "at least one prespecified low and high rho with lower success than an interior rho in each claimed domain"
+  }
+}

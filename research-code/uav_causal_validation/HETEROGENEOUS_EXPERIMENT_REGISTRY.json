@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "status": "LOCKED_UNTIL_L1",
+  "scientific_prediction": "participation can have a finite optimum because information insufficiency decreases with rho while transmitted persistent mismatch can increase with rho",
+  "official_replay_plant": "homogeneous_shared_double_integrator",
+  "heterogeneous_plant_parameters": {
+    "acceleration_effectiveness": null,
+    "linear_drag": null,
+    "actuator_time_constant": null,
+    "identification_records": [],
+    "validation_records": [],
+    "identified_and_frozen": false,
+    "identifiability_audit": "results/heterogeneity_identifiability.json",
+    "identifiability_decision": "NOT_IDENTIFIABLE_FROM_CURRENT_PUBLIC_FIELDS",
+    "external_actuator_range_qualification": "results/uavfd_actuator_qualification.json",
+    "parameter_transfer_contract": "PHYSICAL_PARAMETER_TRANSFER_CONTRACT.json",
+    "external_range_status": "RANGE_QUALIFIED_NOT_IDENTIFIED"
+  },
+  "policies": [
+    "official_pf",
+    "official_nmpc",
+    "residual_gated_nmpc",
+    "connectivity_constrained_gated_nmpc"
+  ],
+  "paired_innovation_manifest": null,
+  "development_environments": [],
+  "heldout_environments": [],
+  "theory_parameter_contract": "FROZEN_THEORY_PARAMETER_CONTRACT.template.json",
+  "prediction_frozen": false,
+  "paired_closed_loop_executed": false,
+  "heldout_opened": false,
+  "claim_status": "NOT_QUALIFIED",
+  "independent_digital_twin": {
+    "protocol": "FROZEN_DIGITAL_TWIN_PROTOCOL.json",
+    "runs": "results/frozen_uav_digital_twin_runs.csv",
+    "summary": "results/frozen_uav_digital_twin_summary.json",
+    "execution_status": "COMPLETE_ADVERSE_RESULT",
+    "scientific_prediction_supported": false,
+    "causal_scope": "paired computational intervention only"
+  }
+}

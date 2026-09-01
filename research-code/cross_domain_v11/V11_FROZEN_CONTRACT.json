@@ -1,0 +1,72 @@
+{
+  "schema_version": "11.0",
+  "frozen_before_heldout_execution": true,
+  "central_hypothesis": "A common parameterized critical-function structure, not a common raw constant, predicts information-limited and mismatch-limited task failure in independently formulated heterogeneous UAV, vehicle and motor models.",
+  "claim_boundary": "author-defined heterogeneous computational causal validation; not official source-controller replay, HIL, hardware or physical intervention",
+  "domains": {
+    "uav6dof": {
+      "state": "3D position, 3D velocity, Euler attitude, body-rate and battery proxy",
+      "heterogeneity": "mass, drag, thrust reserve, attitude bandwidth and sensor bias",
+      "task_endpoints": ["tracking tube", "pairwise clearance", "tilt limit", "energy reserve"]
+    },
+    "vehicle": {
+      "state": "longitudinal position, speed and actuator acceleration",
+      "heterogeneity": "mass-normalized authority, drag, actuator lag, sensing bias and braking reserve",
+      "task_endpoints": ["time headway", "collision clearance", "string amplification", "comfort acceleration"]
+    },
+    "motor": {
+      "state": "armature current and rotor speed",
+      "heterogeneity": "resistance, inductance, inertia, damping, torque constant and load torque",
+      "task_endpoints": ["speed tube", "current limit", "thermal-energy proxy"]
+    }
+  },
+  "sizes": [5, 10, 20, 50],
+  "topologies": ["chain", "ring", "clustered", "random_directed", "switching"],
+  "rho_grid": [0.25, 0.4, 0.6, 0.85, 1.1, 1.4, 1.8, 2.3, 3.0],
+  "target_visible_fractions": [0.1, 0.2, 0.4],
+  "heterogeneous_fractions": [0.1, 0.25, 0.4],
+  "development_seeds": [701, 702, 703],
+  "heldout_seeds": [1701, 1702, 1703, 1704, 1705],
+  "heldout_faults": ["delay", "packet_loss", "sensor_bias", "authority_loss"],
+  "heldout_condition_design": "For every size, topology and rho, held-out seed j deterministically selects visibility[j mod 3], heterogeneity[(2j+1) mod 3] and fault[j mod 4]; this mapping is shared by all policies.",
+  "policies": [
+    "all_coupled",
+    "global_gain_reduction",
+    "broadcast_boost",
+    "residual_gate",
+    "connectivity_gate",
+    "physical_filter",
+    "predictive_filter",
+    "fault_tolerant_control",
+    "two_layer_gate"
+  ],
+  "fairness": {
+    "paired_exogenous_innovations": true,
+    "same_information_constraints": true,
+    "same_actuator_limits": true,
+    "policy_parameters_frozen_before_heldout": true
+  },
+  "critical_function": {
+    "form": "Psi_s(rho)=max{A_s/(rho*gamma_s), (D0_s+rho*Db_s-U_s)_+/(a_s(rho)*epsilon_s)}",
+    "parameters_identified_from": "development seeds only",
+    "uncertainty": "one-sided 95% development bootstrap envelope",
+    "success_rule": "predicted feasible iff upper confidence envelope of Psi is <= 1"
+  },
+  "primary_metrics": [
+    "task_success", "first_failure_time", "minimum_physical_margin",
+    "tail_error", "control_energy", "communication_messages",
+    "wall_clock_compute_time", "recovery_dwell"
+  ],
+  "prediction_metrics": [
+    "sensitivity", "specificity", "false_negative_rate", "balanced_accuracy",
+    "brier_score", "warning_lead_time"
+  ],
+  "promotion_rules": {
+    "minimum_domain_sensitivity": 0.8,
+    "minimum_domain_specificity": 0.8,
+    "maximum_domain_false_negative_rate": 0.2,
+    "minimum_domains_passing": 2,
+    "requires_gate_pareto_dominance": false,
+    "requires_honest_reporting_of_non_dominance": true
+  }
+}

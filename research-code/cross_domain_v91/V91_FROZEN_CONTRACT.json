@@ -1,0 +1,28 @@
+{
+  "schema_version": "9.1",
+  "parent_adverse_study": "cross_domain_v9",
+  "allowed_repairs_only": [
+    "vehicle initial states are placed inside the declared dynamic-spacing set",
+    "robot information failure is evaluated at a predeclared task deadline",
+    "persistent communicated mismatch uses the public vehicle acceleration residual scale"
+  ],
+  "domains": ["robot", "vehicle"],
+  "sizes": [5, 10, 20, 50],
+  "topologies": ["chain", "ring", "clustered", "random_directed"],
+  "rho": [0.25, 0.35, 0.5, 0.7, 0.9, 1.15, 1.4, 1.7, 2.0, 2.35, 2.7, 3.1],
+  "policies": ["all_coupled", "two_layer_gate", "independent_tracking", "global_gain_reduction"],
+  "heldout_seeds": [9201, 9202, 9203, 9204, 9205],
+  "dt_s": 0.05,
+  "duration_s": 15.0,
+  "robot_deadline_s": 5.0,
+  "target_visible_fraction": 0.1,
+  "heterogeneous_fraction": 0.25,
+  "persistent_transmitted_mismatch": 1.0,
+  "vehicle_initial_gap_m": 28.0,
+  "vehicle_initial_dynamic_margin_m": 7.2,
+  "success_endpoints": {
+    "robot": "deadline max target/formation error <= 0.55 and minimum separation >= 0.25",
+    "vehicle": "minimum dynamic-spacing margin >= 0 and tail speed error <= 1.2"
+  },
+  "claim_boundary": "separately frozen repair study in author-defined computational models; V9 remains adverse and immutable"
+}

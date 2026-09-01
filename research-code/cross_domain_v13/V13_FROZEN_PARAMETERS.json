@@ -1,0 +1,62 @@
+{
+  "contract_sha256": "c489ba622d50e76338d407072db93660435d09ab997bcc14582efa3f4e81c3fa",
+  "critical_function": "Psi=A/(rho*gamma)+B*rho*f_het+C*rho^2*f_het+D*log(N/5)",
+  "parameters": [
+    {
+      "domain": "circuit",
+      "A_information": 0.011302567337786673,
+      "B_mismatch": 1.8281392932521792,
+      "C_constraint": 0.3550472879232327,
+      "D_scale": 0.4587565700554823,
+      "development_sensitivity": 0.8409090909090909,
+      "development_specificity": 0.8338414634146342,
+      "development_balanced_accuracy": 0.8373752771618626,
+      "rows": 700
+    },
+    {
+      "domain": "microgrid",
+      "A_information": 0.0001913797039922449,
+      "B_mismatch": 0.22227101740597988,
+      "C_constraint": 2.0162075647077526,
+      "D_scale": 0.03634654367660195,
+      "development_sensitivity": 0.6775244299674267,
+      "development_specificity": 0.6743002544529262,
+      "development_balanced_accuracy": 0.6759123422101765,
+      "rows": 700
+    },
+    {
+      "domain": "robot",
+      "A_information": 0.0001252841204997246,
+      "B_mismatch": 0.3569985131433775,
+      "C_constraint": 1.1427621371875682,
+      "D_scale": 0.6350266919764032,
+      "development_sensitivity": 0.7867647058823529,
+      "development_specificity": 0.8085106382978723,
+      "development_balanced_accuracy": 0.7976376720901126,
+      "rows": 700
+    },
+    {
+      "domain": "structure",
+      "A_information": 0.0002884747608432048,
+      "B_mismatch": 0.6013418182069912,
+      "C_constraint": 1.8406968082490838,
+      "D_scale": 0.005580693946073856,
+      "development_sensitivity": 0.7751937984496124,
+      "development_specificity": 0.7285067873303167,
+      "development_balanced_accuracy": 0.7518502928899646,
+      "rows": 700
+    },
+    {
+      "domain": "water",
+      "A_information": 0.3822622830947513,
+      "B_mismatch": 0.38303196683485474,
+      "C_constraint": 3.468533741749735,
+      "D_scale": 1.6797586302719258,
+      "development_sensitivity": 0.0,
+      "development_specificity": 1.0,
+      "development_balanced_accuracy": 0.5,
+      "rows": 700
+    }
+  ],
+  "status": "FROZEN_BEFORE_CONFIRMATION"
+}

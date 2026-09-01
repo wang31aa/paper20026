@@ -1,0 +1,22 @@
+{
+  "version": "V47.0",
+  "created_before_execution": true,
+  "evidence_class": "public-record-constrained heterogeneous computational counterfactual",
+  "parent_model": "vehicle_v46/run_v46.py",
+  "source": "US DOT/FHWA ADAS public-domain sample vhz2-exyi, record id 6",
+  "participation_grid": [0.2, 0.2667, 0.3333, 0.4, 0.4667, 0.5333, 0.6, 0.6667, 0.7333, 0.8, 0.8667, 0.9333, 1.0],
+  "stress": [0.5, 1.5, 2.5],
+  "delay_s": [0.0, 0.4, 0.8],
+  "development_seeds": [4701, 4702, 4703, 4704, 4705, 4706, 4707, 4708],
+  "heldout_seeds": [4801, 4802, 4803, 4804, 4805, 4806, 4807, 4808, 4809, 4810, 4811, 4812, 4813, 4814, 4815, 4816],
+  "policies": ["all_coupled", "two_layer", "one_step_barrier_filter"],
+  "response_rule": {
+    "feasible_success_rate": 0.8,
+    "low_band": [0.2, 0.4],
+    "middle_band": [0.4667, 0.7333],
+    "high_band": [0.8, 1.0],
+    "classes": ["infeasible", "monotone_non_decreasing", "monotone_non_increasing", "finite_window", "irregular"]
+  },
+  "primary_failure": "negative conservative dynamic-headway margin for at least 0.5 s",
+  "claim_boundary": "The development data generate a prespecified empirical response classifier; only the modal theorem supplies an exact necessary-and-sufficient critical function. Held-out results test transfer within this vehicle model, not road safety."
+}

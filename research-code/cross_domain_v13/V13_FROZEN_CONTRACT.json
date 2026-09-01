@@ -1,0 +1,29 @@
+{
+  "schema_version": "13.0",
+  "frozen_before_execution": true,
+  "domains": ["robot", "microgrid", "circuit", "water", "structure"],
+  "sizes": [5, 10, 20, 50],
+  "topologies": ["chain", "ring", "clustered", "random_directed", "switching"],
+  "rho_grid": [0.25, 0.5, 0.8, 1.1, 1.5, 2.0, 2.8],
+  "development_seeds": [6101, 6102, 6103, 6104, 6105],
+  "confirmation_seeds": [7101, 7102, 7103, 7104, 7105],
+  "policies": ["all_coupled", "two_layer_gate"],
+  "fault_rotation": ["delay", "packet_loss", "sensor_bias", "actuator_loss", "mixed"],
+  "visible_fractions": [0.2, 0.4, 0.6],
+  "heterogeneous_fractions": [0.2, 0.5, 0.8],
+  "critical_function": "Psi=A/(rho*gamma)+B*rho*f_het+C*rho^2*f_het+D*log(N/5)",
+  "prediction_acceptance": {
+    "minimum_sensitivity": 0.8,
+    "minimum_specificity": 0.8,
+    "maximum_false_negative_rate": 0.2,
+    "minimum_passing_domains": 3
+  },
+  "evidence_contract": {
+    "development": "identify each domain's critical-function coefficients only from development seeds",
+    "freeze": "hash contract and fitted coefficients before confirmation",
+    "confirmation": "run new seeds without changing coefficients, thresholds, dynamics or endpoints",
+    "pairing": "reuse identical initial states and exogenous innovations across policies within each condition",
+    "negative_results": "retain every condition and report induced as well as prevented failures"
+  },
+  "claim_boundary": "Author-defined heterogeneous computational counterparts constrained by the qualitative ranges of retained public records. They are neither source-controller replay, HIL, hardware experiments nor counterfactuals extracted from passive logs."
+}

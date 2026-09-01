@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0.0",
+  "protocol_id": "PHYS-E2E-OCT-R34",
+  "status": "draft",
+  "classification": "design_only_not_executed_not_result",
+  "draft_notice": "This file is intentionally incomplete. It cannot pass completed validation and is not physical evidence.",
+  "completion_instructions": [
+    "Populate every required field in PARAMETER_SCHEMA.json from real apparatus records and pre-primary certificate files.",
+    "Remove classification, draft_notice, completion_instructions and draft_sections.",
+    "Set status to preregistration_parameters_no_results only after every value is frozen and independently checked.",
+    "Compute freeze.canonical_parameter_payload_sha256 after removing only that hash field from canonical JSON.",
+    "Run validate_parameters.py without --draft-lint before any primary acquisition."
+  ],
+  "official_source_pin": {
+    "name": "OpenMCT",
+    "version": "v1.1.0",
+    "zenodo_doi": "10.5281/zenodo.19986592",
+    "code_zip_md5": "3b308895b767e59dc48fab6c2119d1fb",
+    "code_zip_sha256": "a5213827b52e43a9ef93445c2c3678ffbc0a54aa090de0d9f6ff28b3425fc45a",
+    "github_commit": "2bb6278"
+  },
+  "fixed_design": {
+    "physical_motor_count": 3,
+    "roles": [
+      "physical_leader",
+      "physical_follower",
+      "physical_follower"
+    ],
+    "follower_adjacency": [
+      [0, 0],
+      [1, 0]
+    ],
+    "pinning": [1, 0],
+    "pinned_laplacian": [
+      [1, 0],
+      [-1, 1]
+    ],
+    "arms": [
+      "observer_loop",
+      "oracle_target",
+      "no_target"
+    ]
+  },
+  "draft_sections": {
+    "freeze": null,
+    "upstream_fork_and_license_evidence": null,
+    "apparatus_node_identities": null,
+    "state_map_and_units": null,
+    "timing_and_network_bounds": null,
+    "physical_interval_models": null,
+    "observer_and_controller_gains": null,
+    "quantization_and_actuation": null,
+    "safety_limits": null,
+    "quadratic_certificate_and_system_matrices": null,
+    "disjoint_run_partitions": null,
+    "matched_arm_schedule": null,
+    "predeclared_endpoints_and_margins": null,
+    "failure_rules": null,
+    "raw_field_dictionary": null,
+    "release_contract": null
+  }
+}

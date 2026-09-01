@@ -1,0 +1,29 @@
+{
+  "schema_version": "11.1",
+  "source_v11_sha256": "afc053409951571428f635dfdcbcb592399dfd91550ad53dfa72377964fae312",
+  "critical_function": "Psi=A/(rho*gamma)+B*rho*f_het; feasible iff Psi<=1",
+  "parameters": [
+    {
+      "domain": "motor",
+      "A_information": 0.017292350977012864,
+      "B_mismatch": 3.248344813312335,
+      "development_sensitivity": 0.8780487804878049,
+      "development_specificity": 0.6809290953545232
+    },
+    {
+      "domain": "uav6dof",
+      "A_information": 0.10258241459220913,
+      "B_mismatch": 0.8404663467264846,
+      "development_sensitivity": 0.9850746268656716,
+      "development_specificity": 0.8271308523409364
+    },
+    {
+      "domain": "vehicle",
+      "A_information": 0.047074927433392984,
+      "B_mismatch": 1.7811898621734523,
+      "development_sensitivity": 0.9072164948453608,
+      "development_specificity": 0.7596513075965131
+    }
+  ],
+  "status": "FROZEN_BEFORE_V11_1"
+}

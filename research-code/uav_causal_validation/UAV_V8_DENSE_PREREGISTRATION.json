@@ -1,0 +1,27 @@
+{
+  "schema_version": "8.0",
+  "status": "FROZEN_BEFORE_V8_EXECUTION",
+  "relationship_to_v7": "confirmatory resolution and mechanism ablation; not an independent discovery cohort",
+  "seeds": [24101,24102,24103,24104,24105,24106,24107,24108,24109,24110],
+  "environments": ["bursty_loss","delayed_crosswind","payload_shift","topology_dropout"],
+  "rho_grid": [0.35,0.45,0.55,0.65,0.8,0.95,1.1,1.25,1.4,1.65,1.9,2.2,2.5,2.8],
+  "policies": ["all_coupled_with_trim_sharing","heterogeneity_constrained_participation_gate","independent_constrained_tracking"],
+  "mechanism_witness_rho": [0.5,1.18,2.5],
+  "mechanism_arms": ["homogeneous","all_heterogeneous_without_feedforward_sharing","trim_only","all_heterogeneous"],
+  "target_visibility": "target_rooted",
+  "observer_mode": "model_based_bounded_age",
+  "base_update_interval_s": 0.04,
+  "max_missed_updates": 1,
+  "command_reserve_mps2": 1.0,
+  "target_manoeuvre_amplitude_m": 0.6,
+  "target_observer_gain": 0.8,
+  "frozen_predictions": {
+    "low_information_region": "all-coupled failure rate exceeds 0.5 at rho <= 0.55",
+    "intermediate_region": "all-coupled success rate exceeds 0.8 for at least one rho in [0.95,1.4]",
+    "high_mismatch_region": "all-coupled failure rate exceeds 0.5 at rho >= 2.2",
+    "gate_recovery": "gate success rate exceeds all-coupled success rate by at least 0.5 at one rho >= 2.2",
+    "homogeneous_counterexample": "removing heterogeneity eliminates the high-participation failure at rho=2.5",
+    "information_ablation": "removing shared heterogeneous feedforward cannot remove the low-participation information failure"
+  },
+  "claim_boundary": "new random streams in the same low-order simulator; no official NMPC, HIL, hardware or leave-domain qualification"
+}

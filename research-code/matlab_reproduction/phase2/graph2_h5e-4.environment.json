@@ -1,0 +1,11 @@
+{
+  "graph": "graph2",
+  "h": 0.0005,
+  "horizon": 100.0,
+  "sample_dt": 0.001,
+  "implementation": "intended-continuous-stage-consistent-rk4-v1",
+  "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 11:09:21) [Clang 14.0.6 ]",
+  "platform": "macOS-10.16-x86_64-i386-64bit-Mach-O",
+  "numpy": "2.5.1",
+  "scipy": "1.18.0"
+}

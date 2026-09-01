@@ -1,0 +1,194 @@
+{
+  "registry_sha256": "724f968b94f116515d1bd0dfb1bb260a3c72591dc76609a7f02ced8c920ece7f",
+  "status": "PASS",
+  "claim_boundary": "Literature- and record-constrained computational parameters; not independently identified node-level plants",
+  "independent_node_level_identification": false,
+  "draws_per_domain": 1500,
+  "failures": [],
+  "summaries": {
+    "uav": {
+      "mass_ratio": {
+        "n": 1500,
+        "min": 0.7509040913910587,
+        "median": 1.0461416479341263,
+        "max": 1.3498071374964165
+      },
+      "drag_ratio": {
+        "n": 1500,
+        "min": 0.640645439870783,
+        "median": 1.1853257699644433,
+        "max": 1.7260635360410643
+      },
+      "bandwidth_ratio": {
+        "n": 1500,
+        "min": 0.6229152793497101,
+        "median": 0.9884714898012502,
+        "max": 1.263
+      },
+      "actuator_reserve_ratio": {
+        "n": 1500,
+        "min": 0.72,
+        "median": 0.8785319601127964,
+        "max": 1.0
+      }
+    },
+    "vehicle": {
+      "lag_ratio": {
+        "n": 1500,
+        "min": 0.7016575008836077,
+        "median": 1.2429263545458982,
+        "max": 1.7996464187434302
+      },
+      "authority_ratio": {
+        "n": 1500,
+        "min": 0.65,
+        "median": 0.8501595054032831,
+        "max": 1.05
+      },
+      "drag_ratio": {
+        "n": 1500,
+        "min": 0.6166663892654978,
+        "median": 1.1939814208023536,
+        "max": 1.77355160908643
+      }
+    },
+    "motor": {
+      "resistance_ratio": {
+        "n": 1500,
+        "min": 0.7474034230249444,
+        "median": 1.1288644962490055,
+        "max": 1.5
+      },
+      "inductance_ratio": {
+        "n": 1500,
+        "min": 0.609108424332577,
+        "median": 1.0211536355747663,
+        "max": 1.464714303236081
+      },
+      "inertia_ratio": {
+        "n": 1500,
+        "min": 0.6485594496074324,
+        "median": 1.1845430947656164,
+        "max": 1.7366051635454278
+      },
+      "friction_ratio": {
+        "n": 1500,
+        "min": 0.6303337494795328,
+        "median": 1.2116540533194522,
+        "max": 1.8171721546741542
+      },
+      "torque_constant_ratio": {
+        "n": 1500,
+        "min": 0.75,
+        "median": 0.9710072667529568,
+        "max": 1.2
+      }
+    },
+    "robot": {
+      "mass_ratio": {
+        "n": 125,
+        "min": 0.7093286707855259,
+        "median": 1.0,
+        "max": 1.4985488397513202
+      },
+      "drag_ratio": {
+        "n": 125,
+        "min": 0.5097025410165608,
+        "median": 1.0,
+        "max": 1.7243045109751631
+      },
+      "authority_ratio": {
+        "n": 125,
+        "min": 0.6505578911028146,
+        "median": 0.980894379379412,
+        "max": 1.0
+      }
+    },
+    "microgrid": {
+      "inertia_ratio": {
+        "n": 125,
+        "min": 0.5630326595540193,
+        "median": 1.0,
+        "max": 1.5397629946688656
+      },
+      "damping_ratio": {
+        "n": 125,
+        "min": 0.5017415143832689,
+        "median": 1.0,
+        "max": 1.6932898147992705
+      },
+      "droop_authority_ratio": {
+        "n": 125,
+        "min": 0.7210457578686432,
+        "median": 1.0,
+        "max": 1.1455507546869397
+      }
+    },
+    "circuit": {
+      "alpha_ratio": {
+        "n": 125,
+        "min": 0.708556628421433,
+        "median": 1.0,
+        "max": 1.3823893904746352
+      },
+      "beta_ratio": {
+        "n": 125,
+        "min": 0.703035493612075,
+        "median": 1.0,
+        "max": 1.2968639789601384
+      },
+      "authority_ratio": {
+        "n": 125,
+        "min": 0.6615363043858243,
+        "median": 1.0,
+        "max": 1.0894841916364495
+      }
+    },
+    "water": {
+      "tank_area_ratio": {
+        "n": 125,
+        "min": 0.7044914265704776,
+        "median": 1.0,
+        "max": 1.4529826761881472
+      },
+      "outflow_ratio": {
+        "n": 125,
+        "min": 0.6522709980538623,
+        "median": 1.0,
+        "max": 1.5284903896343611
+      },
+      "pump_gain_ratio": {
+        "n": 125,
+        "min": 0.6574222325783882,
+        "median": 1.0,
+        "max": 1.0964487260945108
+      }
+    },
+    "structure": {
+      "mass_ratio": {
+        "n": 125,
+        "min": 0.7022302933712519,
+        "median": 1.0,
+        "max": 1.4802510521338585
+      },
+      "damping_ratio": {
+        "n": 125,
+        "min": 0.5026626624351005,
+        "median": 1.0,
+        "max": 1.8277640236201278
+      },
+      "stiffness_ratio": {
+        "n": 125,
+        "min": 0.7001316267814857,
+        "median": 1.0,
+        "max": 1.4991518628786606
+      },
+      "authority_ratio": {
+        "n": 125,
+        "min": 0.7043838224685027,
+        "median": 1.0,
+        "max": 1.0480706253152647
+      }
+    }
+  }
+}

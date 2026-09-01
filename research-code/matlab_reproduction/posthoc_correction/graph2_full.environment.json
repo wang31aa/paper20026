@@ -1,0 +1,13 @@
+{
+  "graph": "graph2",
+  "mat": "/Volumes/work/\u8bba\u6587\u9879\u76ee/Nature_TAC2023_Upgrade/code/exam1_graph2.mat",
+  "steps": 100001,
+  "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 11:09:21) [Clang 14.0.6 ]",
+  "platform": "macOS-10.16-x86_64-i386-64bit-Mach-O",
+  "numpy": "2.5.1",
+  "scipy": "1.18.0",
+  "implementation": "posthoc-ab3-ma4-v1",
+  "changes": [
+    "AB3[k] = 2*MB3[k] - MB2[k] - MA4[k] for k>=2"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "12.0",
+  "development_sources": [
+    "results/v11_heldout_runs.csv",
+    "results/v11_1_confirmatory_runs.csv"
+  ],
+  "new_seeds": [3701, 3702, 3703, 3704, 3705, 3706, 3707, 3708, 3709, 3710],
+  "domains": ["uav6dof", "vehicle", "motor"],
+  "sizes": [5, 10, 20, 50],
+  "topologies": ["chain", "ring", "clustered", "random_directed", "switching"],
+  "rho_grid": [0.25, 0.4, 0.6, 0.85, 1.1, 1.4, 1.8, 2.3, 3.0],
+  "policies": ["all_coupled", "two_layer_gate"],
+  "critical_function": "Psi_s=A_s/(rho*gamma)+B_s*rho*f_het+C_s*rho^2*f_het+D_s*log(N/5); feasible iff Psi_s<=1",
+  "parameter_interpretation": {
+    "A": "information-age burden",
+    "B": "first-order mismatch exposure",
+    "C": "constraint and saturation amplification",
+    "D": "scale burden not captured by the graph rate"
+  },
+  "prediction_frozen_before_execution": true,
+  "acceptance": {
+    "sensitivity": 0.8,
+    "specificity": 0.8,
+    "false_negative_rate": 0.2,
+    "minimum_passing_domains": 2
+  },
+  "claim_boundary": "third independent-seed confirmation in author-defined heterogeneous UAV, vehicle and motor models; computational causal evidence only"
+}

@@ -1,0 +1,19 @@
+{
+  "status": "FROZEN_BEFORE_HELDOUT_EXECUTION",
+  "controller_source": "UAV_V11_PLANNER_CBF_PILOT_PROTOCOL.json",
+  "reference_environment": "UAV_V9_REFERENCE_ENVIRONMENT_PROTOCOL.json",
+  "claim": "Reference-environment-qualified heterogeneous computational intervention; not official-controller replay, HIL or hardware evidence.",
+  "heldout_environments": ["crosswind", "lossy_dense"],
+  "heldout_seeds": [35001, 35002, 35003, 35004, 35005],
+  "rho_witnesses": {"low": 0.4, "middle": 0.65, "high": 2.1},
+  "policies": ["pf", "new_mpc", "new_mpc_cbf", "two_layer_heterogeneity_gate"],
+  "primary_policy": "two_layer_heterogeneity_gate",
+  "frozen_predictions": {
+    "low_success_rate_max": 0.2,
+    "middle_success_rate_min": 0.8,
+    "high_success_rate_max": 0.2,
+    "middle_better_than_low_and_high": true
+  },
+  "qualification_rule": "All three primary success-rate inequalities and the ordering prediction must pass on the complete heldout matrix.",
+  "no_retuning_rule": "No plant, controller, threshold, environment, seed, rho or endpoint may change after this file is hashed."
+}

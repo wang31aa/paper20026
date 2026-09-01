@@ -1,0 +1,51 @@
+{
+  "version": "V46.0",
+  "frozen_before_execution": true,
+  "evidence_class": "public-record-constrained heterogeneous computational counterfactual",
+  "source": "US DOT/FHWA ADAS public-domain sample vhz2-exyi, record id 6",
+  "calibration_fraction": 0.6,
+  "heldout_rule": "first 20 s of the final chronological 40 percent; seeds 4601-4604",
+  "evaluation_horizon_s": 20.0,
+  "finite_grid_mpc": {
+    "update_period_s": 1.0,
+    "prediction_steps": 4,
+    "control_candidates": 9,
+    "qualification_note": "finite-grid receding-horizon baseline, not source-controller NMPC"
+  },
+  "plant": "four-vehicle longitudinal chain with node-specific actuator lag, drag, acceleration and braking authority",
+  "heterogeneity": {
+    "lag_ratio": [0.7, 1.8],
+    "drag_ratio": [0.6, 1.8],
+    "authority_ratio": [0.65, 1.05],
+    "status": "record-constrained author-declared ranges; not independently identified"
+  },
+  "information": {
+    "target_visible_nodes": [0],
+    "observer": "sampled distributed target-speed observer with delayed neighbour messages",
+    "physical_order": "0-1-2-3 is immutable; information gating never changes collision pairs"
+  },
+  "grid": {
+    "stress": [0.5, 1.5, 2.5],
+    "delay_s": [0.0, 0.4, 0.8],
+    "participation": [0.35, 0.65, 0.95],
+    "seeds": [4601, 4602, 4603, 4604]
+  },
+  "policies": [
+    "all_coupled",
+    "global_gain_reduction",
+    "independent_tracking",
+    "residual_gate",
+    "connectivity_gate",
+    "one_step_barrier_filter",
+    "finite_grid_mpc",
+    "two_layer"
+  ],
+  "paired_design": "same initial state, node parameters, target record and random stream for all policies within a condition",
+  "primary_failure": "negative conservative dynamic-headway margin for at least 0.5 s",
+  "outcomes": [
+    "task_success", "first_failure_s", "minimum_margin_m", "failure_dwell_s",
+    "recovery_dwell_s", "tail_tracking_rmse_mps", "control_energy",
+    "communication_messages", "saturation_fraction", "observer_rmse_mps"
+  ],
+  "claim_boundary": "The protocol tests causal computational interventions. It is not road testing, HIL, an executed V2V controller, or safety certification."
+}

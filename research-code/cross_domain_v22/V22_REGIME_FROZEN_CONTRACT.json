@@ -1,0 +1,26 @@
+{
+  "schema_version": "22.0",
+  "frozen_before_execution": true,
+  "question": "Which heterogeneous motor resource regimes are monotone, windowed, mixed or infeasible under a fixed time-scale-aware controller?",
+  "theory": "Heterogeneity is not sufficient for a finite window. Zero mismatch exposure removes the high-participation branch; non-zero exposure can produce a window only when its marginal cost exceeds contraction gain and available control authority.",
+  "regimes": {
+    "no_exposure_full_authority": {"exposure_scale": 0.0, "authority_scale": 1.0},
+    "nominal_exposure_full_authority": {"exposure_scale": 1.0, "authority_scale": 1.0},
+    "strong_exposure_full_authority": {"exposure_scale": 3.0, "authority_scale": 1.0},
+    "strong_exposure_limited_authority": {"exposure_scale": 3.0, "authority_scale": 0.75},
+    "extreme_exposure_limited_authority": {"exposure_scale": 6.0, "authority_scale": 0.75}
+  },
+  "sizes": [5, 20],
+  "topologies": ["chain", "random_directed", "switching"],
+  "rho_grid": [0.3, 0.5, 0.8, 1.1, 1.5, 2.1, 2.8],
+  "development_seeds": [72001, 72002, 72003],
+  "heldout_seeds": [82001, 82002, 82003, 82004],
+  "policy": "all_coupled_pi",
+  "class_rule": {
+    "empty": "maximum task success below 0.2",
+    "window": "an interior point exceeds both endpoints by at least 0.05",
+    "monotone_non_decreasing": "every adjacent success change is at least -0.05",
+    "mixed": "otherwise"
+  },
+  "evidence_boundary": "prospective computational regime map; parameter regimes are author-declared sensitivity conditions, not independently identified fleets or physical/HIL experiments"
+}

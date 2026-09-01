@@ -1,0 +1,17 @@
+{
+  "schema_version": "40.0",
+  "frozen_before_execution": true,
+  "question": "Can a prospectively frozen domain-specific approximation of the common viability-supervision operator select among equally resourced policies without assuming a universally beneficial gate?",
+  "domains": ["uav6dof", "vehicle", "motor", "robot", "microgrid", "circuit", "water", "structure"],
+  "sizes": [5, 20],
+  "rho_grid": [0.3, 0.5, 0.8, 1.1, 1.5, 2.0, 2.8],
+  "development_seeds_main": [99101, 99102, 99103],
+  "heldout_seeds_main": [99201, 99202, 99203, 99204, 99205],
+  "development_seeds_extension": [8201, 8202, 8203],
+  "heldout_seeds_extension": [8301, 8302, 8303, 8304, 8305],
+  "candidate_policies": ["all_coupled", "global_gain_reduction", "independent_tracking", "connectivity_gate", "physical_filter", "two_layer_gate"],
+  "selection_rule": "Within each domain-size-rho development block, maximize success count, then the 0.10 quantile of physical margin, then minimize normalized energy plus communication cost; ties use candidate_policies order. No held-out outcome enters selection.",
+  "primary_endpoints": ["task_success", "minimum_physical_margin", "first_failure_time", "tail_error", "control_energy", "communication_messages"],
+  "negative_result_policy": "Retain no-window, no-improvement, gate-induced failure and supervisor-underperformance conditions.",
+  "claim_boundary": "Prospective paired heterogeneous software-in-the-loop evaluation of an approximate viability supervisor; not an exact computed viability kernel, source-controller replay, hardware-in-the-loop or physical experiment."
+}

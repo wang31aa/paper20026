@@ -1,0 +1,43 @@
+{
+  "schema": "UAV-V9-REFERENCE-ENVIRONMENT-R1",
+  "frozen_before_execution": true,
+  "evidence_class": "reference-environment-qualified heterogeneous computational intervention",
+  "source_environment_role": "EPFL archive qualifies state-input integration, physical scales and task metrics; the controller and heterogeneous parameters are newly designed",
+  "source_controller_replay_required": false,
+  "agents": 5,
+  "dt_s": 0.08,
+  "duration_s": 30.0,
+  "development_seeds": [31001, 31002, 31003, 31004, 31005, 31006],
+  "heldout_seeds": [32001, 32002, 32003, 32004, 32005, 32006, 32007, 32008, 32009, 32010, 32011, 32012, 32013, 32014, 32015, 32016],
+  "participation_grid": [0.2, 0.4, 0.65, 0.9, 1.2, 1.6, 2.1, 2.7],
+  "policies": ["pf", "new_mpc", "new_mpc_cbf", "two_layer_heterogeneity_gate"],
+  "heterogeneous_plant": {
+    "acceleration_effectiveness": [0.78, 0.89, 1.0, 1.12, 1.24],
+    "linear_drag_per_s": [0.025, 0.045, 0.075, 0.105, 0.14],
+    "actuator_time_constant_s": [0.18, 0.27, 0.40, 0.59, 0.82],
+    "persistent_trim_mps2": [-0.08, 0.04, 0.0, 0.07, -0.11],
+    "status": "author-declared heterogeneous sensitivity design; not fitted EPFL vehicle parameters"
+  },
+  "information": {
+    "target_visible_nodes": [0],
+    "maximum_message_age_s": 0.32,
+    "observer_gain": 1.35
+  },
+  "task": {
+    "goal_x_m": 14.0,
+    "completion_x_m": 13.3,
+    "completion_fraction": 0.8,
+    "minimum_pair_clearance_m": 0.4,
+    "minimum_obstacle_clearance_m": 0.35,
+    "maximum_speed_mps": 1.8,
+    "maximum_acceleration_mps2": 2.2
+  },
+  "promotion": {
+    "minimum_heldout_runs": 1000,
+    "paired_random_streams": true,
+    "minimum_specificity": 0.8,
+    "minimum_sensitivity": 0.8,
+    "require_low_middle_high_witness": true,
+    "retain_empty_window": true
+  }
+}

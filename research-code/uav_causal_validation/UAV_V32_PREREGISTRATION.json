@@ -1,0 +1,14 @@
+{
+  "schema_version":"3.2",
+  "status":"FROZEN_RULES_BEFORE_V32_DEVELOPMENT",
+  "parent_v31_contract_sha256":"7e9269c1a226cb6482440f4800339abbd0209e68c22b224fee1e7151fed35951",
+  "development_seeds":[9101,9102,9103,9104,9105,9106,9107,9108,9109,9110,9111,9112],
+  "future_heldout_seeds":[10101,10102,10103,10104,10105,10106,10107,10108,10109,10110,10111,10112,10113,10114,10115,10116,10117,10118,10119,10120],
+  "rho_grid":[0.18,0.26,0.36,0.50,0.68,0.90,1.18,1.52],
+  "confidence_quantile":0.95,
+  "epsilon_peak_m":0.14,
+  "epsilon_ultimate_m":0.14,
+  "observer_bounds":{"position":"Ep_reset + Vph/rho","velocity":"Ev_reset + Vvh/rho"},
+  "units":{"Ep_reset":"m","Vph":"m","Ev_reset":"m s^-1","Vvh":"m s^-1","K0":"s^2","Kpeak":"s^2","D0":"m s^-2","Db":"m s^-2","U":"m s^-2","Psi":"1"},
+  "claim":"dimensionally valid sufficient output certificate; no general N&S claim for the combined observer terms"
+}

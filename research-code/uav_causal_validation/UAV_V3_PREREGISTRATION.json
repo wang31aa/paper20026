@@ -1,0 +1,88 @@
+{
+  "schema_version": "3.0",
+  "created_from": "v2 treated only as a feasibility pilot",
+  "status": "DESIGN_COMPLETE_NOT_CALIBRATED_NOT_RUN",
+  "evidence_label_if_all_gates_pass": "theory-predicted paired heterogeneous-UAV computational validation",
+  "prohibited_labels": ["physical experiment", "EPFL controller validation", "hardware validation", "universal safety law"],
+  "primary_mechanism": "participating neighbours transmit heterogeneous trim/feedforward estimates; information refresh improves as h/rho while incompatible feedforward exposure grows as rho*Db",
+  "dt_s": 0.10,
+  "duration_s": 30.0,
+  "base_update_interval_s": 0.36,
+  "rho_grid": [0.18, 0.26, 0.36, 0.50, 0.68, 0.90, 1.18, 1.52],
+  "development_seeds": [5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112],
+  "heldout_seeds": [6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 6110, 6111, 6112, 6113, 6114, 6115, 6116, 6117, 6118, 6119, 6120],
+  "development_environments": ["open_nominal", "moderate_loss", "moderate_crosswind"],
+  "heldout_environments": ["bursty_loss", "delayed_crosswind", "payload_shift", "topology_dropout"],
+  "observer": {
+    "augmented_state": ["position", "velocity", "constant_trim_acceleration"],
+    "update_interval": "T(rho)=h/rho",
+    "loss_handling": "predict without measurement reset",
+    "delay_handling": "timestamped out-of-sequence correction",
+    "required_logs": ["state_estimate", "innovation", "observer_error", "trim_estimate", "message_age", "reset_event"]
+  },
+  "heterogeneity_sources": {
+    "intrinsic": ["acceleration effectiveness", "linear drag", "actuator lag", "constant payload/trim bias"],
+    "transmitted": "rho times the graph-weighted difference between neighbour and local trim/feedforward estimates",
+    "required_ablation_arms": ["homogeneous", "effectiveness_only", "drag_only", "lag_only", "trim_only", "all_heterogeneous", "all_heterogeneous_without_feedforward_sharing"]
+  },
+  "declared_trim_acceleration_mps2": [[0.16, 0.04], [-0.10, -0.05], [0.02, 0.00], [0.12, -0.04], [-0.14, 0.05]],
+  "trim_sharing_gain": 2.2,
+  "fault": {"node": 4, "start_s": 9.0, "end_s": 13.0, "additional_trim_mps2": [0.18, 0.06], "recovery_dwell_s": 1.0},
+  "policies": [
+    "independent_constrained_tracking",
+    "all_coupled_without_trim_sharing",
+    "all_coupled_with_trim_sharing",
+    "observer_residual_gate",
+    "connectivity_constrained_observer_gate",
+    "oracle_trim_gate_diagnostic"
+  ],
+  "task_contract": {
+    "nominal_adjacent_spacing_m": 0.62,
+    "minimum_pair_clearance_m": 0.34,
+    "nominal_max_lateral_offset_m": 1.24,
+    "corridor_half_width_m": 1.60,
+    "terminal_reference_overshoot_m": 0.32,
+    "analytic_tracking_tolerance_m": 0.14,
+    "mapping": "epsilon_task=min((spacing-clearance)/2, corridor-nominal_offset, terminal_overshoot)",
+    "all_time_pair_and_corridor_required": true,
+    "terminal_completion_required": true
+  },
+  "parameter_identification": {
+    "development_only": true,
+    "a_i_rho": "robust exponential fit to paired small perturbations in fixed modal coordinates; retain lower confidence bound",
+    "D0_i": "upper confidence bound for intrinsic trim/model residual with feedforward sharing disabled",
+    "Db_i": "upper confidence bound for support slope of graph-transmitted trim mismatch versus rho",
+    "U_i": "lower bound on remaining modal authority after the safety filter and saturation reserve",
+    "V_i_h": "upper confidence bound on sample-reset prediction growth times base update interval",
+    "freeze_artifact": "results/UAV_V3_FROZEN_CONTRACT.json",
+    "freeze_hash_required": true
+  },
+  "pre_registered_branches": {
+    "finite_window": "use only if the identified Psi has an interior feasible component and frozen low/interior/high witnesses",
+    "monotone_information": "use if Db exposure is dominated by topology-induced contraction",
+    "empty_window": "retain as a valid adverse outcome",
+    "disconnected_window": "switch interpretation to the viability kernel; do not force a scalar interval"
+  },
+  "primary_heldout_tests": {
+    "window_classification": ["sensitivity", "specificity", "false_negative_rate", "balanced_accuracy"],
+    "calibration": ["Brier score", "calibration slope", "boundary displacement"],
+    "intervention": ["paired task survival", "time to first violation", "recovery dwell", "control energy", "communication cost"],
+    "uncertainty": "environment-seed clustered bootstrap confidence intervals"
+  },
+  "promotion_gates": {
+    "development_and_heldout_seed_disjoint": true,
+    "frozen_contract_hash_matches": true,
+    "observer_equations_and_logs_complete": true,
+    "D0_Db_mechanism_ablation_passes": true,
+    "task_margin_mapping_verified": true,
+    "paired_random_streams_verified": true,
+    "sensitivity_min": 0.80,
+    "specificity_min": 0.80,
+    "false_negative_rate_max": 0.20,
+    "at_least_one_low_failure_witness": true,
+    "at_least_one_interior_success_witness": true,
+    "at_least_one_high_failure_witness": true,
+    "connectivity_gate_changes_control_and_state": true,
+    "positive_result_not_required_for_reporting": true
+  }
+}

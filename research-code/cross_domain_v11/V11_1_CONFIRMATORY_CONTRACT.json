@@ -1,0 +1,15 @@
+{
+  "schema_version": "11.1",
+  "parent": "V11 is development evidence and remains unchanged",
+  "new_seeds": [2701, 2702, 2703, 2704, 2705],
+  "domains": ["uav6dof", "vehicle", "motor"],
+  "sizes": [5, 10, 20, 50],
+  "topologies": ["chain", "ring", "clustered", "random_directed", "switching"],
+  "rho_grid": [0.25, 0.4, 0.6, 0.85, 1.1, 1.4, 1.8, 2.3, 3.0],
+  "policies": ["all_coupled", "two_layer_gate"],
+  "prediction_frozen_before_execution": true,
+  "primary_test": "all_coupled outcomes versus frozen Psi<=1 prediction",
+  "secondary_test": "paired two_layer_gate intervention effect under identical innovations",
+  "acceptance": {"sensitivity": 0.8, "specificity": 0.8, "false_negative_rate": 0.2, "minimum_passing_domains": 2},
+  "claim_boundary": "independent-seed confirmation in three author-defined heterogeneous computational models; not physical, HIL or official source-controller evidence"
+}

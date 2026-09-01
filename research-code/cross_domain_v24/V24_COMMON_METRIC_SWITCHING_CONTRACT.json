@@ -1,0 +1,35 @@
+{
+  "schema_version": "24.0",
+  "frozen_before_execution": true,
+  "question": "Do the V23 heterogeneous outcomes remain observable when the genuinely switching directed modes have an explicitly verified common metric?",
+  "domains": ["uav6dof", "vehicle", "motor"],
+  "sizes": [5, 20],
+  "topologies": ["chain", "random_directed", "certified_switching"],
+  "rho_grid": [0.3, 0.5, 0.8, 1.1, 1.5, 2.1, 2.8],
+  "development_seeds": [95001, 95002],
+  "heldout_seeds": [96001, 96002, 96003],
+  "fault_rotation": ["delay", "packet_loss", "sensor_bias"],
+  "policies": ["all_coupled", "global_gain_reduction", "connectivity_gate", "two_layer_gate"],
+  "switch_period_s": 2.4,
+  "common_metric_contract": {
+    "metric": "G=I",
+    "required_inequality": "H_k + H_k^T >= mu_* I for every executed certified_switching mode",
+    "strict_minimum_mu": 0.0,
+    "directed_asymmetry_required": true,
+    "minimum_distinct_adjacencies": 2
+  },
+  "observer_contract": {
+    "laplacian": "diag(A 1)-A",
+    "pinned_input": "H^{-1}(I-exp(-rho H dt)) V 1 target",
+    "required_checks": ["L1=0", "H1=V1", "spectral_radius_below_one", "nonvisible_nodes_have_no_direct_target_input"]
+  },
+  "pairing": "Within each condition all policies share parameters, initial conditions, switching schedule and innovations.",
+  "evidence_class": "prospective heterogeneous common-metric software-in-the-loop computation; not physical HIL or hardware",
+  "promotion_rule": {
+    "all_observer_invariants_pass": true,
+    "every_executed_switching_mode_passes_common_metric": true,
+    "all_switching_modes_are_directed": true,
+    "report_all_outcomes": true,
+    "no_exact_modal_theorem_claim": true
+  }
+}

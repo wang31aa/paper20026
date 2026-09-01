@@ -1,0 +1,28 @@
+{
+  "schema": "V19-FROZEN-SYSTEM-SPECIFIC-PREDICTION-1",
+  "frozen_before_execution": true,
+  "development_sources": [
+    "cross_domain_v17/results/v17_runs.csv",
+    "cross_domain_v18/results/v18_heldout_runs.csv"
+  ],
+  "domains": ["uav6dof", "vehicle", "motor", "robot", "microgrid", "circuit", "water", "structure"],
+  "heldout_sizes": [12],
+  "heldout_topologies": ["ring", "switching"],
+  "heldout_rho": [0.42, 1.25, 2.70],
+  "heldout_seeds": [12011, 12012],
+  "policies": ["all_coupled", "independent_tracking", "two_layer_gate"],
+  "prediction": {
+    "model": "domain-specific standardized distance-weighted k-nearest neighbours",
+    "k": 21,
+    "decision_threshold": 0.5,
+    "features": ["log_n", "rho", "rho_squared", "gamma", "visible_fraction", "heterogeneous_fraction", "minimum_parameter_spread", "policy", "topology", "fault"],
+    "no_heldout_retuning": true
+  },
+  "acceptance": {
+    "minimum_sensitivity": 0.8,
+    "minimum_specificity": 0.8,
+    "both_classes_required": true
+  },
+  "claim_boundary": "Prospective new-combination test inside eight author-defined heterogeneous computational plants. It is not source reproduction, leave-physical-domain validation, HIL or hardware evidence."
+  ,"resource_adaptation": "A larger 4,800-row execution was stopped twice before any output existed because wall-clock cost exceeded the local run budget. This 288-row contract was frozen before its outcomes and preserves all eight domains, two graph families, two seeds, three policies and low/intermediate/high participation."
+}

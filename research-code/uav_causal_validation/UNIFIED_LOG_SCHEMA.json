@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "independent_unit": "complete scenario and random seed",
+  "required_fields": [
+    "scenario_id", "split", "paired_replay_id", "policy", "seed",
+    "time", "node_id", "state_true", "state_measured", "reference",
+    "requested_control", "applied_control", "control_saturated",
+    "dynamic_adjacency", "participation_weights", "message_age",
+    "packet_loss", "information_residual", "task_margin",
+    "inter_agent_clearance", "obstacle_clearance", "target_reachable",
+    "completion", "collision_event", "failure_dwell", "recovery_dwell",
+    "control_energy", "communication_messages", "solver_status",
+    "solver_time", "gate_switch_reason"
+  ],
+  "pairing_invariants": [
+    "same initial state across policies",
+    "same map and constraints across policies",
+    "same exogenous disturbance and communication innovations across policies",
+    "same source controller discretization and actuator limits across policies",
+    "gate changes neighbour inputs before optimization and subsequent state integration"
+  ]
+}

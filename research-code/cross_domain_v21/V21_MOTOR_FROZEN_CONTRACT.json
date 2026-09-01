@@ -1,0 +1,35 @@
+{
+  "schema_version": "21.0",
+  "frozen_before_execution": true,
+  "scientific_question": "Does a time-scale-aware heterogeneous motor controller recover a prospectively predictable participation response without retuning the V20 task outcomes?",
+  "evidence_class": "prospective heterogeneous motor computational intervention",
+  "prohibited_labels": ["source-controller replay", "digital twin", "HIL", "physical experiment"],
+  "sample_period_s": 0.02,
+  "plant_substeps": 8,
+  "duration_s": 12.0,
+  "sizes": [5, 20],
+  "topologies": ["chain", "random_directed", "switching"],
+  "rho_grid": [0.3, 0.5, 0.8, 1.1, 1.5, 2.1, 2.8],
+  "development_seeds": [52001, 52002],
+  "heldout_seeds": [62001, 62002, 62003],
+  "policies": ["decentralized_pi", "all_coupled_pi", "global_gain_reduction", "connectivity_gate_pi", "current_limited_pi", "two_layer_pi"],
+  "controller": {
+    "kp": 2.4,
+    "ki": 3.2,
+    "antiwindup_limit": 2.0,
+    "coupling_gain": 0.16,
+    "voltage_limit_v": 24.0,
+    "current_limit_a": 12.0
+  },
+  "task": {
+    "speed_error_limit": 1.8,
+    "current_limit_a": 12.0,
+    "settling_exclusion_s": 2.0
+  },
+  "pairing": "Policies share the same initial state, correlated node parameters, load trajectory, topology and innovation stream within each condition.",
+  "promotion_rule": {
+    "report_all_failures": true,
+    "window_requires_interior_success_above_both_endpoints": true,
+    "no_universal_dominance_claim": true
+  }
+}

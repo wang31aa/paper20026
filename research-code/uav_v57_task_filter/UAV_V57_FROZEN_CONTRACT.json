@@ -1,0 +1,12 @@
+{
+  "schema_version": "57.0",
+  "frozen_before_execution": true,
+  "development_evidence": "V56 showed that all four information/coupling policies failed together in 26 of 32 new-stream conditions; V57 expands the action set with a task-space repulsive filter.",
+  "heldout_seeds": [57101, 57102, 57103, 57104, 57105, 57106, 57107, 57108, 57109, 57110, 57111, 57112],
+  "rho_grid": [0.4, 0.9, 1.4, 2.0],
+  "policies": ["all_coupled", "physical_filter", "two_layer_physical_filter"],
+  "filter": {"activation_distance_m": 0.9, "gain_m2ps2": 0.35, "acceleration_cap_mps2": 2.0},
+  "task": {"minimum_clearance_m": 0.45, "completion_radius_m": 0.8},
+  "promotion": {"report_all_policies": true, "no_post_result_parameter_changes": true},
+  "claim_boundary": "Prospectively specified task-filter intervention in the independent simplified six-degree-of-freedom computational model. It is not source-controller replay, flight, HIL or hardware."
+}

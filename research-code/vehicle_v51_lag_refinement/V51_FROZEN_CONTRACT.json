@@ -1,0 +1,17 @@
+{
+  "schema_version": "51.0",
+  "frozen_before_execution": true,
+  "state": ["bumper_gap_m", "closing_speed_mps", "realized_follower_braking_mps2"],
+  "clearance_m": 2.0,
+  "commanded_max_braking_mps2": 4.2,
+  "leader_max_braking_mps2": 2.73,
+  "actuator_lag_s": [0.15, 0.35, 0.55, 0.8],
+  "closing_speed_mps": [0.0, 0.5, 1.5, 3.0, 5.0, 7.0],
+  "initial_realized_braking_mps2": [0.0, 1.0, 2.5, 4.2],
+  "equivalence_random_cases": 2000,
+  "development_seeds": [51101, 51102, 51103, 51104, 51105, 51106, 51107, 51108],
+  "heldout_seeds": [51201, 51202, 51203, 51204, 51205, 51206, 51207, 51208, 51209, 51210, 51211, 51212, 51213, 51214, 51215, 51216],
+  "sample_time_s": 0.01,
+  "horizon_s": 12.0,
+  "claim_boundary": "Exact for the declared three-state relative vehicle game with first-order follower braking and bounded leader braking. It is not a four-vehicle network, road test, HIL result or source-controller qualification."
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Prospectively declared, physically coherent parameter families for heterogeneous computational validation",
+  "claim_boundary": "Literature- and record-constrained computational parameters; not independently identified node-level plants",
+  "evidence_classes": {
+    "IDENTIFIED": "Estimated from an independent input-output record with uncertainty and held-out predictive validation",
+    "DATASHEET": "Taken from an official manufacturer or platform specification",
+    "LITERATURE_CONSTRAINED": "Type and numerical scale constrained by a cited experimental source",
+    "AUTHOR_DECLARED": "Preregistered stress-test range not estimated from the tested platform",
+    "NORMALIZED": "Dimensionless ratio relative to a declared complete baseline plant"
+  },
+  "domains": {
+    "uav": {
+      "baseline": {
+        "mass_kg": 1.0,
+        "linear_drag_per_s": 0.16,
+        "attitude_bandwidth_per_s": 3.8,
+        "acceleration_limit_m_per_s2": 2.8
+      },
+      "baseline_status": "AUTHOR_DECLARED",
+      "ranges": {
+        "mass_ratio": [0.75, 1.35],
+        "drag_ratio": [0.625, 1.75],
+        "bandwidth_ratio": [0.579, 1.263],
+        "actuator_reserve_ratio": [0.72, 1.0]
+      },
+      "range_status": "LITERATURE_CONSTRAINED_AND_AUTHOR_DECLARED",
+      "constraints": {
+        "minimum_available_acceleration_m_per_s2": 1.49,
+        "maximum_available_acceleration_m_per_s2": 3.74,
+        "minimum_attitude_time_constant_s": 0.208,
+        "maximum_attitude_time_constant_s": 0.455
+      },
+      "independent_identification": false,
+      "source_note": "Public UAV records constrain platform scale and actuator/fault channels but do not identify between-aircraft mass, drag and bandwidth jointly."
+    },
+    "vehicle": {
+      "baseline": {
+        "actuator_lag_s": 0.5,
+        "authority_ratio": 1.0,
+        "linear_drag_per_s": 0.025,
+        "maximum_acceleration_m_per_s2": 2.5,
+        "maximum_braking_m_per_s2": 4.2
+      },
+      "baseline_status": "AUTHOR_DECLARED",
+      "ranges": {
+        "lag_ratio": [0.7, 1.8],
+        "authority_ratio": [0.65, 1.05],
+        "drag_ratio": [0.6, 1.8]
+      },
+      "range_status": "RECORD_CONSTRAINED_AND_AUTHOR_DECLARED",
+      "constraints": {
+        "minimum_braking_authority_m_per_s2": 2.73,
+        "maximum_braking_authority_m_per_s2": 4.41,
+        "minimum_lag_s": 0.35,
+        "maximum_lag_s": 0.9
+      },
+      "independent_identification": false,
+      "source_note": "CARMA2 records establish vehicle-to-vehicle command-response heterogeneity, but the present analysis does not uniquely identify lag, drag and authority."
+    },
+    "motor": {
+      "baseline": {
+        "resistance_ohm": 0.18644,
+        "inductance_h": 0.0063,
+        "equivalent_inertia_kg_m2": 0.013767,
+        "viscous_friction_n_m_s": 0.049813,
+        "torque_constant_n_m_per_a": 0.020375
+      },
+      "baseline_status": "LITERATURE_CONSTRAINED",
+      "baseline_source": "doi:10.1177/00202940261442256",
+      "ranges": {
+        "resistance_ratio": [0.7, 1.5],
+        "inductance_ratio": [0.6, 1.6],
+        "inertia_ratio": [0.625, 1.75],
+        "friction_ratio": [0.6, 1.833],
+        "torque_constant_ratio": [0.75, 1.2]
+      },
+      "range_status": "AUTHOR_DECLARED_NORMALIZED",
+      "constraints": {
+        "electrical_time_constant_s": [0.0113, 0.0773],
+        "mechanical_time_constant_s": [0.0942, 0.9640],
+        "minimum_positive_parameter": 1e-12
+      },
+      "independent_identification": false,
+      "source_note": "A complete experimentally estimated baseline prevents assembly of one virtual motor from unrelated literature values. Ratios remain preregistered computational perturbations."
+    },
+    "robot": {
+      "ranges": {"mass_ratio":[0.7,1.5],"drag_ratio":[0.5,1.75],"authority_ratio":[0.65,1.0]},
+      "range_status":"AUTHOR_DECLARED_NORMALIZED","independent_identification":false,
+      "source_note":"Normalized mobile-agent stress family; not identified from a specific robot fleet."
+    },
+    "microgrid": {
+      "ranges":{"inertia_ratio":[0.556,1.556],"damping_ratio":[0.5,1.7],"droop_authority_ratio":[0.7,1.15]},
+      "range_status":"AUTHOR_DECLARED_NORMALIZED","independent_identification":false,
+      "source_note":"Normalized inverter-machine stress family; not identified from one physical microgrid."
+    },
+    "circuit": {
+      "ranges":{"alpha_ratio":[0.7,1.4],"beta_ratio":[0.7,1.3],"authority_ratio":[0.65,1.1]},
+      "range_status":"AUTHOR_DECLARED_NORMALIZED","independent_identification":false,
+      "source_note":"Normalized nonlinear-circuit stress family; not identified from separate physical oscillators."
+    },
+    "water": {
+      "ranges":{"tank_area_ratio":[0.7,1.5],"outflow_ratio":[0.636,1.545],"pump_gain_ratio":[0.65,1.1]},
+      "range_status":"AUTHOR_DECLARED_NORMALIZED","independent_identification":false,
+      "source_note":"Normalized tank-network stress family; not identified from a multi-tank plant."
+    },
+    "structure": {
+      "ranges":{"mass_ratio":[0.7,1.5],"damping_ratio":[0.5,1.833],"stiffness_ratio":[0.7,1.5],"authority_ratio":[0.7,1.05]},
+      "range_status":"AUTHOR_DECLARED_NORMALIZED","independent_identification":false,
+      "source_note":"Normalized structural-mode stress family; not identified from separate physical specimens."
+    }
+  }
+}

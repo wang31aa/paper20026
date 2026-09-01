@@ -1,0 +1,48 @@
+{
+  "protocol_id": "OPENMCT-GB-R42-1",
+  "frozen_before_holdout_execution": true,
+  "source": {
+    "doi": "10.17632/5xvg43r9r8.1",
+    "archive_sha256": "0f1781b7443dc5f6cfaab8e8cb473ca84832f8d8e4ad8e0b368da09d1a1a06df",
+    "license": "CC-BY-4.0"
+  },
+  "claim_boundary": "public-data-constrained continuous grey-box model qualification; not controller deployment, HIL validation, or a multi-motor experiment",
+  "model": {
+    "continuous_equation": "domega/dt=-a*omega+b*pwm+c+w",
+    "discretization": "exact zero-order hold over each recorded DT_ms interval",
+    "units": {"omega": "recorded rpm", "pwm": "recorded PWM units", "time": "seconds", "a": "1/s", "b": "rpm/(s*PWM-unit)", "c": "rpm/s"},
+    "bounds": {"a": [1e-6, 10000.0], "b": [1e-9, 10000.0], "c": [-1000000.0, 1000000.0]}
+  },
+  "timing_contracts": ["pwm_k", "pwm_km1"],
+  "timing_selection": "minimum mean grouped leave-one-APRBS-file-out one-step NRMSE; deterministic lexical tie break",
+  "split": {
+    "train": ["03_system_identification/02 ms sampling time/raw_data.txt", "03_system_identification/10 ms sampling time/raw_data.txt", "03_system_identification/20 ms sampling time/raw_data.txt"],
+    "holdout_families": ["04_continuous_PID_validation", "05_discrete_controller_validation"],
+    "random_row_split_prohibited": true
+  },
+  "baselines": ["recursive persistence", "training mean", "current standardized ARX with reference", "exact-ZOH no-intercept grey box"],
+  "identifiability_gate": {
+    "sensitivity_rank": 3,
+    "scaled_sensitivity_condition_max": 100000000.0,
+    "positive_95ci_lower_for_a_and_b": true,
+    "leave_one_aprbs_out_max_relative_parameter_change": 0.30,
+    "minimum_pwm_standard_deviation": 1.0
+  },
+  "holdout_gate": {
+    "all_recursive_predictions_finite": true,
+    "median_recursive_nrmse_better_than_recursive_persistence": true,
+    "every_record_recursive_nrmse_better_than_recursive_persistence": true,
+    "zero_record_operating_domain_exits": true,
+    "domain": "closed min/max box of training MEAS, PWM and DT_ms"
+  },
+  "stop_rules": [
+    "archive or analysed-input hash mismatch",
+    "missing 3 training or 7 holdout files",
+    "ambiguous fit failure or nonpositive a/b",
+    "identifiability gate failure",
+    "recursive holdout gate failure",
+    "any operating-domain exit",
+    "any post-outcome threshold or split change"
+  ],
+  "network_simulation_authorization": "only if every source, identifiability, holdout and integrity check passes"
+}

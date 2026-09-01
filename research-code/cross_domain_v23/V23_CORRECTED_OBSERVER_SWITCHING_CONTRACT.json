@@ -1,0 +1,29 @@
+{
+  "schema_version": "23.0",
+  "frozen_before_execution": true,
+  "question": "Do the heterogeneous domain results persist after a strictly distributed pinned observer, a correct row Laplacian and genuinely time-varying switching graphs are enforced?",
+  "domains": ["uav6dof", "vehicle", "motor"],
+  "sizes": [5, 20],
+  "topologies": ["chain", "random_directed", "switching"],
+  "rho_grid": [0.3, 0.5, 0.8, 1.1, 1.5, 2.1, 2.8],
+  "development_seeds": [93001, 93002],
+  "heldout_seeds": [94001, 94002, 94003],
+  "fault_rotation": ["delay", "packet_loss", "sensor_bias"],
+  "policies": ["all_coupled", "global_gain_reduction", "connectivity_gate", "two_layer_gate"],
+  "switch_period_s": 2.4,
+  "observer_contract": {
+    "laplacian": "diag(A 1)-A",
+    "pinned_input": "H^{-1}(I-exp(-rho H dt)) V 1 target",
+    "target_visible_fraction_source": "frozen condition rotation",
+    "required_checks": ["L1=0", "H1=V1", "spectral_radius_below_one", "nonvisible_nodes_have_no_direct_target_input"]
+  },
+  "pairing": "Within each condition all policies share parameters, initial conditions, switching schedule and innovations.",
+  "evidence_class": "prospective heterogeneous software-in-the-loop computation; not physical HIL or hardware",
+  "promotion_rule": {
+    "zero_parameter_replay_error": true,
+    "all_observer_invariants_pass": true,
+    "switching_requires_at_least_two_distinct_adjacencies": true,
+    "report_all_outcomes": true,
+    "no_exact_participation_theorem_claim_without_modal_contract": true
+  }
+}

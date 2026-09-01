@@ -1,0 +1,13 @@
+{
+  "amendment_id": "CERT-OIL-R3-VALIDATOR-SCHEMAFIX-1",
+  "timing": "post-output",
+  "trigger": "KeyError: delta at frozen validate.py lines 415-419",
+  "frozen_validator_sha256": "5ddb85fc4c9e5c4bc6c132a23cb460925464b0b38441943f9046da87eebfd9a0",
+  "schemafix_validator_sha256": "388e385a936a0c7c31ee48532aa3d1fab7047077a4b8df77cff818c97ef34eec",
+  "exact_semantic_change": "Project observer dt replay Run onto existing PolicyRun fields before comparison",
+  "output_report": "results_r3/validation_schemafix.json",
+  "scientific_changes": false,
+  "threshold_changes": false,
+  "result_changes": false,
+  "replay_count_changes": false
+}

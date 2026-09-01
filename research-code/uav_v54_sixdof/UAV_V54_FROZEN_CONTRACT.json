@@ -1,0 +1,21 @@
+{
+  "schema_version": "54.0",
+  "frozen_before_execution": true,
+  "agents": 5,
+  "sample_time_s": 0.04,
+  "horizon_s": 8.0,
+  "rho_grid": [0.3, 0.7, 1.1, 1.6, 2.2],
+  "development_seeds": [54001, 54002, 54003, 54004, 54005, 54006, 54007, 54008],
+  "heldout_seeds": [54101, 54102, 54103, 54104, 54105, 54106, 54107, 54108, 54109, 54110, 54111, 54112],
+  "masses_kg": [1.00, 1.12, 0.91, 1.25, 1.05],
+  "drag_per_s": [0.10, 0.14, 0.08, 0.17, 0.12],
+  "thrust_lags_s": [0.10, 0.16, 0.08, 0.22, 0.13],
+  "inertia_kgm2": [[0.020,0.021,0.038],[0.024,0.026,0.045],[0.018,0.020,0.034],[0.029,0.031,0.052],[0.022,0.023,0.041]],
+  "target_visible_nodes": [0],
+  "observer_gain": 2.4,
+  "communication_delay_s": 0.12,
+  "minimum_clearance_m": 0.45,
+  "completion_radius_m": 0.8,
+  "policies": ["all_coupled", "global_gain_reduction", "independent_tracking", "two_layer_supervisor"],
+  "claim_boundary": "Independent heterogeneous six-degree-of-freedom computational closed loop with matched counterfactual streams. It is not official EPFL NMPC replay, public-flight counterfactual evidence, HIL or hardware."
+}

@@ -1,0 +1,29 @@
+{
+  "checks": {
+    "a03_a04_only_22_plot_statements": true,
+    "adaptive_cross_family_ccc2": true,
+    "all_initialize_xx4_from_x3": true,
+    "external_has_unscaled_kick": true,
+    "hashes": {
+      "FourNodes_externl.m": true,
+      "FourNodes_full_ADA_20220203.m": true,
+      "FourNodes_full_ADA_20220204.m": true,
+      "FourNodes_full_ADA_robust_null.m": true,
+      "FourNodes_full_robust.m": true,
+      "safecommunciation.m": true
+    },
+    "kick_equivalent_derivative_norms": {
+      "0.00025": 565.685424949238,
+      "0.0005": 282.842712474619,
+      "0.001": 141.4213562373095
+    },
+    "kick_rate_doubles_under_halving_h": true,
+    "robust_null_initializes_only_six_cc": true,
+    "safe_has_unscaled_kick": true,
+    "safe_off_steps": 2993,
+    "safe_on_steps": 97007,
+    "safe_switch_schedule_expected": true
+  },
+  "failures": [],
+  "status": "PASS"
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "3.1",
+  "status": "FROZEN_DIMENSIONAL_RULES_BEFORE_V31_DEVELOPMENT",
+  "parent_v3_contract_sha256": "7aca22b8447ec1bffcf064d653c48be8319776e97691471ca1a56330d6ddca48",
+  "development_seeds": [7101,7102,7103,7104,7105,7106,7107,7108,7109,7110,7111,7112],
+  "future_heldout_seeds": [8101,8102,8103,8104,8105,8106,8107,8108,8109,8110,8111,8112,8113,8114,8115,8116,8117,8118,8119,8120],
+  "rho_grid": [0.18,0.26,0.36,0.50,0.68,0.90,1.18,1.52],
+  "position_feedback_gain_s-2": 1.65,
+  "velocity_feedback_gain_s-1": 1.45,
+  "position_coupling_gain_s-2": 0.34,
+  "velocity_coupling_gain_s-1": 0.42,
+  "observer_confidence_quantile": 0.95,
+  "epsilon_peak_m": 0.14,
+  "epsilon_ultimate_m": 0.14,
+  "units": {"K0":"s^2","Kpeak":"s^2","D0":"m s^-2","Db":"m s^-2","U":"m s^-2","Vph":"m","Vvh":"m s^-1","epsilon":"m","Psi":"1"},
+  "exactness_boundary": "constant-forcing position channel exact in declared modal class; combined velocity-observer term is a sufficient output bound"
+}

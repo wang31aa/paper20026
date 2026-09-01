@@ -1,0 +1,55 @@
+PROVISIONAL DUAL-LICENCE NOTICE — AUTHOR CONFIRMATION REQUIRED
+
+This archive is prepared for public release, but this licence notice does not
+become an effective grant until the copyright holders replace the placeholder
+below with their names and explicitly confirm redistribution rights for every
+included file. Do not publish the GitHub candidate before completing
+AUTHOR_INPUT_NEEDED.md and the project release checklist.
+
+Code licence (MIT)
+==================
+
+Scope: *.py, *.sh, Makefile, Dockerfile, and other source code authored for
+this rebuild, excluding third-party code and files that carry another notice.
+
+Copyright (c) 2026 [COPYRIGHT HOLDERS — CONFIRM BEFORE RELEASE]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Data and original content licence (CC BY 4.0)
+================================================
+
+Scope: original generated data under */results/, original figures, manuscript
+text, Supplementary Information, and documentation authored for this rebuild,
+excluding third-party material and any file carrying another notice.
+
+Upon author confirmation, the scoped material is licensed under the Creative
+Commons Attribution 4.0 International licence (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+Attribution requested: [AUTHORS — CONFIRM], "Traceable residual certificates
+for heterogeneous nonlinear networks", version 0.7.0-rc1 (2026).
+
+Exceptions and provenance
+=========================
+
+The licence does not grant rights in cited publications, trademarks, or any
+third-party material. Audit excerpts and any inherited source-paper content
+must be cleared separately. No DOI, repository deposit, or external
+reproduction is represented by this notice.

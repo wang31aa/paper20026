@@ -1,0 +1,27 @@
+{
+  "status": "FROZEN_DEVELOPMENT_PILOT",
+  "parent_protocol": "UAV_V9_REFERENCE_ENVIRONMENT_PROTOCOL.json",
+  "purpose": "Test a controller-structure correction without changing the heterogeneous plant or task thresholds.",
+  "changes_from_parent": [
+    "obstacle-aware reference shaping before feedback",
+    "relative-degree-two CBF projection with actuator-lag robustness buffers"
+  ],
+  "unchanged": [
+    "heterogeneous plant parameters",
+    "physical task thresholds",
+    "environment geometry",
+    "target visibility and observer structure"
+  ],
+  "pilot_seeds": [34001, 34002],
+  "participation_grid": [0.4, 0.65, 0.9, 1.2, 1.6, 2.1],
+  "policies": ["new_mpc_cbf", "two_layer_heterogeneity_gate"],
+  "planner": {"lookahead_m": 2.4, "lateral_buffer_m": 0.55},
+  "cbf": {
+    "k0": 7.5,
+    "k1": 5.5,
+    "pair_robustness_buffer_m": 0.24,
+    "obstacle_robustness_buffer_m": 0.24,
+    "projection_passes": 20
+  },
+  "claim_boundary": "Development-only controller pilot. It cannot qualify held-out prediction, official-controller replay, HIL or hardware evidence."
+}

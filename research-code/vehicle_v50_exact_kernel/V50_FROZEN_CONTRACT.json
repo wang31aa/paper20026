@@ -1,0 +1,18 @@
+{
+  "schema_version": "50.0",
+  "frozen_before_execution": true,
+  "model": "reduced longitudinal relative vehicle dynamics",
+  "state": ["bumper_gap_m", "closing_speed_mps"],
+  "clearance_m": 2.0,
+  "follower_max_braking_mps2": 4.2,
+  "leader_max_braking_mps2": 2.73,
+  "grid_resolutions": [0.5, 0.25, 0.125, 0.0625],
+  "gap_range_m": [0.0, 40.0],
+  "closing_speed_range_mps": [-4.0, 10.0],
+  "sample_time_s": 0.1,
+  "candidate_braking_mps2": [0.0, 1.05, 2.1, 3.15, 4.2],
+  "development_seeds": [50001, 50002, 50003, 50004, 50005, 50006, 50007, 50008],
+  "heldout_seeds": [50101, 50102, 50103, 50104, 50105, 50106, 50107, 50108, 50109, 50110, 50111, 50112, 50113, 50114, 50115, 50116],
+  "horizon_steps": 200,
+  "claim_boundary": "Exact for the declared reduced relative vehicle game with instantaneous bounded braking; a task-preserving refinement from the actuator-lag four-vehicle model is not asserted. This is not road, HIL or physical evidence."
+}

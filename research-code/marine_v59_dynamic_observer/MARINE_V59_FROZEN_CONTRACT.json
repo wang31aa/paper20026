@@ -1,0 +1,15 @@
+{
+  "protocol": "V59 marine dynamic-observer correction and fresh frozen holdout",
+  "frozen_before_execution": "2026-08-31 after V58 was rejected and retained",
+  "development_diagnosis": "V58 omitted the moving-target internal model; this caused observer lag rather than a heterogeneity-limit failure",
+  "theory_correction": "for a moving target, each non-visible node estimates target position and velocity; the controller uses both estimates. The correction changes the information model, not the physical heterogeneity.",
+  "heldout_seeds": [951, 952, 953, 954, 955, 956, 957, 958, 959, 960],
+  "rho_grid": [0.1, 0.25, 0.5, 0.75, 1.0],
+  "policies": ["all_coupled", "independent_tracking", "two_layer_physical_filter"],
+  "observer_gain_per_s": 1.3,
+  "certified_safe_rho": [0.5, 0.75, 1.0],
+  "not_certified_rho": [0.1, 0.25],
+  "promotion_rule": "zero false-safe outcomes among certified-safe all-coupled cases on the fresh seeds",
+  "parent_physical_contract": "../marine_v58_unseen_domain/MARINE_V58_FROZEN_CONTRACT.json",
+  "claim_boundary": "Prospective correction tested in a public-model-constrained computation. V58 remains the disclosed failed precursor. V59 is not physical, HIL or an MSS replay."
+}

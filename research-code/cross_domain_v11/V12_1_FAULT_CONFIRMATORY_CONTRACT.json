@@ -1,0 +1,14 @@
+{
+  "schema_version": "12.1",
+  "parent_parameters": "V12_FROZEN_PARAMETERS.json",
+  "new_seeds": [4701, 4702, 4703, 4704, 4705, 4706, 4707, 4708, 4709, 4710],
+  "fault_rotation": ["delay", "packet_loss", "sensor_bias", "actuator_loss"],
+  "domains": ["uav6dof", "vehicle", "motor"],
+  "sizes": [5, 10, 20, 50],
+  "topologies": ["chain", "ring", "clustered", "random_directed", "switching"],
+  "rho_grid": [0.25, 0.4, 0.6, 0.85, 1.1, 1.4, 1.8, 2.3, 3.0],
+  "policies": ["all_coupled", "two_layer_gate"],
+  "parameters_and_thresholds_unchanged": true,
+  "acceptance": {"sensitivity": 0.8, "specificity": 0.8, "false_negative_rate": 0.2, "minimum_passing_domains": 2},
+  "claim_boundary": "fault-rotated independent-seed computational confirmation; not HIL, hardware or official controller evidence"
+}

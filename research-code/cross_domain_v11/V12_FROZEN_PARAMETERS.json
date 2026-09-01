@@ -1,0 +1,41 @@
+{
+  "schema_version": "12.0",
+  "contract_sha256": "6a3f309f67760afa49a08481801d723261b24fe6d2ea6ca8db2a4de29ea3a64c",
+  "critical_function": "Psi_s=A_s/(rho*gamma)+B_s*rho*f_het+C_s*rho^2*f_het+D_s*log(N/5); feasible iff Psi_s<=1",
+  "parameters": [
+    {
+      "domain": "motor",
+      "A_information": 0.004262988525690403,
+      "B_mismatch": 0.03562037075374436,
+      "C_constraint": 3.1332628115397703,
+      "D_scale": 0.9256095070176739,
+      "development_sensitivity": 0.8638743455497382,
+      "development_specificity": 0.8663766314481044,
+      "development_balanced_accuracy": 0.8651254884989212,
+      "rows": 1800
+    },
+    {
+      "domain": "uav6dof",
+      "A_information": 0.11109246737426398,
+      "B_mismatch": 0.03638775540084804,
+      "C_constraint": 0.36513272244555495,
+      "D_scale": 0.25126277784716,
+      "development_sensitivity": 0.9121621621621622,
+      "development_specificity": 0.9128329297820823,
+      "development_balanced_accuracy": 0.9124975459721223,
+      "rows": 1800
+    },
+    {
+      "domain": "vehicle",
+      "A_information": 0.04546906060902722,
+      "B_mismatch": 0.4549965895362731,
+      "C_constraint": 1.2081562087458848,
+      "D_scale": 0.16023809235698394,
+      "development_sensitivity": 0.8682926829268293,
+      "development_specificity": 0.8714733542319749,
+      "development_balanced_accuracy": 0.8698830185794021,
+      "rows": 1800
+    }
+  ],
+  "status": "FROZEN_BEFORE_V12_EXECUTION"
+}

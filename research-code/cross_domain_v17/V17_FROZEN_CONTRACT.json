@@ -1,0 +1,40 @@
+{
+  "schema": "V17-THEORY-LED-HETEROGENEOUS-COMPUTATION-1",
+  "frozen_before_execution": true,
+  "domains": ["uav6dof", "vehicle", "motor", "robot", "microgrid", "circuit", "water", "structure"],
+  "sizes": [5, 20, 50],
+  "topologies": ["chain", "random_directed", "switching"],
+  "rho_grid": [0.35, 0.7, 1.1, 1.7, 2.5],
+  "heldout_seeds": [9201, 9202, 9203],
+  "policies": ["all_coupled", "global_gain_reduction", "independent_tracking", "two_layer_gate", "physical_filter"],
+  "fault_rotation": ["delay", "packet_loss", "mixed"],
+  "pairing": "Within each domain-size-topology-rho-seed condition all policies reuse the same initial state, heterogeneous parameter draw and exogenous innovation stream. No state or random stream is shared across domains.",
+  "task_endpoints": {
+    "uav6dof": "tracking, inter-UAV separation, attitude and energy margin",
+    "vehicle": "dynamic headway, speed tracking, acceleration and string-amplification margin",
+    "motor": "speed tracking, current and energy margin",
+    "robot": "formation tracking and inter-robot separation margin",
+    "microgrid": "frequency and phase/task excursion margin",
+    "circuit": "tracking and bounded-state margin",
+    "water": "level tracking and operating-range margin",
+    "structure": "displacement and velocity margin"
+  },
+  "heterogeneous_parameter_families": {
+    "uav6dof": ["mass", "drag", "attitude bandwidth", "actuator reserve"],
+    "vehicle": ["actuator lag", "authority", "drag"],
+    "motor": ["resistance", "inductance", "inertia", "friction", "torque constant"],
+    "robot": ["mass", "drag", "authority"],
+    "microgrid": ["inertia", "damping", "droop authority"],
+    "circuit": ["alpha", "beta", "authority"],
+    "water": ["tank area", "outflow", "pump gain"],
+    "structure": ["mass", "damping", "stiffness", "authority"]
+  },
+  "acceptance": {
+    "all_domains_present": true,
+    "all_parameter_spreads_positive": true,
+    "all_policies_have_complete_pairs": true,
+    "all_two_layer_interventions_change_future_margin": true,
+    "negative_and_induced_failures_retained": true
+  },
+  "claim_boundary": "New theory-led, domain-specific heterogeneous computational interventions. They are not source-model reproductions, HIL, hardware experiments or physical causal evidence."
+}

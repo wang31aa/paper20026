@@ -1,0 +1,20 @@
+{
+  "source": "cl_init_fun.m in Zenodo 10.5281/zenodo.4379503",
+  "prediction_horizon_seconds": 4.0,
+  "parameterization": "multiple_shooting_unif_grid",
+  "nlp_solver": "sqp",
+  "exact_hessian": false,
+  "regularization": "no_regularize",
+  "nlp_max_iterations": 7,
+  "tolerances": {"stationarity": 1.0, "equality": 0.1, "inequality": 0.01, "complementarity": 0.1},
+  "step_length": 0.05,
+  "qp_solver": "partial_condensing_hpipm",
+  "qp_max_iterations": 10,
+  "condensed_horizon": "horizon_steps/2",
+  "qp_warm_start": 0,
+  "integrator": "irk_gnsf",
+  "integrator_stages": 4,
+  "integrator_steps": 3,
+  "cost_type": "nonlinear_ls",
+  "environment_commit": "acados 91067daebe12c07d76d32a6aed0b8db00b3a54e1"
+}

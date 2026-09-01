@@ -1,0 +1,13 @@
+{
+  "protocol": "V60 coordinate-invariant marine holdout",
+  "frozen_before_execution": "2026-08-31 after rejecting V58 and V59",
+  "correction": "rotate every body-frame translational velocity to the common inertial frame before target-velocity feedback or inter-node comparison",
+  "heldout_seeds": [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010],
+  "rho_grid": [0.1,0.25,0.5,0.75,1.0],
+  "policies": ["all_coupled","independent_tracking","two_layer_physical_filter"],
+  "certified_safe_rho": [0.25,0.5],
+  "not_certified_rho": [0.1,0.75,1.0],
+  "response_prediction": "finite participation window; weak participation loses target information and excessive participation exposes inter-agent model mismatch",
+  "promotion_rule": "zero false-safe among the prespecified safe window; retain every false-unsafe and all rejected precursor runs",
+  "claim_boundary": "Previously unseen, public-model-constrained marine computation; not physical, HIL or official-source replay."
+}

@@ -1,0 +1,48 @@
+{
+  "contract_sha256": "bfe73cda3f066f3070053ddc5ad0727bed462635da5deedcee4222950eb6a3e9",
+  "platforms": {
+    "robot": {
+      "qualified": false,
+      "status": "NOT_EXECUTED",
+      "reason": "missing physical run manifest"
+    },
+    "uav": {
+      "qualified": false,
+      "status": "NOT_EXECUTED",
+      "reason": "missing physical run manifest"
+    },
+    "vehicle": {
+      "qualified": false,
+      "status": "NOT_EXECUTED",
+      "reason": "missing physical run manifest"
+    },
+    "motor": {
+      "qualified": false,
+      "status": "NOT_EXECUTED",
+      "reason": "missing physical run manifest"
+    },
+    "microgrid": {
+      "qualified": false,
+      "status": "NOT_EXECUTED",
+      "reason": "missing physical run manifest"
+    },
+    "circuit": {
+      "qualified": false,
+      "status": "NOT_EXECUTED",
+      "reason": "missing physical run manifest"
+    },
+    "water": {
+      "qualified": false,
+      "status": "NOT_EXECUTED",
+      "reason": "missing physical run manifest"
+    },
+    "structure": {
+      "qualified": false,
+      "status": "NOT_EXECUTED",
+      "reason": "missing physical run manifest"
+    }
+  },
+  "qualified_platform_count": 0,
+  "all_platforms_qualified": false,
+  "physical_claim_allowed": false
+}

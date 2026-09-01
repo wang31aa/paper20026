@@ -1,0 +1,16 @@
+{
+  "schema_version":"4.0",
+  "status":"FROZEN_BEFORE_V4_DEVELOPMENT",
+  "parent_v32_contract_sha256":"cd0e95208db15ee4d7b9b620ef3106d8e099d9327122bc7a6ea3acf38babbf1c",
+  "development_seeds":[11101,11102,11103,11104,11105,11106,11107,11108,11109,11110,11111,11112],
+  "heldout_seeds":[12101,12102,12103,12104,12105,12106,12107,12108,12109,12110,12111,12112,12113,12114,12115,12116,12117,12118,12119,12120],
+  "rho_grid":[0.18,0.26,0.36,0.50,0.68,0.90,1.18,1.52],
+  "observer_mode":"timestamp_full_reset",
+  "command_reserve_mps2":0.35,
+  "certified_acceleration_reserve_mps2":0.308,
+  "reserve_derivation":"minimum effectiveness 0.88 times dedicated command reserve 0.35",
+  "epsilon_peak_m":0.14,
+  "epsilon_ultimate_m":0.14,
+  "promotion":{"sensitivity_min":0.8,"specificity_min":0.8,"fnr_max":0.2,"low_failure_required":true,"interior_success_required":true,"high_failure_required":true},
+  "no_post_freeze_changes":true
+}

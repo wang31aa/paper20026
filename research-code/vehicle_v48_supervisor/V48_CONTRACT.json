@@ -1,0 +1,14 @@
+{
+  "version": "V48.0",
+  "created_before_execution": true,
+  "parent_plant": "vehicle_v46 four-node heterogeneous longitudinal model",
+  "evidence_class": "public-record-constrained computational intervention",
+  "seeds": [4901, 4902, 4903, 4904, 4905, 4906, 4907, 4908, 4909, 4910, 4911, 4912],
+  "stress": [0.5, 1.5, 2.5],
+  "delay_s": [0.0, 0.4, 0.8],
+  "participation": [0.35, 0.65, 0.95],
+  "comparators": ["all_coupled", "independent_tracking", "connectivity_gate", "one_step_barrier_filter", "two_layer"],
+  "supervisor_rule": "choose barrier if physical margin <3 m; otherwise choose independent tracking if observer error >1.2 m/s; otherwise choose two-layer influence if residual exceeds the calibration 90th percentile; otherwise use permanent coupling",
+  "warning_rule": "first time joint normalized margin falls below 0.2 while still non-negative",
+  "claim_boundary": "The supervisor is a prespecified model-specific policy. The finite-game theorem dominates fixed action classes only for exact predecessors; empirical superiority is not guaranteed."
+}

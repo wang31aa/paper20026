@@ -1,0 +1,17 @@
+{
+  "schema_version": "41.0",
+  "frozen_before_execution": true,
+  "supersedes_for_switching_claim": "cross_domain_v40",
+  "correction": "The five extension domains now use the V28 actual-switching integrator rather than the V27 fixed-graph integrator. V40 is retained as an audit record and is not qualified for a switching-topology claim.",
+  "domains": ["uav6dof", "vehicle", "motor", "robot", "microgrid", "circuit", "water", "structure"],
+  "sizes": [5, 20],
+  "rho_grid": [0.3, 0.5, 0.8, 1.1, 1.5, 2.0, 2.8],
+  "development_seeds_main": [99301, 99302, 99303],
+  "heldout_seeds_main": [99401, 99402, 99403, 99404, 99405],
+  "development_seeds_extension": [8401, 8402, 8403],
+  "heldout_seeds_extension": [8501, 8502, 8503, 8504, 8505],
+  "candidate_policies": ["all_coupled", "global_gain_reduction", "independent_tracking", "connectivity_gate", "physical_filter", "two_layer_gate"],
+  "selection_rule": "Within each domain-size-rho development block, maximize success count, then the 0.10 quantile of physical margin, then minimize normalized energy plus communication cost; ties use candidate_policies order. No held-out outcome enters selection.",
+  "required_model_checks": ["positive_finite_node_parameters", "nonzero_within-run_parameter_spread", "observer_equilibrium_identity", "actual_topology_switching", "positive_common_metric_margin", "policy_pair_parameter_hash", "domain_specific_task_margin"],
+  "claim_boundary": "Corrected prospective paired heterogeneous actual-switching software-in-the-loop evaluation; not exact viability-kernel computation, source-controller replay, HIL or physical experimentation."
+}

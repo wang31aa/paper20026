@@ -1,0 +1,12 @@
+{
+  "schema_version": "14.0",
+  "frozen_before_execution": true,
+  "domains": ["robot", "microgrid", "circuit", "water", "structure"],
+  "sizes": [5, 20, 50],
+  "topologies": ["chain", "random_directed", "switching"],
+  "rho_grid": [0.25, 0.8, 1.1, 2.0, 2.8],
+  "seeds": [8201, 8202, 8203],
+  "policies": ["all_coupled", "global_gain_reduction", "independent_tracking", "robust_local_feedback", "physical_filter", "two_layer_gate"],
+  "pairing": "all policies reuse the same initial state, heterogeneous parameters and innovations for each condition",
+  "claim_boundary": "Computational mechanism comparators, not domain-standard MPC, CBF, source controller, HIL or hardware baselines."
+}

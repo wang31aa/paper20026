@@ -1,0 +1,16 @@
+{
+  "schema_version": "52.0",
+  "frozen_before_execution": true,
+  "vehicles": 4,
+  "braking_limits_mps2": [2.0, 3.0, 4.0, 5.0],
+  "actuator_lags_s": [0.12, 0.25, 0.45, 0.7],
+  "clearance_m": 2.0,
+  "sample_time_s": 0.02,
+  "horizon_s": 8.0,
+  "observer_gain": 2.0,
+  "observer_error_bounds_mps": [0.15, 0.35],
+  "message_delay_s": [0.0, 0.2],
+  "heldout_seeds": [52101, 52102, 52103, 52104, 52105, 52106, 52107, 52108, 52109, 52110, 52111, 52112, 52113, 52114, 52115, 52116],
+  "policies": ["two_layer_lag_kernel", "unbuffered_kernel", "maximum_braking", "tracking_only"],
+  "claim_boundary": "A compositional sufficient safety certificate for the declared heterogeneous four-vehicle chain. It is not the exact global viability kernel, a road experiment, HIL or source-controller reproduction."
+}

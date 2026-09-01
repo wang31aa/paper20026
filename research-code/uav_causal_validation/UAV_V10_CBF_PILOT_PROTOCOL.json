@@ -1,0 +1,11 @@
+{
+  "schema": "UAV-V10-CBF-PILOT-R1",
+  "frozen_before_execution": true,
+  "parent_model": "UAV-V9-REFERENCE-ENVIRONMENT-R1",
+  "change": "replace heuristic repulsion by relative-degree-two half-space CBF projection; retain all plant parameters and task thresholds",
+  "pilot_seeds": [33001, 33002],
+  "participation_grid": [0.2, 0.4, 0.65, 0.9, 1.2, 1.6, 2.1, 2.7],
+  "policies": ["new_mpc_cbf", "two_layer_heterogeneity_gate"],
+  "cbf": {"k0": 6.0, "k1": 4.5, "projection_passes": 12, "violation_tolerance": 1e-7},
+  "promotion": "pilot only; no heldout or manuscript claim"
+}

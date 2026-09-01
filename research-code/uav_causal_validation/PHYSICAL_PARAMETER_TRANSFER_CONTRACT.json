@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "status": "RANGE_QUALIFIED_NOT_IDENTIFIED",
+  "source": "UAVFD_PROVENANCE.json",
+  "qualification_result": "results/uavfd_actuator_qualification.json",
+  "observed_actuator_envelope": {
+    "time_constant_s": [0.19831116858708434, 0.7596714944050404],
+    "steady_rpm_per_pwm": [8.458095879593568, 9.65234088560168]
+  },
+  "allowed_transfer": {
+    "actuator_time_constant": "Sensitivity range only; no value is a UAV-specific estimate.",
+    "acceleration_effectiveness": "May vary in a declared synthetic factorial, but RPM/PWM alone cannot calibrate it without thrust, mass and attitude mapping.",
+    "linear_drag": "Unidentified; requires synchronized applied thrust and translational state under adequate excitation."
+  },
+  "forbidden_inferences": [
+    "fault minus no-fault is a causal blade-damage effect",
+    "within-vehicle motor spread equals between-vehicle heterogeneity",
+    "the records validate participation gating or recovery",
+    "the envelope freezes the confirmatory heterogeneous plant"
+  ],
+  "unlock_conditions": [
+    "at least two independently identified UAV units or records with vehicle identity",
+    "synchronized requested and applied actuation, attitude and translational state",
+    "a frozen calibration-validation split with excitation and residual diagnostics",
+    "parameter uncertainty propagated into the participation-window prediction"
+  ]
+}

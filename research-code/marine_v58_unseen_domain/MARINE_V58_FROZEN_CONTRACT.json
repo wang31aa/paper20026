@@ -1,0 +1,47 @@
+{
+  "protocol": "V58 genuinely unseen marine-domain prospective computation",
+  "frozen_before_execution": "2026-08-31",
+  "source_model": {
+    "structure": "three-degree-of-freedom planar marine craft: eta_dot=R(psi)nu; M_i nu_dot=tau_i-D_i nu_i+d_i",
+    "primary_model_reference": "MSS Marine Systems Simulator, OTTER USV model and marine-craft equations",
+    "primary_model_url": "https://github.com/cybergalactic/MSS",
+    "task_geometry_reference": "TU Delft multi-vessel artificial trajectory dataset",
+    "task_geometry_doi": "10.4121/776e311c-9ccf-4fab-886d-c1886ff15fcf",
+    "qualification": "public-model-constrained author implementation; not an MSS replay, HIL or physical experiment"
+  },
+  "agents": 5,
+  "sample_time_s": 0.05,
+  "horizon_s": 35.0,
+  "heldout_seeds": [901, 902, 903, 904, 905, 906, 907, 908, 909, 910],
+  "rho_grid": [0.1, 0.25, 0.5, 0.75, 1.0],
+  "policies": ["all_coupled", "independent_tracking", "two_layer_physical_filter"],
+  "heterogeneous_parameters": {
+    "mass_kg": [55.0, 62.0, 70.0, 78.0, 88.0],
+    "yaw_inertia_kgm2": [18.0, 21.0, 25.0, 29.0, 34.0],
+    "surge_damping_Nspm": [16.0, 19.0, 23.0, 27.0, 31.0],
+    "sway_damping_Nspm": [28.0, 32.0, 37.0, 43.0, 49.0],
+    "yaw_damping_NmspRad": [8.0, 9.5, 11.0, 13.0, 15.0],
+    "actuator_lag_s": [0.22, 0.28, 0.35, 0.43, 0.52],
+    "current_bias_mps": [[0.02, -0.01], [0.00, 0.02], [-0.03, 0.01], [0.04, -0.02], [-0.02, -0.03]]
+  },
+  "information": {
+    "target_visible_nodes": [0],
+    "observer_gain_per_s": 1.3,
+    "message_delay_s": 0.15,
+    "information_backbone": "directed chain 0->1->2->3->4"
+  },
+  "task": {
+    "minimum_clearance_m": 1.5,
+    "terminal_formation_rmse_m": 2.0,
+    "formation_spacing_m": 4.0
+  },
+  "frozen_theory_prediction": {
+    "response_class": "monotone-improvement-or-plateau; no high-participation failure predicted",
+    "certified_safe_rho": [0.5, 0.75, 1.0],
+    "not_certified_rho": [0.1, 0.25],
+    "reason": "the frozen mismatch-exposure slope remains below the participation-induced contraction gain; information age dominates only at weak participation",
+    "success_definition": "minimum clearance and terminal formation RMSE both satisfy the frozen task thresholds",
+    "promotion_rule": "zero false-safe outcomes among certified-safe all-coupled cases; prediction is rejected otherwise"
+  },
+  "claim_boundary": "A prospective, public-model-constrained marine computation in a previously absent domain. It is not physical, HIL, an MSS controller replay, or evidence of one universal numerical critical constant."
+}
