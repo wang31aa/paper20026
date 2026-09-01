@@ -1,0 +1,24 @@
+name: code-only-check
+on:
+  push:
+    paths:
+      - 'research-code/**'
+      - '.github/workflows/code-only-check.yml'
+  pull_request:
+    paths:
+      - 'research-code/**'
+      - '.github/workflows/code-only-check.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Parse Python sources
+        run: python -m compileall -q research-code
+      - name: Verify code-only scope and manifest
+        run: python research-code/tools/validate_code_only_release.py
