@@ -1,0 +1,26 @@
+name: UAV native pinned-acados qualification
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+jobs:
+  native-replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build and run in CasADi 3.4.5 ABI-matched container
+        run: |
+          docker run --rm -v "$GITHUB_WORKSPACE:/work" -w /work ubuntu:18.04 bash aris_nature_agents_v7/uav_causal_validation/run_native_acados_bionic.sh
+      - name: Apply frozen source-replay acceptance criteria
+        run: |
+          python -m pip install --disable-pip-version-check numpy scipy
+          python aris_nature_agents_v7/uav_causal_validation/qualify_native_acados_replay.py dataset/data/mpc/comparison/01/workspace.mat aris_nature_agents_v7/uav_causal_validation/results/native_acados_replay.mat --output aris_nature_agents_v7/uav_causal_validation/results/native_acados_source_replay_metrics.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: uav-native-acados-qualification
+          path: aris_nature_agents_v7/uav_causal_validation/results/
