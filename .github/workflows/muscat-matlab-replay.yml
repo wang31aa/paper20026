@@ -59,7 +59,7 @@ jobs:
       - name: Run MATLAB source replay
         uses: matlab-actions/run-command@v3
         with:
-          command: run('external/muscat/Mission/Mission_NISAR_2SC_MATLAB_SMOKE.m')
+          command: addpath('tools/muscat_matlab_replay'); run('external/muscat/Mission/Mission_NISAR_2SC_MATLAB_SMOKE.m')
 
       - name: Validate exported evidence
         run: python3 tools/muscat_matlab_replay/validate_matlab_replay.py artifacts/muscat_matlab_smoke.csv
