@@ -1,0 +1,73 @@
+name: MuSCAT MATLAB source replay
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/muscat-matlab-replay.yml'
+      - 'tools/muscat_matlab_replay/**'
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    runs-on: macos-15-intel
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Fetch fixed MuSCAT source
+        run: |
+          git clone https://github.com/nasa/muscat.git external/muscat
+          git -C external/muscat checkout d8a0739426a23b3e25dc66e0fa4b7152972c11df
+          test "$(git -C external/muscat rev-parse HEAD)" = "d8a0739426a23b3e25dc66e0fa4b7152972c11df"
+
+      - name: Restore MuSCAT supporting files
+        uses: actions/cache@v4
+        with:
+          path: external/MuSCAT_Supporting_Files
+          key: muscat-supporting-files-nisar-v1
+
+      - name: Fetch official supporting files and Intel MICE when absent
+        run: |
+          if [ ! -d external/MuSCAT_Supporting_Files ]; then
+            curl -L --fail --retry 3 -o "$RUNNER_TEMP/muscat-support.zip" "https://www.dropbox.com/s/qokkcj6sn802n7p/MuSCAT_Supporting_Files.zip?dl=1"
+            unzip -q "$RUNNER_TEMP/muscat-support.zip" -d external
+          fi
+          if ! file external/MuSCAT_Supporting_Files/SPICE/mice/lib/mice.mexmaci64 2>/dev/null | grep -q x86_64; then
+            curl -L --fail --retry 3 -o "$RUNNER_TEMP/mice.tar.Z" "https://naif.jpl.nasa.gov/pub/naif/toolkit/MATLAB/MacIntel_OSX_AppleC_MATLAB9.x_64bit/packages/mice.tar.Z"
+            mkdir -p "$RUNNER_TEMP/naif-intel"
+            tar -xzf "$RUNNER_TEMP/mice.tar.Z" -C "$RUNNER_TEMP/naif-intel"
+            if [ ! -d external/MuSCAT_Supporting_Files/SPICE/mice_archived_arm64 ]; then
+              mv external/MuSCAT_Supporting_Files/SPICE/mice external/MuSCAT_Supporting_Files/SPICE/mice_archived_arm64
+            fi
+            cp -R "$RUNNER_TEMP/naif-intel/mice" external/MuSCAT_Supporting_Files/SPICE/mice
+          fi
+          file external/MuSCAT_Supporting_Files/SPICE/mice/lib/mice.mexmaci64 | grep x86_64
+
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v3
+        with:
+          release: R2024b
+
+      - name: Generate frozen 60-second replay script
+        uses: matlab-actions/run-command@v3
+        with:
+          command: run('tools/muscat_matlab_replay/prepare_muscat_matlab_smoke.m')
+
+      - name: Run MATLAB source replay
+        uses: matlab-actions/run-command@v3
+        with:
+          command: run('external/muscat/Mission/Mission_NISAR_2SC_MATLAB_SMOKE.m')
+
+      - name: Validate exported evidence
+        run: python3 tools/muscat_matlab_replay/validate_matlab_replay.py artifacts/muscat_matlab_smoke.csv
+
+      - name: Upload replay evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: muscat-matlab-replay
+          path: artifacts/
+          if-no-files-found: error
