@@ -98,12 +98,26 @@ jobs:
       - name: Evaluate frozen participation prediction
         run: python3 tools/muscat_matlab_replay/validate_participation_v2.py artifacts
 
+      - name: Generate unopened V3 held-out matrix
+        uses: matlab-actions/run-command@v3
+        with:
+          command: run('tools/muscat_matlab_replay/prepare_muscat_participation_v3_heldout.m')
+
+      - name: Run unopened V3 held-out matrix
+        uses: matlab-actions/run-command@v3
+        with:
+          command: addpath('tools/muscat_matlab_replay'); run('external/muscat/Mission/run_muscat_participation_v3_heldout.m')
+
+      - name: Evaluate V2 prediction on V3 held-out matrix
+        run: python3 tools/muscat_matlab_replay/validate_participation_v3_heldout.py artifacts
+
       - name: Remove transient heterogeneous trajectories
         if: always()
         run: |
           rm -f artifacts/muscat_heterogeneous_permanent.csv
           rm -f artifacts/muscat_heterogeneous_two_layer.csv
           rm -f artifacts/muscat_participation_*.csv
+          rm -f artifacts/muscat_heldout_*.csv
 
       - name: Upload replay evidence
         if: always()
