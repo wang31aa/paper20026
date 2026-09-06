@@ -85,11 +85,25 @@ jobs:
           python3 tools/muscat_matlab_replay/validate_matlab_replay.py artifacts/muscat_matlab_smoke.csv
           python3 tools/muscat_matlab_replay/validate_heterogeneous_closed_loop.py artifacts/muscat_heterogeneous_permanent.csv artifacts/muscat_heterogeneous_two_layer.csv
 
+      - name: Generate preregistered participation matrix
+        uses: matlab-actions/run-command@v3
+        with:
+          command: run('tools/muscat_matlab_replay/prepare_muscat_participation_v2.m')
+
+      - name: Run preregistered participation matrix
+        uses: matlab-actions/run-command@v3
+        with:
+          command: addpath('tools/muscat_matlab_replay'); run('external/muscat/Mission/run_muscat_participation_v2.m')
+
+      - name: Evaluate frozen participation prediction
+        run: python3 tools/muscat_matlab_replay/validate_participation_v2.py artifacts
+
       - name: Remove transient heterogeneous trajectories
         if: always()
         run: |
           rm -f artifacts/muscat_heterogeneous_permanent.csv
           rm -f artifacts/muscat_heterogeneous_two_layer.csv
+          rm -f artifacts/muscat_participation_*.csv
 
       - name: Upload replay evidence
         if: always()
