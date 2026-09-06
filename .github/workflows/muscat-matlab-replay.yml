@@ -57,6 +57,9 @@ jobs:
         with:
           release: R2024b
 
+      - name: Qualify source actuator chain
+        run: python3 tools/muscat_matlab_replay/validate_actuator_chain.py external/muscat --output artifacts/muscat_actuator_chain.json
+
       - name: Generate frozen 60-second replay script
         uses: matlab-actions/run-command@v3
         with:
